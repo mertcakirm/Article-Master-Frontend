@@ -1,9 +1,12 @@
 import React from 'react';
+import Navbar from "../components/Navbar.jsx";
 
 const Articles = () => {
     return (
         <div>
-            articles
+            <Navbar />
+            <div className="page-container container-fluid">article</div>
+
         </div>
     );
 };

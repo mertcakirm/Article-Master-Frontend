@@ -1,9 +1,12 @@
 import React from 'react';
+import Navbar from "../components/Navbar.jsx";
 
 const Profile = () => {
     return (
         <div>
-            Profile
+            <Navbar />
+            <div className="page-container container-fluid">profile</div>
+
         </div>
     );
 };

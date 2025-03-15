@@ -1,16 +1,32 @@
 .nav-con{
     background:black;
-    padding: 1% 1%;
+    padding: 0 1%;
+    border-bottom: 1px solid #fff;
 
-}
-
-.nav-inp{
-    background: transparent;
-    border:1px solid #fff;
-    height: 40px;
 }
 
 .navbar-link{
     color:#ffffff;
     text-decoration:none;
+     font-size: 16px;
+    text-align: center;
+    padding: 10px 30px;
+}
+
+.nav-row-lg{
+    display: flex;
+}
+
+.nav-row-sm{
+    display: none;
+}
+
+@media only screen and (max-width: 1000px){
+    .nav-row-sm{
+        display: flex;
+    }
+
+    .nav-row-lg{
+        display: none;
+    }
 }

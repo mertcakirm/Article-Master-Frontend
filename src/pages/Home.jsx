@@ -1,13 +1,11 @@
 import React from 'react';
 import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
-
+import './css/home.css'
 const Home = () => {
     return (
         <div>
             <Navbar />
-            home
-            <Footer />
+            <div className="page-container container-fluid">test</div>
         </div>
     );
 };
