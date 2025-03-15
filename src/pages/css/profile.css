@@ -1,0 +1,22 @@
+.profile_photo{
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 200px;
+    border: 3px solid white;
+}
+
+.profile_inp{
+    border:1px solid #ffffff;
+    height:40px;
+    border-radius: 5px;
+}
+
+.profile_btn{
+    background: #ffffff;
+    color: #000000;
+    font-size: 20px;
+    height: 40px;
+    border-radius: 5px;
+}

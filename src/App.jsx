@@ -4,6 +4,7 @@ import Articles from "./pages/Articles.jsx";
 import Profile from "./pages/Profile.jsx";
 import ArticleDetail from "./pages/ArticleDetail.jsx";
 import Login from "./pages/Login.jsx";
+import MyNotes from "./pages/MyNotes.jsx";
 
 const App=()=>{
 
@@ -16,6 +17,8 @@ const App=()=>{
                 <Route element={<Profile />} path="/profile" />
                 <Route element={<ArticleDetail />} path="/articles/:id" />
                 <Route element={<Login />} path="/login" />
+                <Route element={<MyNotes />} path="/my-notes" />
+
             </Routes>
         </BrowserRouter>
     </>

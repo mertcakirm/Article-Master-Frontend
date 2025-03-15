@@ -3,6 +3,7 @@ import './css/navbar.css';
 import logo from '../assets/logo2-removebg-preview.png'
 
 const Navbar = () => {
+    const token = localStorage.getItem('token');
     return (
         <div className="container-fluid nav-con">
 
@@ -14,7 +15,11 @@ const Navbar = () => {
                 <div className="row align-items-center justify-content-end col-lg-5">
                     <a href="/" className="col-lg-2 navbar-link">Home</a>
                     <a href="/articles" className="col-lg-2 navbar-link">Articles</a>
+                    <a href="/my-notes" className="col-lg-2 navbar-link">Notlarım</a>
                     <a href="/profile" className="col-lg-2 navbar-link" style={{border:'1px solid #fff',borderRadius:'10px'}}>Profile</a>
+                    {token? <button className="col-lg-2 navbar-link bg-transparent border-0 p-0">Çıkış Yap</button> : null }
+
+
                 </div>
             </div>
 

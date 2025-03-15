@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from "../components/Navbar.jsx";
-import './css/Home.css'
-const Home = () => {
+
+const MyNotes = () => {
     return (
         <div>
             <Navbar />
-            <div className="page-container container-fluid">test</div>
+            <div className="page-container container-fluid">notes</div>
         </div>
     );
 };
 
-export default Home;
+export default MyNotes;
