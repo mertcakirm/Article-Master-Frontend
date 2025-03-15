@@ -1,0 +1,16 @@
+.nav-con{
+    background:black;
+    padding: 1% 1%;
+
+}
+
+.nav-inp{
+    background: transparent;
+    border:1px solid #fff;
+    height: 40px;
+}
+
+.navbar-link{
+    color:#ffffff;
+    text-decoration:none;
+}
