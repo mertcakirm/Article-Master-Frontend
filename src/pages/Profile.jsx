@@ -14,9 +14,9 @@ const Profile = () => {
                         </div>
                         <div className="col-lg-6 row-gap-3 text-center row justify-content-center">
                             <h3>Update Profile</h3>
-                            <input type="text" placeholder="Kullanıcı Adınız" className="col-12 profile_inp" />
-                            <input type="password" placeholder="Eski şifreniz" className="col-12 profile_inp" />
-                            <input type="password" placeholder="Yeni şifreniz" className="col-12 profile_inp" />
+                            <input type="text" placeholder="Your Username" className="col-12 profile_inp" />
+                            <input type="password" placeholder="Last Password" className="col-12 profile_inp" />
+                            <input type="password" placeholder="New Password" className="col-12 profile_inp" />
                             <button className="col-12 profile_btn">Save</button>
                         </div>
                     </div>
