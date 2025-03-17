@@ -1,25 +1,29 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './css/navbar.css';
 import logo from '../assets/logo2-removebg-preview.png'
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Navbar = () => {
     const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        AOS.init({ duration: 500 });
+    }, []);
+
     return (
-        <div className="container-fluid nav-con">
+        <div className="container-fluid nav-con" data-aos="fade-down">
 
             <div className="row align-items-center nav-row-lg">
                 <div className="col-lg-7 p-0 align-items-center row">
                     <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3"  /></a>
                 </div>
 
-                <div className="row align-items-center justify-content-end col-lg-5">
+                <div className="row align-items-center justify-content-end col-lg-5 m-0">
                     <a href="/" className="col-lg-2 navbar-link">Home</a>
                     <a href="/articles" className="col-lg-2 navbar-link">Articles</a>
                     <a href="/my-notes" className="col-lg-2 navbar-link">Notes</a>
                     <a href="/profile" className="col-lg-2 navbar-link" style={{border:'1px solid #fff',borderRadius:'10px'}}>Profile</a>
                     {token? <button className="col-lg-2 navbar-link bg-transparent border-0 p-0">Çıkış Yap</button> : null }
-
-
                 </div>
             </div>
 

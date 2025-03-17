@@ -5,9 +5,9 @@ const Articles = () => {
     return (
         <div>
             <Navbar />
-            <div className="page-container container-fluid">
-                <div className="row row-gap-5 mt-5 popular-row">
-                    <div className="col-12 titles mb-4 text-center">Articles</div>
+            <div className="page-container mb-5 container-fluid">
+                <div className="row row-gap-5 popular-row">
+                    <div className="col-12 titles mt-5 mb-4 text-center">Articles</div>
                     <div className="col-lg-3">
                         <a href="#" className="article-card">
                             <img className="w-100 img-fluid article-card-img" alt="article-image"
