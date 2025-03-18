@@ -1,5 +1,4 @@
 .profile_photo{
-    position: absolute;
     height: 100%;
     object-fit: cover;
     width: 100%;
@@ -19,4 +18,28 @@
     font-size: 20px;
     height: 40px;
     border-radius: 5px;
+}
+
+.profile_card{
+    border: 3px solid #404040;
+    height: fit-content;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(to right, #2b2b2b, #373535);
+
+}
+
+.profile-card-left-info{
+    border-bottom: 1px solid #ffffff;
+    height: 40px;
+}
+
+.profile-card-right-key{
+    font-size: 20px;
+}
+
+
+.profile-card-right-value{
+    font-size: 20px;
+    font-weight: bold;
 }

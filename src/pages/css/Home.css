@@ -16,10 +16,11 @@
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: row;
 }
 
 .up-writer-btn{
-    width: fit-content;
+    width: 250px;
     padding: 10px 30px;
     background: #FFFFFF;
     font-size: 20px;
@@ -29,10 +30,12 @@
     color: #000;
     border-radius: 10px;
     transition: .4s;
+    text-align: center;
 }
 
 .up-user-btn{
-    width: fit-content;
+    width: 250px;
+
     padding: 10px 30px;
     background: #000000;
     font-size: 20px;
@@ -41,6 +44,7 @@
     border-radius: 10px;
     border: 2px solid #000000;
     transition: .4s;
+    text-align: center;
     color: #FFFFFF;
 }
 
@@ -171,4 +175,10 @@
     .popular-row{
         padding: 0 10%;
     }
+
+    .header-link-row{
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
 }

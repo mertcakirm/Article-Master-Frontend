@@ -27,7 +27,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm">
+            <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm m-0">
                 <div className="col-3 p-0 align-items-center row">
                     <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3"  /></a>
                 </div>

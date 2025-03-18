@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import './css/MyNotes.css'
 import ProcessPopup from "../components/processPopup.jsx";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const MyNotes = () => {
     const [pageNum, setPageNum] = useState(1);
     const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
@@ -10,13 +11,18 @@ const MyNotes = () => {
     const toggleProcessPopup = () => {
         setProcessIsPopupOpen(!isProcessPopupOpen);
     };
+
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
+
     return (
         <div>
             <Navbar />
             <div className="page-container container-fluid">
                 <div className="row">
-                    <div className="titles col-12 text-center mt-5">My Notes</div>
-                    <div className="col-12 px-5 mt-5 justify-content-center">
+                    <div className="titles col-12 text-center mt-5" data-aos="fade-in">My Notes</div>
+                    <div className="col-12 px-5 mt-5 justify-content-center" data-aos="fade-in">
                         <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                             <thead>
                             <tr>
