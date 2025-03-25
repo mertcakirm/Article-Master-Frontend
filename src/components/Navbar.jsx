@@ -8,53 +8,45 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Navbar = () => {
     const token = localStorage.getItem('token');
+    const url = window.location.pathname.split("/").filter(Boolean).pop();
+    console.log(url)
 
     useEffect(() => {
         AOS.init({ duration: 500 });
     }, []);
 
     return (
-        <div className="container-fluid nav-con" data-aos="fade-down">
+        <div className="container-fluid nav-con" data-aos="fade-in">
 
             <div className="row align-items-center nav-row-lg">
-                <div className="col-lg-7 p-0 align-items-center row">
+                <div className="col-lg-5 p-0 align-items-center row">
                     <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3"  /></a>
                 </div>
 
-                <div className="row align-items-center justify-content-end col-lg-5 m-0">
-                    <a href="/" className="col-lg-2 navbar-link">Home</a>
-                    <a href="/articles" className="col-lg-2 navbar-link">Articles</a>
-                    <a href="/my-notes" className="col-lg-2 navbar-link">Notes</a>
+                <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-7 m-0">
+                    <a href="/" className={` navbar-link ${url === undefined ? "active-nav-link" : ""}`}>Home</a>
+                    <a href="/articles" className={` navbar-link ${url === "articles" ? "active-nav-link" : ""}`}>Articles</a>
+
                     {token ? (
                         <>
-                            <a href="/profile" className="col-lg-2 navbar-link"
-                               style={{ border: "1px solid #fff", borderRadius: "10px" }}>
+
+                            <a href="/favorites" className={` navbar-link ${url === "favorites" ? "active-nav-link" : ""}`}>
+                                Favorites
+                            </a>
+                            <a href="/my-notes" className={`navbar-link ${url === "my-notes" ? "active-nav-link" : ""}`}>
+                                Notes
+                            </a>
+                            <a href="/profile" className={`navbar-link ${url === "profile" ? "active-nav-link" : ""}`}>
                                 Profile
                             </a>
                             <button
-                                className="col-lg-2 navbar-link bg-transparent border-0 p-0">
-                                Çıkış Yap
+                                className=" navbar-link bg-transparent border-0 p-0">
+                                Sign Out
                             </button>
                         </>
                     ) : (
-                        <div className="dropdown col-lg-2 navbar-link bg-transparent border-0">
-                            <button
-                                className="border-0 bg-transparent"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Sign In
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="/sign/in">Sign In</a></li>
-                                <li><a className="dropdown-item" href="/sign/up">Sign Up</a></li>
-                                <li><a className="dropdown-item" href="/sign/writer-up">Writer Sign Up</a></li>
-                            </ul>
-                        </div>
+                        <a href="/sign/in" className=" navbar-link">Sign In</a>
                     )}
-
-
-
-
                 </div>
             </div>
 

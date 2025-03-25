@@ -33,15 +33,14 @@ const Login = () => {
     return (
         <div className="page-container">
             <div className="row p-0 m-0">
-                <div className="col-lg-8">
+                <div className="col-lg-8 d-none d-lg-block p-0 m-0">
                     <img src="https://images.pexels.com/photos/1438190/pexels-photo-1438190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                          className="img-fluid w-100"
                          style={{ height: "100vh", objectFit: "cover" }}
                          alt="Login Banner"
                     />
                 </div>
-                <div className="col-lg-4 row justify-content-center align-items-center">
-
+                <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" style={{ height: "100vh",position: "relative" }}>
                     {authType === "in" && (
                         <div className="col-12 login-flex text-center">
                             <h3>User Sign In</h3>
@@ -92,6 +91,9 @@ const Login = () => {
                             <button className="login-btn-switch" onClick={() => setAuthType("in")}>User Sign In</button>
                         </div>
                     )}
+
+
+                    <a href="/" className="login-home-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="white" width="34" height="34" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg></a>
 
                 </div>
             </div>

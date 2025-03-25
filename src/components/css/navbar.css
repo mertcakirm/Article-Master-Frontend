@@ -2,16 +2,26 @@
     background:black;
     padding: 0 1%;
     border-bottom: 1px solid #fff;
-    z-index: 60;
+
+}
+
+.nav-con>*{
+    z-index: 600!important;
+}
+
+.nav-lg-flex{
+    display: flex;
+    flex-direction: row;
 
 }
 
 .navbar-link{
     color:#ffffff;
     text-decoration:none;
-     font-size: 16px;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
-    padding: 10px 30px;
+    padding: 10px 20px;
 }
 
 .nav-row-lg{
@@ -20,6 +30,12 @@
 
 .nav-row-sm{
     display: none!important;
+}
+
+
+.active-nav-link{
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
 }
 
 @media only screen and (max-width: 1000px){

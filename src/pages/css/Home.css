@@ -1,7 +1,10 @@
 .page-container{
     background: #1c1c1c;
     color: #fff;
+    z-index: 100!important;
 }
+
+
 
 .titles{
     font-size: 32px;

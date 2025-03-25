@@ -5,6 +5,7 @@ import Profile from "./pages/Profile.jsx";
 import ArticleDetail from "./pages/ArticleDetail.jsx";
 import Login from "./pages/Login.jsx";
 import MyNotes from "./pages/MyNotes.jsx";
+import Favorites from "./pages/Favorites.jsx";
 
 const App=()=>{
 
@@ -19,6 +20,7 @@ const App=()=>{
                 <Route element={<Login />} path="/sign/:type" />
                 <Route element={<Login />} path="/sign" />
                 <Route element={<MyNotes />} path="/my-notes" />
+                <Route element={<Favorites />} path="/favorites" />
             </Routes>
         </BrowserRouter>
     </>
