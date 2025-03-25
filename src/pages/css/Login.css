@@ -1,0 +1,46 @@
+.login-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+.login-flex>*{
+    width: 70%;
+}
+
+.login-btn-switch{
+    background: transparent;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    color: #5f77ff;
+}
+
+.dropzone {
+    padding: 20px;
+    margin-top: 10px;
+    border: 2px dashed #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+.dropzone-p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dropzone:hover {
+    background-color: #f8f9fa;
+    transition: .4s ease-in-out;
+
+}
+
+.dropzone:hover .dropzone-p{
+    color: #000000;
+
+}

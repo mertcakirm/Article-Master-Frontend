@@ -18,8 +18,8 @@ const Home = () => {
                 <div className="row p-0 m-0 justify-content-center" style={{borderBottom: '3px solid #fff',position: 'relative'}}>
                     <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header} alt="header_photo" />
                     <div className="header-link-row justify-content-center align-items-center column-gap-3"  data-aos="fade-up">
-                        <a className="up-writer-btn" href="#">Sign up for writer</a>
-                        <a className="up-user-btn" href="#">Sign up for user</a>
+                        <a className="up-writer-btn" href="/sign/writer-up">Sign up for writer</a>
+                        <a className="up-user-btn" href="/sign/up">Sign up for user</a>
                     </div>
 
                 </div>

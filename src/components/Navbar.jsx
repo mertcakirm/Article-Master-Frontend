@@ -3,6 +3,9 @@ import './css/navbar.css';
 import logo from '../assets/logo2-removebg-preview.png'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
 const Navbar = () => {
     const token = localStorage.getItem('token');
 
@@ -22,16 +25,47 @@ const Navbar = () => {
                     <a href="/" className="col-lg-2 navbar-link">Home</a>
                     <a href="/articles" className="col-lg-2 navbar-link">Articles</a>
                     <a href="/my-notes" className="col-lg-2 navbar-link">Notes</a>
-                    <a href="/profile" className="col-lg-2 navbar-link" style={{border:'1px solid #fff',borderRadius:'10px'}}>Profile</a>
-                    {token? <button className="col-lg-2 navbar-link bg-transparent border-0 p-0">Çıkış Yap</button> : null }
+                    {token ? (
+                        <>
+                            <a href="/profile" className="col-lg-2 navbar-link"
+                               style={{ border: "1px solid #fff", borderRadius: "10px" }}>
+                                Profile
+                            </a>
+                            <button
+                                className="col-lg-2 navbar-link bg-transparent border-0 p-0">
+                                Çıkış Yap
+                            </button>
+                        </>
+                    ) : (
+                        <div className="dropdown col-lg-2 navbar-link bg-transparent border-0">
+                            <button
+                                className="border-0 bg-transparent"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Sign In
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="/sign/in">Sign In</a></li>
+                                <li><a className="dropdown-item" href="/sign/up">Sign Up</a></li>
+                                <li><a className="dropdown-item" href="/sign/writer-up">Writer Sign Up</a></li>
+                            </ul>
+                        </div>
+                    )}
+
+
+
+
                 </div>
             </div>
 
+
+
             <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm m-0">
                 <div className="col-3 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3"  /></a>
+                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo"
+                                                                          className="img-fluid w-100 mx-3"/></a>
                 </div>
-                    <button className="btn col-3 p-0" type="button" data-bs-toggle="offcanvas"
+                <button className="btn col-3 p-0" type="button" data-bs-toggle="offcanvas"
                          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                         <svg fill="white" width="50" height="50" clipRule="evenodd" fillRule="evenodd"
                              strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24"

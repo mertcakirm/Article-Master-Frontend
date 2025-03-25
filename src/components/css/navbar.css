@@ -2,6 +2,7 @@
     background:black;
     padding: 0 1%;
     border-bottom: 1px solid #fff;
+    z-index: 60;
 
 }
 
@@ -14,19 +15,19 @@
 }
 
 .nav-row-lg{
-    display: flex;
+    display: flex!important;
 }
 
 .nav-row-sm{
-    display: none;
+    display: none!important;
 }
 
 @media only screen and (max-width: 1000px){
     .nav-row-sm{
-        display: flex;
+        display: flex!important;
     }
 
     .nav-row-lg{
-        display: none;
+        display: none!important;
     }
 }
