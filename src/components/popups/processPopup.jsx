@@ -1,4 +1,4 @@
-import './css/accepted.css';
+import '../css/accepted.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {useEffect} from "react";

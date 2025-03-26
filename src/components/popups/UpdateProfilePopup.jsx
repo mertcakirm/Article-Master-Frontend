@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/accepted.css';
+import '../css/accepted.css';
 
 const UpdateProfilePopup = ({onClose}) => {
     return (

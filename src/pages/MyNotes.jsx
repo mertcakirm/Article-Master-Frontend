@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import './css/MyNotes.css'
-import ProcessPopup from "../components/processPopup.jsx";
+import ProcessPopup from "../components/popups/processPopup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const MyNotes = () => {

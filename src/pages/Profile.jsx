@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import './css/profile.css'
-import UpdateProfilePopup from "../components/UpdateProfilePopup.jsx";
+import UpdateProfilePopup from "../components/popups/UpdateProfilePopup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import ProcessPopup from "../components/processPopup.jsx";
-import AddNewArticlePopup from "../components/AddNewArticlePopup.jsx";
-import EditArticlePopup from "../components/EditArticlePopup.jsx";
+import ProcessPopup from "../components/popups/processPopup.jsx";
+import AddNewArticlePopup from "../components/popups/AddNewArticlePopup.jsx";
+import EditArticlePopup from "../components/popups/EditArticlePopup.jsx";
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
