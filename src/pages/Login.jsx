@@ -43,7 +43,7 @@ const Login = () => {
                 <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" style={{ height: "100vh",position: "relative" }}>
                     {authType === "in" && (
                         <div className="col-12 login-flex text-center">
-                            <h3>User Sign In</h3>
+                            <h3>Log In</h3>
                             <input className="profile_inp" type="text" placeholder="Email Address" />
                             <input className="profile_inp" type="password" placeholder="Password" />
                             <button className="profile_btn">Sign In</button>

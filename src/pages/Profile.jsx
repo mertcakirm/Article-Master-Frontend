@@ -77,11 +77,11 @@ const Profile = () => {
                                             <div className="col-3 profile-card-right-value">75</div>
                                         </div>
                                         <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
-                                            <div className="col-9 profile-card-right-key">Comments Count</div>
+                                            <div className="col-9 profile-card-right-key">Writer Rating</div>
                                             <div className="col-3 profile-card-right-value">75</div>
                                         </div>
                                         <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
-                                            <div className="col-9 profile-card-right-key">Comments Count</div>
+                                            <div className="col-9 profile-card-right-key">View Count</div>
                                             <div className="col-3 profile-card-right-value">75</div>
                                         </div>
                                         <button onClick={toggleUpdatePopup} className="my-notes-process-see col-12">Update Other Information</button>

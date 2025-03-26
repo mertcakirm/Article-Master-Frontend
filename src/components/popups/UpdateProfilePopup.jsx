@@ -24,3 +24,5 @@ const UpdateProfilePopup = ({onClose}) => {
 };
 
 export default UpdateProfilePopup;
+
+

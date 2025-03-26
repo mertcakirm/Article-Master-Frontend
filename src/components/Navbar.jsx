@@ -15,6 +15,11 @@ const Navbar = () => {
         AOS.init({ duration: 500 });
     }, []);
 
+    const LogOut = () => {
+        localStorage.removeItem('token');
+        window.location.href = "/sign/in";
+    }
+
     return (
         <div className="container-fluid nav-con" data-aos="fade-in">
 
@@ -40,12 +45,13 @@ const Navbar = () => {
                                 Profile
                             </a>
                             <button
-                                className=" navbar-link bg-transparent border-0 p-0">
-                                Sign Out
+                                className=" navbar-link bg-transparent border-0 p-0"
+                                onClick={LogOut}>
+                                Log Out
                             </button>
                         </>
                     ) : (
-                        <a href="/sign/in" className=" navbar-link">Sign In</a>
+                        <a href="/sign/in" className=" navbar-link">Log In</a>
                     )}
                 </div>
             </div>

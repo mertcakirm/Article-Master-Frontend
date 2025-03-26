@@ -1,0 +1,69 @@
+.highlighted-text {
+    background-color: darkgoldenrod;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.highlighted-text:hover {
+    background-color: goldenrod;
+}
+
+.tooltip {
+    visibility: hidden;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.highlighted-text:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.add-note-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-note-btn:hover {
+    background-color: #0056b3;
+}
+
+.add-note-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+.mark-text{
+    padding: 10px 300px;
+
+}
+
+@media screen and (max-width: 800px) {
+    .add-note-btn{
+        right: 33%;
+    }
+}
