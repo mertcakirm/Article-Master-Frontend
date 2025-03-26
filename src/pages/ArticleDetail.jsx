@@ -5,7 +5,7 @@ const ArticleDetail = () => {
     return (
         <div>
             <Navbar />
-            <div className="page-container container-fluid">article</div>
+            <div className="page-container container-fluid">article detail</div>
 
         </div>
     );

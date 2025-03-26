@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const AddNewArticlePopup = ({onClose}) => {
+const EditArticlePopup = ({onClose,id}) => {
     const [file, setFile] = useState(null);
     const [file2, setFile2] = useState(null);
 
@@ -39,9 +39,9 @@ const AddNewArticlePopup = ({onClose}) => {
             <div className="popup-content"  style={{color:'#fff'}} data-aos="zoom-in" >
                 <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
                 <div className="row justify-content-center align-items-center row-gap-3">
-                    <div className="titles text-center">Add Article</div>
-                    <input className="col-12 profile_inp" placeholder="Article Title" type="text" />
-                    <input className="col-12 profile_inp" placeholder="Article Description" type="text" />
+                    <div className="titles text-center">Update Article</div>
+                    <input className="col-12 profile_inp" placeholder="New Article Title" type="text" />
+                    <input className="col-12 profile_inp" placeholder="New Article Description" type="text" />
                     <div
                         className="dropzone"
                         onDragOver={handleDragOver2}
@@ -79,7 +79,7 @@ const AddNewArticlePopup = ({onClose}) => {
                         />
                     </div>
 
-                    <button  onClick={() => onClose(false)} className="profile_btn">Post Article</button>
+                    <button  onClick={() => onClose(false)} className="profile_btn">Update Article</button>
 
                 </div>
 
@@ -88,4 +88,4 @@ const AddNewArticlePopup = ({onClose}) => {
     );
 };
 
-export default AddNewArticlePopup;
+export default EditArticlePopup;

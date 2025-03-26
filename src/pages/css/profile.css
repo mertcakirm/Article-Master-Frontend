@@ -50,6 +50,9 @@
     top: 0px;
     right: 2%;
     width: fit-content;
+    border-radius: 10px;
+    border: 1px solid #FFFFFF;
+
 }
 .add-article-btn-profile-sm {
     display: none;
@@ -82,5 +85,6 @@
         width: fit-content;
         padding: 10px 30px;
         border-radius: 10px;
+        border: 1px solid #FFFFFF;
     }
 }

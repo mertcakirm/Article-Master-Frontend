@@ -8,10 +8,13 @@
 .my-notes-process-see{
     border-radius: 5px;
     border: 1px solid #FFFFFF;
+    padding: 5px 10px;
+    background: #5d5c5c;
 }
 
 .my-notes-process-bin{
     border-radius: 5px;
     border: 1px solid #FFFFFF;
+    background: #5d5c5c;
     padding: 0 10px;
 }
