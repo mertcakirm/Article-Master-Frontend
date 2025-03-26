@@ -44,3 +44,43 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.add-article-btn-profile{
+    position: absolute;
+    top: 0px;
+    right: 2%;
+    width: fit-content;
+}
+.add-article-btn-profile-sm {
+    display: none;
+}
+
+.profile-article-card-btns{
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-article-card-btns>button{
+    width: fit-content;
+    padding: 5px 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .profile-col-2{
+        margin-top: 100px;
+    }
+
+    .add-article-btn-profile{
+        display: none;
+    }
+
+    .add-article-btn-profile-sm{
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: fit-content;
+        padding: 10px 30px;
+        border-radius: 10px;
+    }
+}
