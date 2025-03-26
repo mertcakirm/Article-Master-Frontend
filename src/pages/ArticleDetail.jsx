@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import ReactMarkdown from "react-markdown";
 import "./css/ArticleDetail.css";
-import NotePopup from "../components/popups/AddNotesPopup.jsx";
 import rehypeRaw from 'rehype-raw';
 
 const markdownContent = `
@@ -100,9 +99,6 @@ const ArticleDetail = () => {
                 />
             )}
 
-            <button onClick={() => setIsPopupOpen(true)} className="my-notes-process-see add-note-btn">
-                📌 Seçili Bölgeye Not Ekle
-            </button>
         </div>
     );
 };
@@ -117,6 +113,30 @@ const RichTextMarkdown = ({
     const [selectedText, setSelectedText] = useState(null);
     const [newNoteText, setNewNoteText] = useState('');
     const markdownRef = useRef(null);
+    const noteEditorRef = useRef(null);
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        if (!noteEditorRef.current)
+            return;
+
+        noteEditorRef.current.style.top = `${cursorPosition.y + 18}px`;
+    }, [selectedText]);
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setCursorPosition({
+                x: e.clientX,
+                y: e.clientY
+            });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, []);
 
     const handleTextSelection = () => {
         const selection = window.getSelection();
@@ -168,18 +188,32 @@ const RichTextMarkdown = ({
             const highlightedText = modifiedMarkdown.slice(note.start, note.end);
             const suffix = modifiedMarkdown.slice(note.end);
 
-            modifiedMarkdown = `${prefix}<span style="background-color:${note.color}; padding: 0px 4px; border-radius: 4px;">${highlightedText}</span>${suffix}`;
+            modifiedMarkdown = `${prefix}<span style="background-color:${note.color}; padding: 0px 4px; border-radius: 4px;" data-note="${note.text}">${highlightedText}</span>${suffix}`;
         });
 
         return modifiedMarkdown;
     };
-
     const noteColors = [
         '#FFD700', // Gold
         '#98FB98', // Pale Green
         '#87CEFA', // Light Sky Blue
         '#DDA0DD', // Plum
-        '#F0E68C'  // Khaki
+        '#F0E68C', // Khaki
+        '#FF4500', // Orange Red
+        '#32CD32', // Lime Green
+        '#1E90FF', // Dodger Blue
+        '#FF69B4', // Hot Pink
+        '#8A2BE2', // Blue Violet
+        '#00CED1', // Dark Turquoise
+        '#FF6347', // Tomato
+        '#20B2AA', // Light Sea Green
+        '#FF8C00', // Dark Orange
+        '#B0E0E6', // Powder Blue
+        '#DC143C', // Crimson
+        '#4682B4', // Steel Blue
+        '#8FBC8F', // Dark Sea Green
+        '#FFC0CB', // Pink
+        '#7B68EE'  // Medium Slate Blue
     ];
 
     return (
@@ -205,13 +239,17 @@ const RichTextMarkdown = ({
                 >
                     {renderMarkdownWithNotes()}
                 </ReactMarkdown>
+                <CustomTooltip />
             </div>
 
             {selectedText && (
-                <div style={{
+                <div ref={noteEditorRef}
+                    style={{
+                    position: 'fixed',
                     border: '1px solid #ccc',
                     padding: '16px',
-                    borderRadius: '8px'
+                    borderRadius: '8px',
+                    backgroundColor: '#232323',
                 }}>
           <textarea
               placeholder="Enter your note"
@@ -221,7 +259,8 @@ const RichTextMarkdown = ({
                   width: '100%',
                   marginBottom: '16px',
                   padding: '8px',
-                  borderRadius: '4px'
+                  borderRadius: '4px',
+                  resize:'none'
               }}
           />
                     <div style={{
@@ -245,6 +284,75 @@ const RichTextMarkdown = ({
                     </div>
                 </div>
             )}
+        </div>
+    );
+};
+
+const CustomTooltip = () => {
+    const [tooltip, setTooltip] = useState({
+        visible: false,
+        content: '',
+        position: { x: 0, y: 0 }
+    });
+    const [hoveredElement, setHoveredElement] = useState(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const element = document.elementFromPoint(e.clientX, e.clientY);
+
+            if (element === hoveredElement) {
+                setTooltip(prev => ({
+                    ...prev,
+                    position: { x: e.clientX, y: e.clientY }
+                }));
+                return;
+            }
+
+            setHoveredElement(element);
+
+            if (element && element.hasAttribute('data-note')) {
+                const content = element.getAttribute('data-note');
+                setTooltip({
+                    visible: true,
+                    content,
+                    position: { x: e.clientX, y: e.clientY }
+                });
+            } else {
+                setTooltip(prev => ({ ...prev, visible: false }));
+            }
+        };
+
+        const handleMouseLeave = () => {
+            setTooltip(prev => ({ ...prev, visible: false }));
+            setHoveredElement(null);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        document.body.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            document.body.removeEventListener('mouseleave', handleMouseLeave);
+        };
+    }, [hoveredElement]);
+
+    if (!tooltip.visible) return null;
+
+    return (
+        <div
+            style={{
+                position: 'fixed',
+                left: `${tooltip.position.x + 10}px`,
+                top: `${tooltip.position.y + 10}px`,
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                color: 'white',
+                padding: '5px 10px',
+                borderRadius: '4px',
+                zIndex: 9999,
+                pointerEvents: 'none',
+            }}
+        >
+            {tooltip.content}
         </div>
     );
 };
