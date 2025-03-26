@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 
-const NotePopup = ({ selectedText, onClose, onSaveNote }) => {
+const NotePopup = ({ selectedText, onClose, onSaveNote, noteColor, setNoteColor }) => {
     const [noteText, setNoteText] = useState("");
-    const [noteColor, setNoteColor] = useState("#ffeb3b");
 
     const handleNoteChange = (e) => {
         setNoteText(e.target.value);
@@ -11,36 +10,32 @@ const NotePopup = ({ selectedText, onClose, onSaveNote }) => {
     const handleColorChange = (e) => {
         setNoteColor(e.target.value);
     };
-    useEffect(() => {
-        console.log(selectedText)
-    }, [selectedText]);
 
     const saveNote = () => {
         if (!noteText.trim()) {
-            alert("Lütfen bir not girin.");
+            alert("Lütfen bir not girin!");
             return;
         }
 
         onSaveNote(noteText, noteColor);
-
         setNoteText("");
         onClose();
     };
 
     return (
         <div className="popup-overlay">
-        <div className="popup-content">
-                <h3 className="titles text-center" style={{color:'#fff'}}>Not Ekle</h3>
+            <div className="popup-content">
+                <h3 className="titles text-center" style={{ color: "#fff" }}>Not Ekle</h3>
                 <textarea
                     value={noteText}
                     onChange={handleNoteChange}
                     placeholder="Notunuzu girin"
                     rows="4"
                     className="w-100 profile_inp mt-3"
-                    style={{resize: "none",height:"200px"}}
+                    style={{ resize: "none", height: "200px" }}
                 ></textarea>
                 <div>
-                    <label style={{color:'#fff'}}>Renk Seçin:</label>
+                    <label style={{ color: "#fff" }}>Renk Seçin:</label>
                     <input
                         type="color"
                         value={noteColor}

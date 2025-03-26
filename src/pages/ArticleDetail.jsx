@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar.jsx";
 import ReactMarkdown from "react-markdown";
 import "./css/ArticleDetail.css";
 import NotePopup from "../components/popups/AddNotesPopup.jsx";
-
 
 const markdownContent = `
 ## Başlık 1
@@ -17,80 +16,69 @@ Liste öğesi 2
 
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
-    const [selectedText, setSelectedText] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [noteColor, setNoteColor] = useState("");
-
-    const handleTextSelection = () => {
-        const selection = window.getSelection();
-        if (selection.toString().trim().length > 0) {
-            setSelectedText(selection.toString());
-        }
-    };
-
-    useEffect(() => {
-        console.log(selectedText)
-        console.log(noteColor)
-    }, [selectedText,noteColor]);
-
-    const openPopup = () => {
-        if (selectedText.trim() === "") {
-            alert("Lütfen not eklemek için metin seçin!");
-            return;
-        }
-        setIsPopupOpen(true);
-    };
-
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    };
+    const [noteColor, setNoteColor] = useState("#ffeb3b");
+    const [selectedText, setSelectedText] = useState("");
+    const [selectionRange, setSelectionRange] = useState({});
 
     const saveNote = (noteText, noteColor) => {
-        const startIndex = markdownContent.indexOf(selectedText);
-        const endIndex = startIndex + selectedText.length;
+        const { startIndex, endIndex } = selectionRange;
+        if (!noteText.trim()) {
+            alert("Lütfen bir not girin!");
+            return;
+        }
 
         const isAlreadySelected = notes.some(
             (note) => note.startIndex === startIndex && note.endIndex === endIndex
         );
 
         if (!isAlreadySelected) {
-            setNotes([...notes, { startIndex, endIndex, note: noteText, color: noteColor }]);
+            setNotes([
+                ...notes,
+                { startIndex, endIndex, note: noteText, color: noteColor },
+            ]);
         } else {
             alert("Bu bölüme zaten not eklendi!");
         }
 
-        setSelectedText("");
-        closePopup();
+        setIsPopupOpen(false);
+    };
+
+    const handleTextSelection = () => {
+        const selection = window.getSelection();
+        const selectedText = selection.toString();
+
+        if (selectedText.trim()) {
+            const range = selection.getRangeAt(0);
+            const startIndex = range.startOffset;
+            const endIndex = range.endOffset;
+
+            setSelectedText(selectedText);
+            setSelectionRange({ startIndex, endIndex });
+
+            setIsPopupOpen(true);
+        }
     };
 
     const renderMarkdownWithNotes = (content) => {
-        const markdownArray = content.split("\n");
-        let modifiedText = markdownArray.map((line, index) => {
-            let modifiedLine = line;
-            notes
-                .sort((a, b) => a.startIndex - b.startIndex)
-                .forEach(({ startIndex, endIndex, note, color }) => {
-                    if (startIndex >= 0 && endIndex <= modifiedLine.length) {
-                        modifiedLine = (
-                            <span key={index} className="highlighted-text" style={{ backgroundColor: color }}>
-                                {modifiedLine.substring(startIndex, endIndex)}
-                                <span className="tooltip">{note}</span>
-                            </span>
-                        );
-                    }
-                });
-            return modifiedLine;
-        }).join("\n");
-        return modifiedText;
+        let modifiedContent = content;
+
+        notes.forEach(({ startIndex, endIndex, note, color }) => {
+            const highlightedText = modifiedContent.substring(startIndex, endIndex);
+            const replacementText = `<span class="highlighted-text" style="background-color: ${color}" data-note="${note}">${highlightedText}</span>`;
+            modifiedContent = modifiedContent.replace(highlightedText, replacementText);
+        });
+
+        return <div dangerouslySetInnerHTML={{ __html: modifiedContent }} />;
     };
 
     return (
         <div>
             <Navbar />
             <div className="page-container container-fluid">
-                <div onMouseUp={handleTextSelection} className="markdown-content">
+                <div className="markdown-content" onMouseUp={handleTextSelection}>
                     <div className="mark-text">
-                        <ReactMarkdown>{renderMarkdownWithNotes(markdownContent)}</ReactMarkdown>
+                        {renderMarkdownWithNotes(markdownContent)}
                     </div>
                 </div>
             </div>
@@ -98,13 +86,14 @@ const ArticleDetail = () => {
             {isPopupOpen && (
                 <NotePopup
                     selectedText={selectedText}
-                    onClose={closePopup}
-                    onSaveNote={saveNote}
                     noteColor={noteColor}
+                    setNoteColor={setNoteColor}
+                    onSaveNote={saveNote}
+                    onClose={() => setIsPopupOpen(false)}
                 />
             )}
 
-            <button onClick={openPopup} className="my-notes-process-see add-note-btn">
+            <button onClick={() => setIsPopupOpen(true)} className="my-notes-process-see add-note-btn">
                 📌 Seçili Bölgeye Not Ekle
             </button>
         </div>
