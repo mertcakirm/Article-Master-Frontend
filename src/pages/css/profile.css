@@ -32,7 +32,9 @@
 
 .profile-card-left-info{
     border-bottom: 1px solid #ffffff;
-    height: 40px;
+    padding-bottom: 10px;
+    min-height: 40px;
+    height: fit-content;
 }
 
 .profile-card-right-key{
