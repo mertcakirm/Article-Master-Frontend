@@ -12,6 +12,7 @@ Bu makalenin ikinci bölümüdür.
 
 Liste öğesi 1  
 Liste öğesi 2
+
 `;
 
 const ArticleDetail = () => {
@@ -194,11 +195,6 @@ const RichTextMarkdown = ({
         return modifiedMarkdown;
     };
     const noteColors = [
-        '#FFD700', // Gold
-        '#98FB98', // Pale Green
-        '#87CEFA', // Light Sky Blue
-        '#DDA0DD', // Plum
-        '#F0E68C', // Khaki
         '#FF4500', // Orange Red
         '#32CD32', // Lime Green
         '#1E90FF', // Dodger Blue
@@ -208,12 +204,17 @@ const RichTextMarkdown = ({
         '#FF6347', // Tomato
         '#20B2AA', // Light Sea Green
         '#FF8C00', // Dark Orange
-        '#B0E0E6', // Powder Blue
         '#DC143C', // Crimson
         '#4682B4', // Steel Blue
         '#8FBC8F', // Dark Sea Green
-        '#FFC0CB', // Pink
-        '#7B68EE'  // Medium Slate Blue
+        '#7B68EE', // Medium Slate Blue
+        '#800000', // Maroon
+        '#556B2F', // Dark Olive Green
+        '#8B0000', // Dark Red
+        '#2F4F4F', // Dark Slate Gray
+        '#9932CC', // Dark Orchid
+        '#483D8B', // Dark Slate Blue
+        '#008B8B'  // Dark Cyan
     ];
 
     return (
