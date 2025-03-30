@@ -44,6 +44,9 @@ const Navbar = () => {
                             <a href="/profile" className={`navbar-link ${url === "profile" ? "active-nav-link" : ""}`}>
                                 Profile
                             </a>
+                            <a href="/admin" className={` navbar-link ${url === "favorites" ? "active-nav-link" : ""}`}>
+                                Admin
+                            </a>
                             <button
                                 className=" navbar-link bg-transparent border-0 p-0"
                                 onClick={LogOut}>
