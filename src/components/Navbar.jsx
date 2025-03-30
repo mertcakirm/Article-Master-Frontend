@@ -31,6 +31,9 @@ const Navbar = () => {
                 <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-7 m-0">
                     <a href="/" className={` navbar-link ${url === undefined ? "active-nav-link" : ""}`}>Home</a>
                     <a href="/articles" className={` navbar-link ${url === "articles" ? "active-nav-link" : ""}`}>Articles</a>
+                    <a href="/writers" className={`navbar-link ${url === "writers" ? "active-nav-link" : ""}`}>
+                        Writers
+                    </a>
 
                     {token ? (
                         <>
@@ -44,7 +47,8 @@ const Navbar = () => {
                             <a href="/profile" className={`navbar-link ${url === "profile" ? "active-nav-link" : ""}`}>
                                 Profile
                             </a>
-                            <a href="/admin" className={` navbar-link ${url === "favorites" ? "active-nav-link" : ""}`}>
+
+                            <a href="/admin" className={` navbar-link ${url === "admin" ? "active-nav-link" : ""}`}>
                                 Admin
                             </a>
                             <button

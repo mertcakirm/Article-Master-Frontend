@@ -191,6 +191,17 @@
     transform: scale(1,1);
 }
 
+
+.writer-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+
 @media screen and (max-width: 1000px) {
     .popular-row{
         padding: 0 10%;
