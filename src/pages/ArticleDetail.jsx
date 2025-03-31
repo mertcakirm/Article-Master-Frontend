@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import ReactMarkdown from "react-markdown";
 import "./css/ArticleDetail.css";
 import rehypeRaw from 'rehype-raw';
+import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
 
 const markdownContent = `
 ## Başlık 1
@@ -18,10 +19,11 @@ Liste öğesi 2
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isPopupOpenComment, setIsPopupOpenComment] = useState(false);
     const [noteColor, setNoteColor] = useState("#ffeb3b");
     const [selectedText, setSelectedText] = useState("");
     const [selectionRange, setSelectionRange] = useState({});
-
+    const [articleid,setArticleid] = useState(null);
     const saveNote = (noteText, noteColor) => {
         const { startIndex, endIndex } = selectionRange;
         if (!noteText.trim()) {
@@ -44,6 +46,10 @@ const ArticleDetail = () => {
 
         setIsPopupOpen(false);
     };
+
+    const togglePopupComment = () => {
+        setIsPopupOpenComment(!isPopupOpenComment);
+    }
 
     const handleTextSelection = () => {
         return;
@@ -79,6 +85,11 @@ const ArticleDetail = () => {
         <div>
             <Navbar />
             <div className="page-container container-fluid">
+                    <button className="comment-canvas-btn" onClick={togglePopupComment} >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M12 3c5.514 0 10 3.685 10 8.213 0 5.04-5.146 8.159-9.913 8.159-2.027 0-3.548-.439-4.548-.712l-4.004 1.196 1.252-2.9c-.952-1-2.787-2.588-2.787-5.743 0-4.528 4.486-8.213 10-8.213zm0-2c-6.628 0-12 4.573-12 10.213 0 2.39.932 4.591 2.427 6.164l-2.427 5.623 7.563-2.26c1.585.434 3.101.632 4.523.632 7.098.001 11.914-4.931 11.914-10.159 0-5.64-5.372-10.213-12-10.213z"/></svg>
+                    </button>
+
+
                 <div className="markdown-content" onMouseUp={handleTextSelection}>
                     <div className="mark-text">
                         <RichTextMarkdown
@@ -99,7 +110,12 @@ const ArticleDetail = () => {
                     onClose={() => setIsPopupOpen(false)}
                 />
             )}
-
+            {isPopupOpenComment && (
+                <CommnetsPopup
+                    onClose={() => setIsPopupOpenComment(false)}
+                    id="1"
+                />
+            )}
         </div>
     );
 };
