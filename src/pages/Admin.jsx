@@ -9,7 +9,7 @@ const Admin = () => {
     const [processtype, setProcesstype] = useState(null);
     const [text, setText] = useState("");
     const [acceptedText, setAcceptedText] = useState("");
-    const [Id,setId] = useState("");
+    const [Id,setId] = useState();
 
     const toggleProcessPopup = (type,id,text,acceptedText) => {
         setProcessIsPopupOpen(!isProcessPopupOpen);
@@ -40,7 +40,7 @@ const Admin = () => {
                                 <td>Alan Abel</td>
                                 <td>
                                     <div className="my-notes-process-flex">
-                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('role_Kabul',1,"Role talebi Kabul","işlem başarılı")} style={{background:'green'}}>
+                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('approve_user',1,"Role talebi Kabul","işlem başarılı")} style={{background:'green'}}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M9 21.035l-9-8.638 2.791-2.87 6.156 5.874 12.21-12.436 2.843 2.817z"/></svg>
                                         </button>
                                         <button onClick={()=>toggleProcessPopup('role_reject',1,"Role talebi reddi","işlem başarılı")} className="my-notes-process-bin" style={{background:'red'}}>

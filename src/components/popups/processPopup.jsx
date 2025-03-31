@@ -2,6 +2,7 @@ import '../css/accepted.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {useEffect} from "react";
+import {ApproveRequest} from "../../API/AdminApi.jsx";
 const ProcessPopup = ({ type , text , id, onClose , acceptedText }) => {
 
     const handleDelete = async () => {
@@ -11,8 +12,8 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText }) => {
 
 
         switch (type) {
-            case "product_delete":
-                console.log("test")
+            case "approve_user":
+                await ApproveRequest(id)
                 break;
             case "category_delete":
                 console.log("test");

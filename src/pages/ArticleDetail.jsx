@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import "./css/ArticleDetail.css";
 import rehypeRaw from 'rehype-raw';
 import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
+import {GetArticleRequest} from "../API/ArticleApi.js";
 
 const markdownContent = `
 ## Başlık 1
@@ -79,6 +80,14 @@ const ArticleDetail = () => {
 
         return <div dangerouslySetInnerHTML={{ __html: modifiedContent }} />;
     };
+
+    const GetArticle=async ()=>{
+        const article =await GetArticleRequest(3);
+        console.log(article);
+    }
+    useEffect(()=>{
+        GetArticle();
+    },[])
 
 
     return (
