@@ -6,6 +6,18 @@ const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
     const [file, setFile] = useState(null);
+    const [loginObj, setLoginObj] = useState({
+        Email:"",
+        Password:""
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setLoginObj((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     const handleDragOver = (event) => {
         event.preventDefault();
@@ -30,9 +42,14 @@ const Login = () => {
         }
     }, [type]);
 
+    const handleLogin = () => {
+
+    }
+
     return (
         <div className="page-container">
             <div className="row p-0 m-0">
+
                 <div className="col-lg-8 d-none d-lg-block p-0 m-0">
                     <img src="https://images.pexels.com/photos/1438190/pexels-photo-1438190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                          className="img-fluid w-100"
@@ -40,13 +57,28 @@ const Login = () => {
                          alt="Login Banner"
                     />
                 </div>
+
                 <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" style={{ height: "100vh",position: "relative" }}>
                     {authType === "in" && (
                         <div className="col-12 login-flex text-center">
                             <h3>Log In</h3>
-                            <input className="profile_inp" type="text" placeholder="Email Address" />
-                            <input className="profile_inp" type="password" placeholder="Password" />
-                            <button className="profile_btn">Sign In</button>
+                            <input
+                                className="profile_inp"
+                                type="text"
+                                name="Email"
+                                placeholder="Email Address"
+                                value={loginObj.Email}
+                                onChange={handleInputChange}
+                            />
+                            <input
+                                className="profile_inp"
+                                type="password"
+                                name="Password"
+                                placeholder="Password"
+                                value={loginObj.Password}
+                                onChange={handleInputChange}
+                            />
+                            <button className="profile_btn" onClick={handleLogin}>Sign In</button>
                             <button className="login-btn-switch" onClick={() => setAuthType("up")}>User Sign Up</button>
                         </div>
                     )}

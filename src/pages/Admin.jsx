@@ -4,6 +4,7 @@ import ProcessPopup from "../components/popups/processPopup.jsx";
 
 const Admin = () => {
     const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
+    const [pageNum, setPageNum] = useState(1);
 
     const toggleProcessPopup = () => {
         setProcessIsPopupOpen(!isProcessPopupOpen);
