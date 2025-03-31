@@ -5,9 +5,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import {deleteCookie, getCookie} from "../API/Cokkie.js";
 
 const Navbar = () => {
-    const token = localStorage.getItem('token');
+    const token = getCookie('token');
     const url = window.location.pathname.split("/").filter(Boolean).pop();
     console.log(url)
 
@@ -16,7 +17,7 @@ const Navbar = () => {
     }, []);
 
     const LogOut = () => {
-        localStorage.removeItem('token');
+        deleteCookie('token');
         window.location.href = "/sign/in";
     }
 

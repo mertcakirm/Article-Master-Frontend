@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./css/Login.css";
+import {LoginRequest} from "../API/AuthApi.js";
 
 const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
     const [file, setFile] = useState(null);
     const [loginObj, setLoginObj] = useState({
-        Email:"",
-        Password:""
+        email:"",
+        password:""
     });
 
     const handleInputChange = (event) => {
@@ -42,8 +43,9 @@ const Login = () => {
         }
     }, [type]);
 
-    const handleLogin = () => {
-
+    const handleLogin = async () => {
+        await LoginRequest(loginObj);
+        window.location.href = "/";
     }
 
     return (
@@ -65,17 +67,17 @@ const Login = () => {
                             <input
                                 className="profile_inp"
                                 type="text"
-                                name="Email"
+                                name="email"
                                 placeholder="Email Address"
-                                value={loginObj.Email}
+                                value={loginObj.email}
                                 onChange={handleInputChange}
                             />
                             <input
                                 className="profile_inp"
                                 type="password"
-                                name="Password"
+                                name="password"
                                 placeholder="Password"
-                                value={loginObj.Password}
+                                value={loginObj.password}
                                 onChange={handleInputChange}
                             />
                             <button className="profile_btn" onClick={handleLogin}>Sign In</button>

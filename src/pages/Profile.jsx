@@ -192,7 +192,7 @@ const Profile = () => {
                     onClose={(b) => {
                         if (b === false) setProcessPopup(b);
                     }}
-                    text="Bu makaley silmek istediğinize emin misiniz?"
+                    text="Bu makaleyi silmek istediğinize emin misiniz?"
                     acceptedText="Makale başarıyla silindi"
                     type="offer_delete"
                     id={delId}
