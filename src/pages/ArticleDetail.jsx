@@ -119,6 +119,7 @@ const ArticleDetail = () => {
                     onClose={() => setIsPopupOpen(false)}
                 />
             )}
+
             {isPopupOpenComment && (
                 <CommnetsPopup
                     onClose={() => setIsPopupOpenComment(false)}

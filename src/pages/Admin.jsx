@@ -6,17 +6,23 @@ const Admin = () => {
     const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
     const [pageNumRole, setPageNumRole] = useState(1);
     const [pageNumUser, setPageNumUser] = useState(1);
-    const [processtype, setProcesstype] = useState(null);
-    const [text, setText] = useState("");
-    const [acceptedText, setAcceptedText] = useState("");
-    const [Id,setId] = useState();
+    const [pageNumArticle, setPageNumArticle] = useState(1);
+    const [processState, setProcessState] = useState({
+        processtype: null,
+        text: "",
+        acceptedText: "",
+        id: null,
+    });
 
-    const toggleProcessPopup = (type,id,text,acceptedText) => {
+    const toggleProcessPopup = (type, id, text, acceptedText) => {
         setProcessIsPopupOpen(!isProcessPopupOpen);
-        setText(text);
-        setAcceptedText(acceptedText);
-        setProcesstype(type);
-        setId(id);
+        setProcessState(prevState => ({
+            ...prevState,
+            processtype: type,
+            text: text,
+            acceptedText: acceptedText,
+            id: id
+        }));
     };
     return (
         <div>
@@ -164,8 +170,8 @@ const Admin = () => {
                         </table>
 
                         <div  className="my-notes-process-flex">
-                            {pageNumUser > 1 && (
-                                <button onClick={() => setPageNumUser(pageNumUser - 1)} className="my-notes-process-see">
+                            {pageNumArticle > 1 && (
+                                <button onClick={() => setPageNumArticle(pageNumArticle - 1)} className="my-notes-process-see">
                                     <svg
                                         fill="white"
                                         width="34"
@@ -182,8 +188,8 @@ const Admin = () => {
                                 </button>
                             )}
 
-                            <div className="my-notes-process-see text-center" style={{width:'40px',lineHeight:'40px'}}>{pageNumUser}</div>
-                            <button onClick={()=>setPageNumUser(pageNumUser+1)} className="my-notes-process-see">
+                            <div className="my-notes-process-see text-center" style={{width:'40px',lineHeight:'40px'}}>{pageNumArticle}</div>
+                            <button onClick={()=>setPageNumArticle(pageNumArticle+1)} className="my-notes-process-see">
                                 <svg  fill="white" width="34" height="36" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m10.211 7.155c-.141-.108-.3-.157-.456-.157-.389 0-.755.306-.755.749v8.501c0 .445.367.75.755.75.157 0 .316-.05.457-.159 1.554-1.203 4.199-3.252 5.498-4.258.184-.142.29-.36.29-.592 0-.23-.107-.449-.291-.591-1.299-1.002-3.945-3.044-5.498-4.243z"/></svg>
                             </button>
                         </div>
@@ -195,10 +201,10 @@ const Admin = () => {
                     onClose={(b) => {
                         if (b === false) setProcessIsPopupOpen(b);
                     }}
-                    text={text}
-                    acceptedText={acceptedText}
-                    type={processtype}
-                    id={Id}
+                    text={processState.text}
+                    acceptedText={processState.acceptedText}
+                    type={processState.processtype}
+                    id={processState.id}
                 />
             )}
         </div>

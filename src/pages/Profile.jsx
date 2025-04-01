@@ -12,17 +12,29 @@ const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [pageNum, setPageNum] = useState(1);
     const [processPopup, setProcessPopup] = useState(false);
-    const [delId, setDelId] = useState(null);
     const [updateId, setUpdateId] = useState(null);
     const [newArticlePopup, setNewArticlePopup] = useState(false);
     const [editArticlePopup, setEditArticlePopup] = useState(false);
+    const [processState, setProcessState] = useState({
+        processtype: null,
+        text: "",
+        acceptedText: "",
+        id: null,
+    });
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
     };
 
-    const toggleProcessPopup = () => {
+    const toggleProcessPopup = (type, id, text, acceptedText) => {
         setProcessPopup(!processPopup);
+        setProcessState(prevState => ({
+            ...prevState,
+            processtype: type,
+            text: text,
+            acceptedText: acceptedText,
+            id: id
+        }));
     };
 
     const toggleNewArticlePopup = () => {
@@ -106,7 +118,7 @@ const Profile = () => {
                                     <p className="article-card-desc">Article Description Article Description Article Description Article Description Article Description Article Description Article Description</p>
                                     <div className="profile-article-card-btns col-12 px-3 justify-content-between">
                                         <button className="my-notes-process-see" onClick={toggleEditArticlePopup}>Edit</button>
-                                        <button className="my-notes-process-see" onClick={toggleProcessPopup}>Delete</button>
+                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('delete_article',1,"Makale silme prof","işlem başarılı")}>Delete</button>
                                     </div>
                                 </a>
                             </div>
@@ -192,10 +204,10 @@ const Profile = () => {
                     onClose={(b) => {
                         if (b === false) setProcessPopup(b);
                     }}
-                    text="Bu makaleyi silmek istediğinize emin misiniz?"
-                    acceptedText="Makale başarıyla silindi"
-                    type="offer_delete"
-                    id={delId}
+                    text={processState.text}
+                    acceptedText={processState.acceptedText}
+                    type={processState.processtype}
+                    id={processState.id}
                 />
             )}
             {newArticlePopup && (
