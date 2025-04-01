@@ -237,6 +237,7 @@ const Profile = () => {
                     id={processState.id}
                 />
             )}
+
             {newArticlePopup && (
                 <AddNewArticlePopup
                     onClose={(b) => {
