@@ -1,10 +1,72 @@
-.profile_photo{
+.profile-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+/* Profil fotoğrafı */
+.profile_photo {
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    width: 100%;
-    border-radius: 200px;
+    border-radius: 50%;
     border: 3px solid white;
 }
+
+/* Overlay alanı (başlangıçta gizli) */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Başlangıçta görünmez */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: background 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    flex-direction: column;
+}
+
+/* Hover olduğunda overlay tam görünecek */
+.profile-container:hover .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Koyu görünüm */
+    opacity: 1;
+}
+
+/* Dosya yükleme butonu (tam ekran, şeffaf) */
+.file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2; /* Input'un tıklanabilir olması için */
+}
+
+/* Metin başlangıçta şeffaf, hover ile belirginleşir */
+.overlay-text {
+    z-index: 1;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.profile-container:hover .overlay-text {
+    opacity: 1;
+}
+
+
 
 .profile_inp{
     border:1px solid #ffffff;

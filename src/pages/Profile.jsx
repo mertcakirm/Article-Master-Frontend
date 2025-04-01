@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import AddNewArticlePopup from "../components/popups/AddNewArticlePopup.jsx";
 import EditArticlePopup from "../components/popups/EditArticlePopup.jsx";
+import {UpdateProfilePhotoRequest} from "../API/ProfileApi.jsx";
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
@@ -15,12 +16,15 @@ const Profile = () => {
     const [updateId, setUpdateId] = useState(null);
     const [newArticlePopup, setNewArticlePopup] = useState(false);
     const [editArticlePopup, setEditArticlePopup] = useState(false);
+    const [fileBase64, setFileBase64] = useState("");
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
         acceptedText: "",
         id: null,
     });
+
+
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
@@ -48,6 +52,26 @@ const Profile = () => {
         AOS.init({ duration: 500 });
     }, []);
 
+    const SubmitPhoto=async ()=>{
+        await UpdateProfilePhotoRequest(fileBase64);
+
+    }
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result.split(",")[1];
+                setFileBase64(base64String);
+            };
+            reader.readAsDataURL(file);
+            SubmitPhoto();
+        }
+    };
+
+
+
     return (
         <div>
             <Navbar />
@@ -60,15 +84,18 @@ const Profile = () => {
 
                             <div className="profile_card row justify-content-between p-3 mt-5"  data-aos="fade-up">
                                     <div className="col-lg-5 col-12 row justify-content-center align-items-center row-gap-2">
-                                        <div className="p-0" style={{
-                                            position: 'relative',
-                                            overflow: 'hidden',
-                                            width: '150px',
-                                            height: '150px'
-                                        }}>
-                                            <img className="profile_photo"
-                                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                                 alt="profile_photo"/>
+
+                                        <div className="p-0 profile-container">
+                                            <img
+                                                className="profile_photo"
+                                                src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
+                                                alt="profile_photo"
+                                            />
+                                            <input type="file" className="file-input" onChange={handleFileChange} />
+                                            <div className="overlay">
+                                                <input type="file" className="file-input" onChange={handleFileChange} />
+                                                <span className="overlay-text">Fotoğraf Yükle</span>
+                                            </div>
                                         </div>
 
                                         <div className="profile-card-left-info col-lg-8 col-12 text-center">Mert Çakır</div>
