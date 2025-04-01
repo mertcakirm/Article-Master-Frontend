@@ -1,35 +1,43 @@
 import axios from "axios";
+import {getCookie} from "./Cokkie.js";
+
+const BaseUrl = "http://localhost:5094/api/";
+
+const api = axios.create({
+    baseURL: BaseUrl,
+});
+
+api.interceptors.request.use((config) => {
+    const token = getCookie("token");
+
+    if (!config.headers["NoAuth"] && token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    delete config.headers["NoAuth"];
+    return config;
+});
+
+export const GetArticleRequest = async (id) => {
+    return await api.get(`article/article/${id}`,{
+        headers: { NoAuth: true }
+    });
+};
+
+export const AddArticleRequest = async (newArticleObj) => {
+    return await api.post("article", newArticleObj);
+};
+
+export const DeleteArticleRequest = async (id) => {
+    return await api.delete(`article/${id}`);
+};
+
+export const GetArticlesRequest = async (Page, Size) => {
+    return await api.get(`article/paged/all?PageNumber=${Page}&PageSize=${Size}`,{
+        headers: { NoAuth: true }
+    });
+};
 
 
-const BaseUrl="http://localhost:5094/api/"
-
-export const GetArticleRequest =async (id)=> {
-    const response =await axios.get(`${BaseUrl}article/article/${id}`)
-    return response;
-
-}
-
-export const AddArticleRequest =async (newArticleObj) => {
-    const response =await axios.post(`${BaseUrl}article`,newArticleObj)
-    return response;
-
-}
-
-export const DeleteArticleRequest =async (id) => {
-    const response =await axios.delete(`${BaseUrl}article/${id}`)
-    return response;
-
-}
-
-
-export const GetArticlesRequest =async (Page,Size)=> {
-    const response =await axios.get(`${BaseUrl}article/paged/all?PageNumber=${Page}&PageSize=${Size}`)
-    return response;
-
-}
-
-
-export const AddCommentRequest =async (newCommentObj) => {
-    const response =await axios.post(`${BaseUrl}comment`,newCommentObj)
-    return response;
-}
+export const AddCommentRequest = async (newCommentData) => {
+    return await api.post("comment", newCommentData);
+};

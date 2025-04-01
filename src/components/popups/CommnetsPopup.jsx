@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {AddCommentRequest} from "../../API/ArticleApi.js";
 
 const CommentsPopup = ({ onClose, id }) => {
     const [newCommentData, setNewCommentData] = useState({
@@ -19,11 +20,16 @@ const CommentsPopup = ({ onClose, id }) => {
         setNewCommentData({ ...newCommentData, rating: parseInt(e.target.value) });
     };
 
-    const handleSendComment = () => {
+    const handleSendComment = async () => {
         if (newCommentData.content.trim() === "") return;
 
-
-        setNewCommentData({ content: "", rating: 1, articleId: id });
+        try {
+            await AddCommentRequest(newCommentData);
+            setNewCommentData({ content: "", rating: 1, articleId: id });
+        } catch (error) {
+            console.error("Error while sending comment:", error.response?.data || error.message);
+            alert("Yorum gönderilirken hata oluştu. Lütfen tekrar deneyin.");
+        }
     };
 
     return (
