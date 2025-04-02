@@ -37,14 +37,12 @@ const Articles = () => {
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">
                     <div className="col-12 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
-
-
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div className="col-lg-3" data-aos="fade-up" key={index}>
-                                <a href={`/articles/${article.id}`} className="article-card">
+                                <a href={`/article/${article.id}`} className="article-card">
                                     <img className="w-100 img-fluid article-card-img" alt="article-image"
-                                         src={article.thumbnailBase64 || "https://bgcp.bionluk.com/images/portfolio/1400x788/d9792dfe-2379-4a8f-bc5f-3c1649310174.jpg"} />
+                                         src={article.thumbnailBase64 || "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"} />
                                     <p className="article-card-title">{article.title}</p>
                                     <p className="article-card-desc">{article.description || "Article description not found."}</p>
                                     <div className="my-notes-process-flex justify-content-between w-100 px-5">
@@ -70,7 +68,7 @@ const Articles = () => {
                             </div>
                         ))
                     ) : (
-                        <p className="text-center my-4">Henüz makale bulunmamaktadır.</p>
+                        <p className="text-center my-4">There are no articles yet.</p>
                     )}
 
 

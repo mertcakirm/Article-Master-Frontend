@@ -30,7 +30,7 @@ const Admin = () => {
             <div className="page-container mb-5 container-fluid">
                 <div className="row justify-content-between row-gap-5 popular-row ">
 
-                    <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" style={{height:'fit-content'}}>
+                    <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{height:'fit-content'}}>
                         <div className="titles text-center mb-3">Role Requests</div>
                         <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                             <thead>
@@ -87,7 +87,7 @@ const Admin = () => {
 
 
 
-                    <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" style={{height:'fit-content'}}>
+                    <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{height:'fit-content'}}>
                         <div className="titles text-center mb-3">users</div>
                         <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                             <thead>
@@ -140,7 +140,7 @@ const Admin = () => {
                     </div>
 
 
-                    <div className="col-12 px-3 mt-5 row justify-content-center" style={{height:'fit-content'}}>
+                    <div className="col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{height:'fit-content'}}>
                         <div className="titles text-center mb-3">artIcles</div>
                         <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                             <thead>

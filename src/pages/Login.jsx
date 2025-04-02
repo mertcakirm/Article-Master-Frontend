@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./css/Login.css";
 import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
@@ -69,6 +70,10 @@ const Login = () => {
             }
         }
     };
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
+
 
     useEffect(() => {
         if (["in", "up", "writer-up"].includes(type)) {
@@ -97,7 +102,7 @@ const Login = () => {
         <div className="page-container">
             <div className="row p-0 m-0">
 
-                <div className="col-lg-8 d-none d-lg-block p-0 m-0">
+                <div className="col-lg-8 d-none d-lg-block p-0 m-0" data-aos="fade-in">
                     <img src="https://images.pexels.com/photos/1438190/pexels-photo-1438190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                          className="img-fluid w-100"
                          style={{ height: "100vh", objectFit: "cover" }}
@@ -105,7 +110,7 @@ const Login = () => {
                     />
                 </div>
 
-                <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" style={{ height: "100vh",position: "relative" }}>
+                <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" data-aos="fade-in" style={{ height: "100vh",position: "relative" }}>
                     {authType === "in" && (
                         <div className="col-12 login-flex text-center">
                             <h3>Log In</h3>

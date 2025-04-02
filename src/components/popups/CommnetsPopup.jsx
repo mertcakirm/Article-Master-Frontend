@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {AddCommentRequest, GetAllCommentsRequest} from "../../API/ArticleApi.js";
+import {getCookie} from '../../API/Cokkie.js'
 
 const CommentsPopup = ({ onClose, id }) => {
     const [newCommentData, setNewCommentData] = useState({
@@ -8,6 +9,9 @@ const CommentsPopup = ({ onClose, id }) => {
         articleId: id
     });
     const [comments, setComments] = useState([]);
+    const [refresh, setRefresh] = useState(true);
+
+    const token = getCookie("token")
 
     const handleInputChange = (e) => {
         setNewCommentData({ ...newCommentData, content: e.target.value });
@@ -19,13 +23,15 @@ const CommentsPopup = ({ onClose, id }) => {
 
     const handleSendComment = async () => {
         if (newCommentData.content.trim() === "") return;
-
+        if (!token){
+            window.location.href = "/sign/in";
+        }
         try {
             await AddCommentRequest(newCommentData);
             setNewCommentData({ content: "", rating: 1, articleId: id });
+            setRefresh(!refresh);
         } catch (error) {
             console.error("Error while sending comment:", error.response?.data || error.message);
-            alert("Yorum gönderilirken hata oluştu. Lütfen tekrar deneyin.");
         }
     };
 
@@ -35,9 +41,17 @@ const CommentsPopup = ({ onClose, id }) => {
         setComments(CommentsObjFiltered);
     };
 
+
+
     useEffect(() => {
         GetAllComment()
     }, []);
+
+
+    useEffect(() => {
+        GetAllComment()
+    }, [refresh]);
+
 
     return (
         <div className="popup-overlay">
@@ -76,14 +90,20 @@ const CommentsPopup = ({ onClose, id }) => {
                             comments.map(comment => (
                                 <div className="comment-card w-100 row" key={comment.id}>
                                     <img
-                                        className="profile_photo_comment col-1 align-items-center"
+                                        className="profile_photo_comment col-1 align-items-center p-0"
                                         style={{ aspectRatio: '1' }}
-                                        src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
+                                        src={comment.photoBase64 || "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"}
                                         alt="profile_photo"
                                     />
                                     <div className="row col-11">
-                                        <div className="comment-name col-12">
-                                            {comment.author} - {comment.rating}/10
+                                        <div className="comment-name col-12 row justify-content-between align-items-center">
+                                            <div className="col-6">{comment.author}</div>
+                                            <div className="col-6 text-end">
+                                                {comment.rating}/10
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" fill="yellow" height="20" viewBox="0 0 24 24">
+                                                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                                                </svg>
+                                            </div>
                                         </div>
                                         <div className="comment-text col-12">{comment.content}</div>
                                     </div>
