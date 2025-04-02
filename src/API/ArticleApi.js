@@ -48,3 +48,7 @@ export const GetAllCommentsRequest = async (id) => {
         headers: { NoAuth: true }
     });
 }
+
+export const IncreaseArticleViewCountRequest = async (id) => {
+    return await api.patch(`article/${id}`);
+}

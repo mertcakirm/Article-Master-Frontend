@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import "./css/ArticleDetail.css";
 import rehypeRaw from 'rehype-raw';
 import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
-import {GetArticleRequest} from "../API/ArticleApi.js";
+import {GetArticleRequest, IncreaseArticleViewCountRequest} from "../API/ArticleApi.js";
 
 const markdownContent = `
 ## Başlık 1
@@ -73,6 +73,10 @@ const ArticleDetail = () => {
         }
     };
 
+    const IncreaseViewCount=async ()=>{
+        await IncreaseArticleViewCountRequest(url)
+    }
+
     const renderMarkdownWithNotes = (content) => {
         let modifiedContent = content;
 
@@ -92,7 +96,14 @@ const ArticleDetail = () => {
     useEffect(()=>{
         GetArticle();
         setArticleid(url)
+
+        const timer = setTimeout(() => {
+            IncreaseViewCount();
+        }, 10000);
+
+        return () => clearTimeout(timer);
     },[])
+
 
 
     return (

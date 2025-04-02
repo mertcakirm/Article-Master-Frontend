@@ -46,10 +46,10 @@ const Admin = () => {
                                 <td>Alan Abel</td>
                                 <td>
                                     <div className="my-notes-process-flex">
-                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('approve_user',1,"Role talebi Kabul","işlem başarılı")} style={{background:'green'}}>
+                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('approve_user',1,"Accept role request?","Transaction successful")} style={{background:'green'}}>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M9 21.035l-9-8.638 2.791-2.87 6.156 5.874 12.21-12.436 2.843 2.817z"/></svg>
                                         </button>
-                                        <button onClick={()=>toggleProcessPopup('role_reject',1,"Role talebi reddi","işlem başarılı")} className="my-notes-process-bin" style={{background:'red'}}>
+                                        <button onClick={()=>toggleProcessPopup('role_reject',1,"Reject role request?","Transaction successful")} className="my-notes-process-bin" style={{background:'red'}}>
                                             <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
                                         </button>
                                     </div>
@@ -103,7 +103,7 @@ const Admin = () => {
                                 <td>Alan Abel</td>
                                 <td>
                                     <div className="my-notes-process-flex">
-                                        <button  onClick={()=>toggleProcessPopup('delete_user',1,"user talebi reddi","user  işlem başarılı")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
+                                        <button  onClick={()=>toggleProcessPopup('delete_user',1,"Should the user be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
                                             <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
                                         </button>
                                     </div>
@@ -158,7 +158,7 @@ const Admin = () => {
                                 <td>Alan Abel</td>
                                 <td>
                                     <div className="my-notes-process-flex">
-                                        <button onClick={()=>toggleProcessPopup('article_delete',1,"article talebi reddi","article başarılı")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
+                                        <button onClick={()=>toggleProcessPopup('article_delete',1,"Should the article be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
                                             <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
                                         </button>
                                     </div>

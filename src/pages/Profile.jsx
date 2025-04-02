@@ -145,7 +145,7 @@ const Profile = () => {
                                     <p className="article-card-desc">Article Description Article Description Article Description Article Description Article Description Article Description Article Description</p>
                                     <div className="profile-article-card-btns col-12 px-3 justify-content-between">
                                         <button className="my-notes-process-see" onClick={toggleEditArticlePopup}>Edit</button>
-                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('delete_article',1,"Makale silme prof","işlem başarılı")}>Delete</button>
+                                        <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('delete_article',1,"Should the article be deleted?","Transaction successful")}>Delete</button>
                                     </div>
                                 </a>
                             </div>
