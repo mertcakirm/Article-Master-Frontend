@@ -25,6 +25,10 @@ const ArticleDetail = () => {
     const [selectedText, setSelectedText] = useState("");
     const [selectionRange, setSelectionRange] = useState({});
     const [articleid,setArticleid] = useState(null);
+
+    const url = window.location.pathname.split("/").filter(Boolean).pop();
+
+
     const saveNote = (noteText, noteColor) => {
         const { startIndex, endIndex } = selectionRange;
         if (!noteText.trim()) {
@@ -87,6 +91,7 @@ const ArticleDetail = () => {
     }
     useEffect(()=>{
         GetArticle();
+        setArticleid(url)
     },[])
 
 
@@ -123,7 +128,7 @@ const ArticleDetail = () => {
             {isPopupOpenComment && (
                 <CommnetsPopup
                     onClose={() => setIsPopupOpenComment(false)}
-                    id="2"
+                    id={articleid}
                 />
             )}
         </div>
