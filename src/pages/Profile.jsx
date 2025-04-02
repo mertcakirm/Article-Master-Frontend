@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import AddNewArticlePopup from "../components/popups/AddNewArticlePopup.jsx";
 import EditArticlePopup from "../components/popups/EditArticlePopup.jsx";
-import {UpdateProfilePhotoRequest} from "../API/ProfileApi.jsx";
+import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
@@ -16,7 +16,7 @@ const Profile = () => {
     const [updateId, setUpdateId] = useState(null);
     const [newArticlePopup, setNewArticlePopup] = useState(false);
     const [editArticlePopup, setEditArticlePopup] = useState(false);
-    const [fileBase64, setFileBase64] = useState("");
+    const [photoBase64, setPhotoBase64] = useState("");
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
@@ -53,7 +53,7 @@ const Profile = () => {
     }, []);
 
     const SubmitPhoto=async ()=>{
-        await UpdateProfilePhotoRequest(fileBase64);
+        await UpdateProfilePhotoRequest(photoBase64);
 
     }
 
@@ -63,7 +63,7 @@ const Profile = () => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64String = reader.result.split(",")[1];
-                setFileBase64(base64String);
+                setPhotoBase64(base64String);
             };
             reader.readAsDataURL(file);
             SubmitPhoto();

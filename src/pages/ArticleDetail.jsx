@@ -123,7 +123,7 @@ const ArticleDetail = () => {
             {isPopupOpenComment && (
                 <CommnetsPopup
                     onClose={() => setIsPopupOpenComment(false)}
-                    id="1"
+                    id="2"
                 />
             )}
         </div>

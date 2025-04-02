@@ -10,7 +10,6 @@ import {deleteCookie, getCookie} from "../API/Cokkie.js";
 const Navbar = () => {
     const token = getCookie('token');
     const url = window.location.pathname.split("/").filter(Boolean).pop();
-    console.log(url)
 
     useEffect(() => {
         AOS.init({ duration: 500 });

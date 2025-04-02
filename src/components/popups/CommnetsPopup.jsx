@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {AddCommentRequest} from "../../API/ArticleApi.js";
+import React, {useEffect, useState} from 'react';
+import {AddCommentRequest, GetAllCommentsRequest} from "../../API/ArticleApi.js";
 
 const CommentsPopup = ({ onClose, id }) => {
     const [newCommentData, setNewCommentData] = useState({
@@ -7,10 +7,7 @@ const CommentsPopup = ({ onClose, id }) => {
         rating: 1,
         articleId: id
     });
-    const [comments, setComments] = useState([
-        { id: 1, name: "User1", content: "Great article!", rating: 8 },
-        { id: 2, name: "User2", content: "Not bad, but could be better.", rating: 6 }
-    ]);
+    const [comments, setComments] = useState([]);
 
     const handleInputChange = (e) => {
         setNewCommentData({ ...newCommentData, content: e.target.value });
@@ -31,6 +28,16 @@ const CommentsPopup = ({ onClose, id }) => {
             alert("Yorum gönderilirken hata oluştu. Lütfen tekrar deneyin.");
         }
     };
+
+    const GetAllComment=async ()=>{
+        const CommentsObj = await GetAllCommentsRequest(id)
+        const CommentsObjFiltered = CommentsObj.data.data
+        setComments(CommentsObjFiltered);
+    };
+
+    useEffect(() => {
+        GetAllComment()
+    }, []);
 
     return (
         <div className="popup-overlay">
@@ -63,20 +70,26 @@ const CommentsPopup = ({ onClose, id }) => {
                     </div>
 
                     <div className="comments-flex w-100">
-                        {comments.map(comment => (
-                            <div className="comment-card w-100 row" key={comment.id}>
-                                <img
-                                    className="profile_photo_comment col-1 align-items-center"
-                                    style={{ aspectRatio: '1' }}
-                                    src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                    alt="profile_photo"
-                                />
-                                <div className="row col-11">
-                                    <div className="comment-name col-12">{comment.name} - {comment.rating}/10</div>
-                                    <div className="comment-text col-12">{comment.content}</div>
+                        {comments.length === 0 ? (
+                            <p>Henüz yorum yok</p>
+                        ) : (
+                            comments.map(comment => (
+                                <div className="comment-card w-100 row" key={comment.id}>
+                                    <img
+                                        className="profile_photo_comment col-1 align-items-center"
+                                        style={{ aspectRatio: '1' }}
+                                        src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
+                                        alt="profile_photo"
+                                    />
+                                    <div className="row col-11">
+                                        <div className="comment-name col-12">
+                                            {comment.author} - {comment.rating}/10
+                                        </div>
+                                        <div className="comment-text col-12">{comment.content}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
             </div>

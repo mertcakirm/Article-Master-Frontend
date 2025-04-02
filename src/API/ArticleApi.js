@@ -41,3 +41,10 @@ export const GetArticlesRequest = async (Page, Size) => {
 export const AddCommentRequest = async (newCommentData) => {
     return await api.post("comment", newCommentData);
 };
+
+
+export const GetAllCommentsRequest = async (id) => {
+    return await api.get(`comment/${id}`,{
+        headers: { NoAuth: true }
+    });
+}
