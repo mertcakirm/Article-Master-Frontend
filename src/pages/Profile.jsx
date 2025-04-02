@@ -75,7 +75,7 @@ const Profile = () => {
                     canvas.height = img.height * scaleSize;
 
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    const base64String = canvas.toDataURL("image/jpeg", 0.7).split(",")[1]; // Kaliteyi düşürerek küçült
+                    const base64String = canvas.toDataURL("image/jpeg", 0.7).split(",")[1];
                     setPhotoBase64(base64String);
                     SubmitPhoto(base64String);
                 };

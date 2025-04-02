@@ -18,10 +18,6 @@ api.interceptors.request.use((config) => {
 });
 
 export const UpdateProfilePhotoRequest = async (PhotoObj) => {
-    return await api.post(`user/upload/photo`, PhotoObj,{
-        headers: {
-            "Content-Type": "multipart/form-data"
-        }
-    });
+    return await api.post(`user/upload/photo`, PhotoObj);
 };
 
