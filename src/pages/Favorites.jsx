@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 const Favorites = () => {
     const [pageNum, setPageNum] = useState(1);
     const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);

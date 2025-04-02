@@ -61,12 +61,26 @@ const Profile = () => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64String = reader.result.split(",")[1];
-                setPhotoBase64(base64String);
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+
+                    const maxWidth = 500;
+                    const scaleSize = maxWidth / img.width;
+                    canvas.width = maxWidth;
+                    canvas.height = img.height * scaleSize;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const base64String = canvas.toDataURL("image/jpeg", 0.7).split(",")[1]; // Kaliteyi düşürerek küçült
+                    setPhotoBase64(base64String);
+                    SubmitPhoto(base64String);
+                };
             };
             reader.readAsDataURL(file);
-            SubmitPhoto();
         }
     };
 
@@ -91,7 +105,6 @@ const Profile = () => {
                                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
                                                 alt="profile_photo"
                                             />
-                                            <input type="file" className="file-input" onChange={handleFileChange} />
                                             <div className="overlay">
                                                 <input type="file" className="file-input" onChange={handleFileChange} />
                                                 <span className="overlay-text">Fotoğraf Yükle</span>

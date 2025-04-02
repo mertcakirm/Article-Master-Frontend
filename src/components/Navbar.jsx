@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './css/navbar.css';
-import logo from '../assets/logo2-removebg-preview.png'
+import logo from '../assets/logo.png'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,11 +21,11 @@ const Navbar = () => {
     }
 
     return (
-        <div className="container-fluid nav-con" data-aos="fade-in">
+        <div className="container-fluid nav-con py-2" data-aos="fade-in">
 
             <div className="row align-items-center nav-row-lg">
                 <div className="col-lg-5 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3"  /></a>
+                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3" /></a>
                 </div>
 
                 <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-7 m-0">
