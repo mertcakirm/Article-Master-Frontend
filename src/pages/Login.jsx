@@ -4,6 +4,8 @@ import "./css/Login.css";
 import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {convertToBase64} from "../Helper/ConverterBase64.js";
+
 const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
@@ -31,23 +33,12 @@ const Login = () => {
         setState(prevState => ({ ...prevState, [name]: value }));
     };
 
-    const convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const base64String = reader.result.split(',')[1]; // "," sonrası veriyi al
-                resolve(base64String);
-            };
-            reader.onerror = (error) => reject(error);
-        });
-    };
     const handleFileChange = async (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
             try {
                 const base64String = await convertToBase64(selectedFile);
-                setWriterObj(prev => ({ ...prev, PdfBase64: base64String }));
+                setWriterObj(prev => ({ ...prev, pdfBase64: base64String })); // pdfBase64 olarak düzeltilmiş hali
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -64,7 +55,7 @@ const Login = () => {
         if (droppedFile) {
             try {
                 const base64String = await convertToBase64(droppedFile);
-                setWriterObj(prev => ({ ...prev, file: base64String }));
+                setWriterObj(prev => ({ ...prev, pdfBase64: base64String })); // pdfBase64 olarak düzeltilmiş hali
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -96,6 +87,7 @@ const Login = () => {
 
     const handleWriterSignIn = async () => {
         await WriterSignRequest(writerObj);
+        window.location.href = "/sign/in";
     }
 
     return (

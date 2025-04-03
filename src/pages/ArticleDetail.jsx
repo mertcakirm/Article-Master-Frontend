@@ -90,7 +90,7 @@ const ArticleDetail = () => {
     };
 
     const GetArticle=async ()=>{
-        const article =await GetArticleRequest(3);
+        const article =await GetArticleRequest(url);
         console.log(article);
     }
     useEffect(()=>{

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {AddArticleRequest} from "../../API/ArticleApi.js";
+import { AddArticleRequest } from "../../API/ArticleApi.js";
+import {convertToBase64} from "../../Helper/ConverterBase64.js";
 
 const AddNewArticlePopup = ({ onClose }) => {
     const [articleData, setArticleData] = useState({
@@ -31,20 +32,8 @@ const AddNewArticlePopup = ({ onClose }) => {
         }
     };
 
-    const convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const base64String = reader.result.split(',')[1];
-                resolve(base64String);
-            };
-            reader.onerror = (error) => reject(error);
-        });
-    };
-
     const handleSubmit = async () => {
-        await AddArticleRequest(articleData)
+        await AddArticleRequest(articleData);
         onClose(false);
     };
 

@@ -84,9 +84,8 @@ const CommentsPopup = ({ onClose, id }) => {
                     </div>
 
                     <div className="comments-flex w-100">
-                        {comments.length === 0 ? (
-                            <p className="text-center">No comments yet</p>
-                        ) : (
+
+                        {Array.isArray(comments) && comments.length > 0 ? (
                             comments.map(comment => (
                                 <div className="comment-card w-100 row" key={comment.id}>
                                     <img
@@ -109,7 +108,10 @@ const CommentsPopup = ({ onClose, id }) => {
                                     </div>
                                 </div>
                             ))
+                        ) : (
+                            <p className="text-center">No comments yet</p>
                         )}
+
                     </div>
                 </div>
             </div>

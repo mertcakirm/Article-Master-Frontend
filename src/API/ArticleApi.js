@@ -2,7 +2,7 @@ import api from "../Helper/api.js";
 
 
 export const GetArticleRequest = async (id) => {
-    return await api.get(`article/article/${id}`, {
+    return await api.get(`article/${id}`, {
         headers: { NoAuth: true }
     });
 };
