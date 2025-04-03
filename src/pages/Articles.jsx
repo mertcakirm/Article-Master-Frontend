@@ -9,7 +9,6 @@ const Articles = () => {
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
 
-    const url = window.location.pathname.split("/").filter(Boolean).pop();
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
