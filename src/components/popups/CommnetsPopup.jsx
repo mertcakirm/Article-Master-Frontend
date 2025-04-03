@@ -3,14 +3,13 @@ import {AddCommentRequest, GetAllCommentsRequest} from "../../API/ArticleApi.js"
 import {getCookie} from '../../API/Cokkie.js'
 
 const CommentsPopup = ({ onClose, id }) => {
+    const [comments, setComments] = useState([]);
+    const [refresh, setRefresh] = useState(true);
     const [newCommentData, setNewCommentData] = useState({
         content: "",
         rating: 1,
         articleId: id
     });
-    const [comments, setComments] = useState([]);
-    const [refresh, setRefresh] = useState(true);
-
     const token = getCookie("token")
 
     const handleInputChange = (e) => {
@@ -38,20 +37,16 @@ const CommentsPopup = ({ onClose, id }) => {
     const GetAllComment=async ()=>{
         const CommentsObj = await GetAllCommentsRequest(id)
         const CommentsObjFiltered = CommentsObj.data.data
-        setComments(CommentsObjFiltered);
+        setComments(CommentsObjFiltered.items);
     };
-
-
 
     useEffect(() => {
         GetAllComment()
     }, []);
 
-
     useEffect(() => {
         GetAllComment()
     }, [refresh]);
-
 
     return (
         <div className="popup-overlay">

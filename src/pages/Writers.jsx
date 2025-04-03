@@ -1,8 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
+import {WriterGetAllRequest} from "../API/AdminApi.js";
 
 const Writers = () => {
     const [pageNum, setPageNum] = useState(1);
+    const [writers, setWriters] = useState([]);
+
+    const GetWriters = async () => {
+        const data = await WriterGetAllRequest();
+        setWriters(data);
+        console.log(data)
+    }
+
+    useEffect(() => {
+        GetWriters();
+    },[])
+
     return (
         <div>
             <Navbar />
