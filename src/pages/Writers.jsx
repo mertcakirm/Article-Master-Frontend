@@ -7,14 +7,18 @@ const Writers = () => {
     const [writers, setWriters] = useState([]);
 
     const GetWriters = async () => {
-        const data = await WriterGetAllRequest();
-        setWriters(data);
+        const data = await WriterGetAllRequest(pageNum,36);
+        setWriters(data.data.data.items);
         console.log(data)
     }
 
     useEffect(() => {
         GetWriters();
     },[])
+
+    useEffect(() => {
+        GetWriters();
+    },[pageNum])
 
     return (
         <div>
@@ -23,70 +27,28 @@ const Writers = () => {
                 <div className="row row-gap-5 m-0  popular-row  column-gap-5 align-items-center">
                     <div className="col-12 titles mb-4 mt-5 text-center" data-aos="fade-up">Writers</div>
 
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
-
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
-
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
-
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
-
-                    <div className="col-lg-1 col-3" data-aos="fade-up">
-                        <a href="/writer/1" className="writer-card">
-                            <img className="profile_photo"
-                                 style={{aspectRatio:'1'}}
-                                 src="https://image.hurimg.com/i/hurriyet/75/750x422/596730b4c03c0e32bc3e59a2.jpg"
-                                 alt="profile_photo"/>
-                            <div className="small text-uppercase fw-bold">Mert çakır</div>
-                            <div className="small">9/10</div>
-                        </a>
-                    </div>
+                    {writers.length > 0 ? (
+                        writers.map((writer,index) => (
+                            <div key={index} className="col-lg-1 col-3" data-aos="fade-up">
+                                <a href={`/writer/${writer.id}`} className="writer-card">
+                                    <img className="profile_photo"
+                                         style={{aspectRatio:'1'}}
+                                         src={
+                                             writers.thumbnailBase64
+                                                 ? (writers.thumbnailBase64.startsWith("data:image")
+                                                     ? writers.thumbnailBase64
+                                                     : `data:image/jpeg;base64,${writers.thumbnailBase64}`)
+                                                 : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
+                                         }
+                                         alt="profile_photo"/>
+                                    <div className="small text-uppercase fw-bold">{writer.name}</div>
+                                    <div className="small">9/10</div>
+                                </a>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center my-4">There are no writers yet.</p>
+                    )}
 
                     <div  className="my-notes-process-flex">
                         {pageNum > 1 && (

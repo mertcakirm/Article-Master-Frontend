@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 import {useEffect} from "react";
 import {ApproveRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
-const ProcessPopup = ({ type , text , id, onClose , acceptedText }) => {
+const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
     const HandleSubmit = async () => {
 

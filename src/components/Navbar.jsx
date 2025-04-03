@@ -25,7 +25,22 @@ const Navbar = () => {
 
             <div className="row align-items-center nav-row-lg">
                 <div className="col-lg-5 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo" className="img-fluid w-100 mx-3" /></a>
+                    <a href="/" className="col-lg-1 p-0 navbar-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
+                            <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
+                            <path d="M120,60 L120,140 L140,120 L140,80 Z" fill="#F8F9F9" stroke="#4A235A" strokeWidth="1"/>
+
+                            <line x1="160" y1="80" x2="210" y2="80" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="95" x2="210" y2="95" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="110" x2="200" y2="110" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="125" x2="190" y2="125" stroke="#4A235A" strokeWidth="3"/>
+
+                            <text x="250" y="95" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#4A235A">ARTICLE</text>
+                            <text x="250" y="135" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#8E44AD">MASTER</text>
+
+                            <line x1="250" y1="150" x2="520" y2="150" stroke="#4A235A" strokeWidth="3"/>
+                        </svg>
+                    </a>
                 </div>
 
                 <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-7 m-0">
@@ -67,8 +82,22 @@ const Navbar = () => {
 
             <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm m-0">
                 <div className="col-3 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link"><img src={logo} alt="logo"
-                                                                          className="img-fluid w-100 mx-3"/></a>
+                    <a href="/" className="col-lg-1 p-0 navbar-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
+                            <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
+                            <path d="M120,60 L120,140 L140,120 L140,80 Z" fill="#F8F9F9" stroke="#4A235A" strokeWidth="1"/>
+
+                            <line x1="160" y1="80" x2="210" y2="80" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="95" x2="210" y2="95" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="110" x2="200" y2="110" stroke="#4A235A" strokeWidth="3"/>
+                            <line x1="160" y1="125" x2="190" y2="125" stroke="#4A235A" strokeWidth="3"/>
+
+                            <text x="250" y="95" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#4A235A">ARTICLE</text>
+                            <text x="250" y="135" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#8E44AD">MASTER</text>
+
+                            <line x1="250" y1="150" x2="520" y2="150" stroke="#4A235A" strokeWidth="3"/>
+                        </svg>
+                    </a>
                 </div>
                 <button className="btn col-3 p-0" type="button" data-bs-toggle="offcanvas"
                          data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
