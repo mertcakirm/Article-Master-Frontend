@@ -12,3 +12,4 @@ export const WriterGetAllRequest =async (page,size)=> {
 export const GetWritersDocumentRequest =async (id)=> {
     return await api.get(`/admin/writer/pdf/download/${id}`);
 }
+
