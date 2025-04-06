@@ -91,8 +91,6 @@
     margin-top: 10px;
 }
 
-
-
 .comment-text{
     word-break: break-all;
     color: #989898;
@@ -104,6 +102,30 @@
     width: 50px;
     border-radius: 200px;
     border: 1px solid white;
+}
+
+.article-detail-info-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    column-gap: 10px;
+    width: 100%;
+    padding: 30px 320px;
+
+}
+
+@media screen and (max-width: 1600px) {
+    .mark-text{
+        padding: 10px 10px;
+
+    }
+
+    .article-detail-info-flex{
+        padding: 30px 10px;
+    }
 }
 
 @media screen and (max-width: 800px) {
