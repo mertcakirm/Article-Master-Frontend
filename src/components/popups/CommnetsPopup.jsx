@@ -86,7 +86,13 @@ const CommentsPopup = ({ onClose, id }) => {
                                     <img
                                         className="profile_photo_comment col-1 align-items-center p-0"
                                         style={{ aspectRatio: '1' }}
-                                        src={comment.photoBase64 || "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"}
+                                        src={
+                                            comment.photoBase64
+                                                ? (comment.photoBase64.startsWith("data:image")
+                                                    ? comment.photoBase64
+                                                    : `data:image/jpeg;base64,${comment.photoBase64}`)
+                                                : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
+                                        }
                                         alt="profile_photo"
                                     />
                                     <div className="row col-11">
