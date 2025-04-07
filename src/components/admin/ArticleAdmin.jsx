@@ -39,7 +39,7 @@ const ArticleAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
     };
 
     return (
-        <div className="col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{ height: 'fit-content' }}>
+        <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{ height: 'fit-content' }}>
             <div className="row justify-content-between">
                 <input type="text" className="profile_inp admin-inp col-lg-3" onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Article"></input>
                 <div className="titles text-center admin-title mb-3 col-lg-6">artIcles</div>

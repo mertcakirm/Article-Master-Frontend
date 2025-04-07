@@ -4,6 +4,7 @@ import ArticleAdmin from "../components/admin/ArticleAdmin.jsx";
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import React , { useState } from "react";
 import './css/Admin.css'
+import WriterAdmin from "../components/admin/WriterAdmin.jsx";
 
 const Admin = () => {
     const [refresh, setRefresh] = useState(false);
@@ -41,6 +42,19 @@ const Admin = () => {
                             id: id
                         });
                     }}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                    />
+                    <WriterAdmin
+                        toggleProcessPopup={(type, id, text, acceptedText) => {
+                            setProcessIsPopupOpen(true);
+                            setProcessState({
+                                processtype: type,
+                                text: text,
+                                acceptedText: acceptedText,
+                                id: id
+                            });
+                        }}
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
