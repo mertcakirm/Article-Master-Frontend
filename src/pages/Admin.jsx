@@ -13,6 +13,7 @@ const Admin = () => {
     const [searchUser, setSearchUser] = useState("");
     const [refresh, setRefresh] = useState(false);
     const [users, setUsers] = useState([]);
+    const [articles, setArticles] = useState([]);
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
@@ -75,6 +76,7 @@ const Admin = () => {
     const GetArticles= async () => {
         const articleObj=await GetArticlesRequest(pageNumArticle,5);
         console.log(articleObj.data.data);
+        setArticles(articleObj.data.data.items)
     }
 
     useEffect(() => {
@@ -211,7 +213,7 @@ const Admin = () => {
                             ) : (
                                 <tr>
                                     <td colSpan="3" className="text-center my-4">
-                                        There are no writers yet.
+                                        There are no users yet.
                                     </td>
                                 </tr>
                             )}
@@ -250,27 +252,34 @@ const Admin = () => {
                         <div className="titles text-center mb-3">artIcles</div>
                         <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                             <thead>
-                            <tr>
-                                <th scope="col">Article Name</th>
-                                <th scope="col">Writer Name</th>
-                                <th scope="col">File</th>
-                                <th scope="col">Process</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">Article Name</th>
+                                    <th scope="col">Writer Name</th>
+                                    <th scope="col">Process</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">Article 1</th>
-                                <th>Writer 1</th>
-                                <td>Alan Abel</td>
-                                <td>
-                                    <div className="my-notes-process-flex">
-                                        <button onClick={()=>toggleProcessPopup('article_delete',1,"Should the article be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
-                                            <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            {articles.length > 0 ? (
+                                articles.map((article,index) => (
+                                    <tr key={index}>
+                                        <th scope="row">{article.title}</th>
+                                        <td>{article.viewCount}</td>
+                                        <td>
+                                            <div className="my-notes-process-flex">
+                                                <button  onClick={()=>toggleProcessPopup('delete_article',article.id,"Should the article be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" className="text-center my-4">
+                                        There are no articles yet.
+                                    </td>
+                                </tr>
+                            )}
 
                             </tbody>
                         </table>

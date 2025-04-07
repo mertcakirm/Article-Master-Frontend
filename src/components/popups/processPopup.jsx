@@ -22,7 +22,6 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
             case "delete_user":
                 DeleteUsersRequest(id)
                 break;
-
             default:
                 console.error("Unknown type");
                 return;
