@@ -10,6 +10,13 @@ export const WriterGetAllRequest =async (page,size)=> {
 }
 
 export const GetWritersDocumentRequest =async (id)=> {
-    return await api.get(`/admin/writer/pdf/download/${id}`);
+    return await api.get(`admin/writer/pdf/download/${id}`);
 }
 
+export const GetUsersRequests =async (page,size,search)=> {
+    return await api.get(`admin/user/all?pageNumber=${page}&pageSize=${size}&usernameSearch=${search}`);
+}
+
+export const DeleteUsersRequest =async (id)=> {
+    return await api.delete(`admin/user/delete/${id}`);
+}

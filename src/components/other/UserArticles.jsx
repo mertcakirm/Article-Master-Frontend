@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ProcessPopup from "../popups/processPopup.jsx";
 import AddNewArticlePopup from "../popups/AddNewArticlePopup.jsx";
 import EditArticlePopup from "../popups/EditArticlePopup.jsx";
+import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 
 const UserArticles = () => {
     const [updateId, setUpdateId] = useState(null);
@@ -33,6 +34,8 @@ const UserArticles = () => {
     const toggleEditArticlePopup = () => {
         setEditArticlePopup(!editArticlePopup);
     };
+
+
     return (
         <div className="row profile-col-2 col-xl-6 col-12">
             <div className="row row-gap-5 col-12" style={{position:'relative'}}>

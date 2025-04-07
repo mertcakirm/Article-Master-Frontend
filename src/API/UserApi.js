@@ -8,5 +8,5 @@ export const WriterGetAll = async (page,size) => {
 };
 
 export const CheckRoleRequest = async () => {
-    return await api.post (`auth/role`,null)
+    return await api.post (`auth/role`)
 }

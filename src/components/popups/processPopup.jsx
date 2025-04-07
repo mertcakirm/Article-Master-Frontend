@@ -2,7 +2,7 @@ import '../css/accepted.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {useEffect} from "react";
-import {ApproveRequest} from "../../API/AdminApi.js";
+import {ApproveRequest, DeleteUsersRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
 const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
@@ -19,9 +19,10 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
             case "delete_article":
                 await DeleteArticleRequest(id)
                 break;
-            case "offer_delete":
-                console.log("test");
+            case "delete_user":
+                DeleteUsersRequest(id)
                 break;
+
             default:
                 console.error("Unknown type");
                 return;

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import ProcessPopup from "../components/popups/processPopup.jsx";
-import {GetWritersDocumentRequest, WriterGetAllRequest} from "../API/AdminApi.js";
+import {GetUsersRequests, GetWritersDocumentRequest, WriterGetAllRequest} from "../API/AdminApi.js";
+import {GetArticlesRequest} from "../API/ArticleApi.js";
 
 const Admin = () => {
     const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
@@ -9,7 +10,9 @@ const Admin = () => {
     const [pageNumUser, setPageNumUser] = useState(1);
     const [pageNumArticle, setPageNumArticle] = useState(1);
     const [writers, setWriters] = useState([]);
+    const [searchUser, setSearchUser] = useState("");
     const [refresh, setRefresh] = useState(false);
+    const [users, setUsers] = useState([]);
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
@@ -64,8 +67,20 @@ const Admin = () => {
         setWriters(writersObj.data.data.items);
     }
 
+    const GetUsers = async () => {
+        const userObj = await GetUsersRequests(pageNumUser,5,searchUser);
+        setUsers(userObj.data.data.items);
+    }
+
+    const GetArticles= async () => {
+        const articleObj=await GetArticlesRequest(pageNumArticle,5);
+        console.log(articleObj.data.data);
+    }
+
     useEffect(() => {
         GetWriters();
+        GetUsers();
+        GetArticles();
     }, []);
 
     useEffect(() => {
@@ -73,8 +88,18 @@ const Admin = () => {
     }, [pageNumRole]);
 
     useEffect(() => {
+        GetUsers();
+    }, [pageNumUser]);
+
+    useEffect(() => {
+        GetArticles();
+    }, [pageNumArticle]);
+
+    useEffect(() => {
         GetWriters();
-    }, [refresh]);
+        GetArticles();
+        GetUsers();
+        }, [refresh]);
 
     return (
         <div>
@@ -164,22 +189,32 @@ const Admin = () => {
                             <thead>
                             <tr>
                                 <th scope="col">Username</th>
-                                <th scope="col">File</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Process</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">Article 1</th>
-                                <td>Alan Abel</td>
-                                <td>
-                                    <div className="my-notes-process-flex">
-                                        <button  onClick={()=>toggleProcessPopup('delete_user',1,"Should the user be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
-                                            <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            {users.length > 0 ? (
+                                users.map((user,index) => (
+                                    <tr key={index}>
+                                        <th scope="row">{user.username}</th>
+                                        <td>{user.email}</td>
+                                        <td>
+                                            <div className="my-notes-process-flex">
+                                                <button  onClick={()=>toggleProcessPopup('delete_user',user.id,"Should the user be deleted?","Transaction successful")} className="my-notes-process-bin px-3 py-1" style={{background:'red'}}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"  fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="3" className="text-center my-4">
+                                        There are no writers yet.
+                                    </td>
+                                </tr>
+                            )}
 
                             </tbody>
                         </table>
@@ -272,7 +307,7 @@ const Admin = () => {
                     onClose={(b) => {
                         if (b === false) {
                             setProcessIsPopupOpen(b)
-                            setRefresh(true)
+                            setRefresh(!refresh)
                         };
 
                     }}

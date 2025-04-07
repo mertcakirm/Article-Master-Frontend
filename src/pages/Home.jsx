@@ -11,13 +11,13 @@ const Home = () => {
         AOS.init({ duration: 1000 });
     }, []);
 
-    const GetRoles = async () => {
-        const data = await CheckRoleRequest();
+
+    const getRole=async ()=>{
+        const data =await CheckRoleRequest();
         console.log(data)
     }
-
     useEffect(() => {
-        GetRoles()
+        getRole();
     }, []);
 
     return (
