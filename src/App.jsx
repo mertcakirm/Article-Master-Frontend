@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Articles from "./pages/Articles.jsx";
 import Profile from "./pages/Profile.jsx";
@@ -11,12 +11,13 @@ import Writers from "./pages/Writers.jsx";
 import WriterArticles from "./pages/WriterArticles.jsx";
 import Navbar from "./components/Navbar.jsx";
 
-const App=()=>{
+const AppContent = () => {
+    const location = useLocation();
+    const hideNavbar = location.pathname.startsWith("/sign");
 
-  return (
-    <>
-        <Navbar />
-        <BrowserRouter>
+    return (
+        <>
+            {!hideNavbar && <Navbar />}
             <Routes>
                 <Route element={<Home />} path="/" />
                 <Route element={<Articles />} path="/articles" />
@@ -30,9 +31,16 @@ const App=()=>{
                 <Route element={<Writers />} path="/writers" />
                 <Route element={<WriterArticles />} path="/writer/:id" />
             </Routes>
+        </>
+    );
+};
+
+const App = () => {
+    return (
+        <BrowserRouter>
+            <AppContent />
         </BrowserRouter>
-    </>
-  )
-}
+    );
+};
 
 export default App;

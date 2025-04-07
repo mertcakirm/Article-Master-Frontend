@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar.jsx";
 import RoleRequests from "../components/admin/RoleRequests.jsx";
 import User from "../components/admin/User.jsx";
 import ArticleAdmin from "../components/admin/ArticleAdmin.jsx";
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import React , { useState } from "react";
+import './css/Admin.css'
 
 const Admin = () => {
     const [refresh, setRefresh] = useState(false);

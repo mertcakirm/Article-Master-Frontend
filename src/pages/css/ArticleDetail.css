@@ -75,6 +75,7 @@
     border-radius: 100px;
     padding: 15px;
     border: 1px solid #fff;
+    z-index: 100!important;
 }
 
 .comments-flex{
