@@ -7,18 +7,18 @@ import "aos/dist/aos.css";
 import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 import UserArticles from "../components/other/UserArticles.jsx";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
+import {CheckRoleRequest} from "../API/UserApi.js";
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [photoBase64, setPhotoBase64] = useState("");
+    const [role, setRole] = useState("");
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
     };
 
-    useEffect(() => {
-        AOS.init({ duration: 500 });
-    }, []);
+
 
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
@@ -33,10 +33,19 @@ const Profile = () => {
         }
     };
 
+    const getRole=async ()=>{
+        const data =await CheckRoleRequest();
+        console.log(data)
+        setRole(data.data.data.role)
+    }
+
+    useEffect(() => {
+        getRole();
+        AOS.init({ duration: 500 });
+    }, []);
+
     return (
-        <div>
-            <Navbar />
-            <div className="page-container  container-fluid">
+            <div className="page-container container-fluid">
                 <div className="row justify-content-center py-5">
 
                     <div className="col-xl-6 row justify-content-center">
@@ -88,17 +97,19 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <UserArticles />
+                    {(role === "ADMIN" || role === "WRITER") && (
+                        <UserArticles />
+                    )}
+
                 </div>
+                {updatePopup && (
+                    <UpdateProfilePopup
+                        onClose={(b) => {
+                            if (b === false) setUpdatePopup(b);
+                        }}
+                    />
+                )}
             </div>
-            {updatePopup && (
-                <UpdateProfilePopup
-                    onClose={(b) => {
-                        if (b === false) setUpdatePopup(b);
-                    }}
-                />
-            )}
-        </div>
     );
 };
 

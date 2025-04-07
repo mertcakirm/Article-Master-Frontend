@@ -1,8 +1,8 @@
 .nav-con{
     background:black;
-    padding: 0 1%;
+    padding: 10px 10px;
     border-bottom: 1px solid #fff;
-
+    z-index: 9999;
 }
 
 .nav-con>*{
@@ -37,6 +37,7 @@
     border: 1px solid #FFFFFF;
     border-radius: 10px;
 }
+
 
 @media only screen and (max-width: 1000px){
     .nav-row-sm{

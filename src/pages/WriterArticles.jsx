@@ -32,8 +32,6 @@ const WriterArticles = () => {
 
 
     return (
-        <div>
-            <Navbar />
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">
                     <div className="col-12 titles mt-5 mb-4 text-center" data-aos="fade-in">Writer Articles</div>
@@ -115,7 +113,6 @@ const WriterArticles = () => {
                     )}
                 </div>
             </div>
-        </div>
     );
 };
 

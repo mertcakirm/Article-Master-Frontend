@@ -9,11 +9,13 @@ import Favorites from "./pages/Favorites.jsx";
 import Admin from "./pages/Admin.jsx";
 import Writers from "./pages/Writers.jsx";
 import WriterArticles from "./pages/WriterArticles.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const App=()=>{
 
   return (
     <>
+        <Navbar />
         <BrowserRouter>
             <Routes>
                 <Route element={<Home />} path="/" />

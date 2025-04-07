@@ -16,8 +16,7 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar />
-            <div className="page-container p-0  container-fluid">
+            <div className="page-container p-0 container-fluid">
                 <div className="row p-0 m-0 justify-content-center" style={{borderBottom: '3px solid /articles/1fff',position: 'relative'}}>
                     <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header} alt="header_photo" />
                     <div className="header-link-row justify-content-center align-items-center column-gap-3"  data-aos="fade-up">

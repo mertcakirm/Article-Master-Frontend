@@ -16,8 +16,6 @@ const Admin = () => {
     });
 
     return (
-        <div>
-            <Navbar />
             <div className="page-container mb-5 container-fluid">
                 <div className="row justify-content-between row-gap-5 popular-row">
                     <RoleRequests
@@ -60,22 +58,22 @@ const Admin = () => {
                         setRefresh={setRefresh}
                     />
                 </div>
+                {isProcessPopupOpen && (
+                    <ProcessPopup
+                        onClose={(b) => {
+                            if (b === false) {
+                                setProcessIsPopupOpen(b);
+                                setRefresh(!refresh);
+                            }
+                        }}
+                        text={processState.text}
+                        acceptedText={processState.acceptedText}
+                        type={processState.processtype}
+                        id={processState.id}
+                    />
+                )}
             </div>
-            {isProcessPopupOpen && (
-                <ProcessPopup
-                    onClose={(b) => {
-                        if (b === false) {
-                            setProcessIsPopupOpen(b);
-                            setRefresh(!refresh);
-                        }
-                    }}
-                    text={processState.text}
-                    acceptedText={processState.acceptedText}
-                    type={processState.processtype}
-                    id={processState.id}
-                />
-            )}
-        </div>
+
     );
 };
 

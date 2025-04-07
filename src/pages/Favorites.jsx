@@ -30,8 +30,6 @@ const Favorites = () => {
     }, []);
 
     return (
-        <div>
-            <Navbar />
             <div className="page-container container-fluid">
                 <div className="row">
                     <div className="titles col-12 text-center mt-5" data-aos="fade-in">My Favorites</div>
@@ -122,20 +120,20 @@ const Favorites = () => {
                         </div>
                     </div>
                 </div>
+                {isProcessPopupOpen && (
+                    <ProcessPopup
+                        onClose={(b) => {
+                            if (b === false) setProcessIsPopupOpen(b);
+                        }}
+                        text={processState.text}
+                        acceptedText={processState.acceptedText}
+                        type={processState.processtype}
+                        id={processState.id}
+                    />
+                )}
             </div>
 
-            {isProcessPopupOpen && (
-                <ProcessPopup
-                    onClose={(b) => {
-                        if (b === false) setProcessIsPopupOpen(b);
-                    }}
-                    text={processState.text}
-                    acceptedText={processState.acceptedText}
-                    type={processState.processtype}
-                    id={processState.id}
-                />
-            )}
-        </div>
+
     );
 };
 

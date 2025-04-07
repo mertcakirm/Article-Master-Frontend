@@ -23,8 +23,6 @@ const Writers = () => {
     },[pageNum])
 
     return (
-        <div>
-            <Navbar />
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 m-0  popular-row  column-gap-5 align-items-center">
                     <div className="col-12 titles mb-4 mt-5 text-center" data-aos="fade-up">Writers</div>
@@ -88,7 +86,6 @@ const Writers = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 

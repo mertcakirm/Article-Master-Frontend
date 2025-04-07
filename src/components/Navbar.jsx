@@ -70,9 +70,11 @@ const Navbar = () => {
                                 Profile
                             </a>
 
-                            <a href="/admin" className={` navbar-link ${url === "admin" ? "active-nav-link" : ""}`}>
-                                Admin
-                            </a>
+                            {role === "ADMIN" && (
+                                <a href="/admin" className={` navbar-link ${url === "admin" ? "active-nav-link" : ""}`}>
+                                    Admin
+                                </a>
+                            )}
                             <button
                                 className=" navbar-link bg-transparent border-0 p-0"
                                 onClick={LogOut}>
@@ -116,6 +118,7 @@ const Navbar = () => {
                                 fillRule="nonzero"/>
                         </svg>
                     </button>
+
             </div>
 
 

@@ -31,8 +31,6 @@ const Articles = () => {
 
 
     return (
-        <div>
-            <Navbar />
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">
                     <div className="col-12 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
@@ -118,7 +116,6 @@ const Articles = () => {
 
             </div>
 
-        </div>
     );
 };
 
