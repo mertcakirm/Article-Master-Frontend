@@ -12,13 +12,7 @@ const Home = () => {
     }, []);
 
 
-    const getRole=async ()=>{
-        const data =await CheckRoleRequest();
-        console.log(data)
-    }
-    useEffect(() => {
-        getRole();
-    }, []);
+
 
     return (
         <div>

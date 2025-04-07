@@ -1,23 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './css/navbar.css';
-import logo from '../assets/logo.png'
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import {deleteCookie, getCookie} from "../API/Cokkie.js";
+import {CheckRoleRequest} from "../API/UserApi.js";
 
 const Navbar = () => {
     const token = getCookie('token');
+    const [role, setRole] = useState("");
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
     useEffect(() => {
+        getRole();
         AOS.init({ duration: 500 });
     }, []);
 
     const LogOut = () => {
         deleteCookie('token');
         window.location.href = "/sign/in";
+    }
+
+    const getRole=async ()=>{
+        const data =await CheckRoleRequest();
+        setRole(data.data.data.role)
     }
 
     return (

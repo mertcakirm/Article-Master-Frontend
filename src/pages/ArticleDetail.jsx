@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import "./css/ArticleDetail.css";
 import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
 import {GetArticleRequest, IncreaseArticleViewCountRequest} from "../API/ArticleApi.js";
 import RichTextMarkdown from "../components/other/RichTextMarkdown.jsx";
-
 
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
@@ -17,7 +16,6 @@ const ArticleDetail = () => {
     const [articleid,setArticleid] = useState(null);
 
     const url = window.location.pathname.split("/").filter(Boolean).pop();
-
 
     const saveNote = (noteText, noteColor) => {
         const { startIndex, endIndex } = selectionRange;
