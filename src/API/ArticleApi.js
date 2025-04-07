@@ -28,8 +28,8 @@ export const AddCommentRequest = async (newCommentData) => {
     return await api.post("comment", newCommentData);
 };
 
-export const GetAllCommentsRequest = async (id) => {
-    return await api.get(`comment/${id}`, {
+export const GetAllCommentsRequest = async (page,size,id) => {
+    return await api.get(`comment/${id}?PageNumber=${page}&PageSize=${size}`, {
         headers: { NoAuth: true }
     });
 };
