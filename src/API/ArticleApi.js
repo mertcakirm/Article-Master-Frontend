@@ -34,3 +34,9 @@ export const GetAllCommentsRequest = async (id) => {
 export const IncreaseArticleViewCountRequest = async (id) => {
     return await api.patch(`article/${id}`);
 };
+
+export const GetWriterArticleRequest = async (page,size,id) => {
+    return await api.get(`/article/writer/all?Id=${id}&PageNumber=${page}&PageSize=${size}`, {
+        headers: { NoAuth: true }
+    });
+};

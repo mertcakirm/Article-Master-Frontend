@@ -2,12 +2,13 @@ import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {GetArticlesRequest} from "../API/ArticleApi.js";
+import {GetArticlesRequest, GetWriterArticleRequest} from "../API/ArticleApi.js";
 
 const WriterArticles = () => {
     const [pageNum, setPageNum] = useState(1);
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
+    const url = window.location.pathname.split("/").filter(Boolean).pop();
 
 
     useEffect(() => {
@@ -15,7 +16,7 @@ const WriterArticles = () => {
     }, []);
 
     const GetArticles = async () => {
-        const data = await GetArticlesRequest(pageNum,10)
+        const data = await GetWriterArticleRequest(pageNum,12,url)
         setArticles(data.data.data.items)
         setLastPage(data.data.data.totalPages)
         console.log(articles)

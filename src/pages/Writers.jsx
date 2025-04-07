@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Navbar from "../components/Navbar.jsx";
 import {WriterGetAllRequest} from "../API/AdminApi.js";
+import {WriterGetAll} from "../API/UserApi.js";
 
 const Writers = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -8,7 +9,7 @@ const Writers = () => {
     const [lastPage, setLastPage] = useState(null);
 
     const GetWriters = async () => {
-        const data = await WriterGetAllRequest(pageNum,36);
+        const data = await WriterGetAll(pageNum,36);
         setWriters(data.data.data.items);
         setLastPage(data.data.data.totalPages)
     }
@@ -42,8 +43,15 @@ const Writers = () => {
                                                  : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
                                          }
                                          alt="profile_photo"/>
-                                    <div className="small text-uppercase fw-bold">{writer.name}</div>
-                                    <div className="small">9/10</div>
+                                    <div className="small text-uppercase fw-bold">{writer.writerName}</div>
+                                    <div className="my-notes-process-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" fill="yellow" height="25"
+                                             viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                                        </svg>
+                                        <div>{Number.isInteger(writer.rating) ? writer.rating : writer.rating.toFixed(1)}/10</div>
+                                    </div>
                                 </a>
                             </div>
                         ))

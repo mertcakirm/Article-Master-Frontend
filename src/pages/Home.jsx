@@ -4,10 +4,20 @@ import header from "../assets/home-header.jpg"
 import AOS from "aos";
 import "aos/dist/aos.css";
 import './css/Home.css'
+import {CheckRoleRequest} from "../API/UserApi.js";
 const Home = () => {
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
+    }, []);
+
+    const GetRoles = async () => {
+        const data = await CheckRoleRequest();
+        console.log(data)
+    }
+
+    useEffect(() => {
+        GetRoles()
     }, []);
 
     return (
