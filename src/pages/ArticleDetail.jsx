@@ -83,10 +83,13 @@ const ArticleDetail = () => {
         try {
             const article =await GetArticleRequest(url);
             setMarkdownContent(article.data.data)
+            if (article.data===null) {
+                setLoading(true)
+            }
+            setLoading(false);
+
         }catch (error) {
             console.log(error);
-        }finally {
-            setLoading(false);
         }
 
     }

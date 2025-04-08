@@ -75,9 +75,9 @@
 
 .article-card {
     width: 100%;
+    height: fit-content!important;
     border-radius: 10px;
     border: 1px solid #fff;
-    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,6 +88,7 @@
     transition: .4s;
     z-index: 1;
     position: relative;
+    padding: 0 0 10% 0!important;
 }
 
 .article-card:hover{
@@ -111,13 +112,24 @@
 .article-card-title{
     font-size: 24px;
     font-weight: bold;
+    max-width: 100%;
+    padding: 0 2%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.article-card-desc{
+.article-card-desc {
     font-size: 16px;
     font-weight: bold;
     padding: 0 2%;
     text-align: center;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 
@@ -135,17 +147,18 @@
 /*btn*/
 
 .animation-btn {
-    width: fit-content;
+    width: fit-content!important;
     color: #fff;
     text-decoration: none;
 }
 
 .animation-btn-child {
-    line-height: 40px;
-    height: 50px;
+    line-height: 40px!important;
+    height: 50px!important;
     text-align: center;
     width: 250px;
     cursor: pointer;
+    color: #fff!important;
 }
 
 
@@ -208,5 +221,6 @@
         flex-direction: column;
         row-gap: 20px;
     }
+
 
 }

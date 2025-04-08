@@ -90,9 +90,8 @@ const Home = () => {
                         <a href="/article/1" className="article-card">
                             <img className="w-100 img-fluid article-card-img" alt="article-image"
                                  src="https://bgcp.bionluk.com/images/portfolio/1400x788/d9792dfe-2379-4a8f-bc5f-3c1649310174.jpg"/>
-                            <p className="article-card-title">Article Title</p>
-                            <p className="article-card-desc">Article Description Article Description Article Description
-                                Article Description Article Description Article Description Article Description</p>
+                            <p className="article-card-title text-center">Article Title</p>
+                            <p className="article-card-desc">Article Description Article Description Description Article Description </p>
                             <div className="my-notes-process-flex justify-content-between w-100 px-5">
                                 <div className="my-notes-process-flex align-items-center">
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" width="30" fill="white" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.998 5c-4.078 0-7.742 3.093-9.853 6.483-.096.159-.145.338-.145.517s.048.358.144.517c2.112 3.39 5.776 6.483 9.854 6.483 4.143 0 7.796-3.09 9.864-6.493.092-.156.138-.332.138-.507s-.046-.351-.138-.507c-2.068-3.403-5.721-6.493-9.864-6.493zm.002 3c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4zm0 1.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" fillRule="nonzero"/></svg>
@@ -108,7 +107,7 @@ const Home = () => {
                     </div>
 
 
-                    <div className="col-12 row justify-content-center">
+                    <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
                         <a href="/articles" className="animation-btn">
                             <div className="btn animation-btn-child">
                                 <span>Show All</span>
