@@ -5,10 +5,14 @@ import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
+import ProcessPopup from "../components/popups/processPopup.jsx";
+import Information from "../components/other/Information.jsx";
 
 const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [infoText, setInfoText] = useState("");
 
     const [loginObj, setLoginObj] = useState({
         email: "",
@@ -38,7 +42,7 @@ const Login = () => {
         if (selectedFile) {
             try {
                 const base64String = await convertToBase64(selectedFile);
-                setWriterObj(prev => ({ ...prev, pdfBase64: base64String })); // pdfBase64 olarak düzeltilmiş hali
+                setWriterObj(prev => ({ ...prev, pdfBase64: base64String }));
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -55,7 +59,7 @@ const Login = () => {
         if (droppedFile) {
             try {
                 const base64String = await convertToBase64(droppedFile);
-                setWriterObj(prev => ({ ...prev, pdfBase64: base64String })); // pdfBase64 olarak düzeltilmiş hali
+                setWriterObj(prev => ({ ...prev, pdfBase64: base64String }));
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -75,21 +79,52 @@ const Login = () => {
     }, [type]);
 
     const handleLogin = async () => {
-        await LoginRequest(loginObj);
-        window.location.href = "/";
+        if (!loginObj.email || !loginObj.password) {
+            setInfoText("Please fill in all fields.");
+            setIsPopupOpen(true);
+            return;
+        }
+        try {
+            await LoginRequest(loginObj);
+            window.location.href = "/";
+        } catch (error) {
+            const errorMessage = error?.response?.data?.errorMessage || "Login failed.";
+            setInfoText(errorMessage);
+            setIsPopupOpen(true);
+        }
     };
 
     const handleSignUp = async () => {
-        await SignRequest(signObj);
-        window.location.href = "/sign/in";
-
+        if (!signObj.username || !signObj.email || !signObj.password) {
+            setInfoText("Please fill in all fields.");
+            setIsPopupOpen(true);
+            return;
+        }
+        try {
+            await SignRequest(signObj);
+            window.location.href = "/sign/in";
+        } catch (error) {
+            const errorMessage = error?.response?.data?.errorMessage || "Registration failed.";
+            setInfoText(errorMessage);
+            setIsPopupOpen(true);
+        }
     };
 
     const handleWriterSignIn = async () => {
-        await WriterSignRequest(writerObj);
-        window.location.href = "/sign/in";
-    }
-
+        if (!writerObj.username || !writerObj.email || !writerObj.password || !writerObj.pdfBase64) {
+            setInfoText("Please fill in all fields and upload the file.");
+            setIsPopupOpen(true);
+            return;
+        }
+        try {
+            await WriterSignRequest(writerObj);
+            window.location.href = "/sign/in";
+        } catch (error) {
+            const errorMessage = error?.response?.data?.errorMessage || "Writer registration failed.";
+            setInfoText(errorMessage);
+            setIsPopupOpen(true);
+        }
+    };
     return (
         <div className="page-container">
             <div className="row p-0 m-0">
@@ -215,6 +250,15 @@ const Login = () => {
 
                 </div>
             </div>
+            {isPopupOpen && (
+                <Information
+                    onClose={(b) => {
+                        if (b === false) setIsPopupOpen(b);
+                    }}
+                    infoText={infoText}
+
+                />
+            )}
         </div>
     );
 };

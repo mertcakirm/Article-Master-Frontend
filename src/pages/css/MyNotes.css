@@ -10,6 +10,7 @@
     border: 1px solid #FFFFFF;
     padding: 5px 10px;
     background: #5d5c5c;
+    transition: .4s;
 }
 
 .my-notes-process-bin{
@@ -17,4 +18,16 @@
     border: 1px solid #FFFFFF;
     background: #5d5c5c;
     padding: 0 10px;
+    transition: .4s;
+}
+
+.my-notes-process-bin:hover{
+    transform: scale(1.05);
+    transition: .4s;
+}
+
+
+.my-notes-process-see:hover{
+    transform: scale(1.05);
+    transition: .4s;
 }
