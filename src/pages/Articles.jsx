@@ -3,11 +3,13 @@ import Navbar from "../components/Navbar.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {GetArticlesRequest} from "../API/ArticleApi.js";
+import Loading from "../components/other/Loading.jsx";
 
 const Articles = () => {
     const [pageNum, setPageNum] = useState(1);
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -15,10 +17,17 @@ const Articles = () => {
     }, []);
 
     const GetArticles = async () => {
-        const data = await GetArticlesRequest(pageNum,10)
-        setArticles(data.data.data.items)
-        setLastPage(data.data.data.totalPages)
-        console.log(articles)
+        try {
+            const data = await GetArticlesRequest(pageNum,10)
+            setArticles(data.data.data.items)
+            setLastPage(data.data.data.totalPages)
+            console.log(articles)
+        }catch (error) {
+            console.log(error);
+        }finally {
+            setLoading(false);
+        }
+
     }
 
     useEffect(() => {
@@ -29,7 +38,9 @@ const Articles = () => {
         GetArticles()
     }, [pageNum]);
 
-
+    if (loading) {
+        return <Loading />;
+    }
     return (
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">

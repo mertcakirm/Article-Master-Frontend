@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from "../components/Navbar.jsx";
 import './css/profile.css'
 import UpdateProfilePopup from "../components/popups/UpdateProfilePopup.jsx";
 import AOS from "aos";
@@ -26,7 +25,7 @@ const Profile = () => {
             try {
                 const base64String = await convertToBase64(file);
                 setPhotoBase64(base64String);
-                await UpdateProfilePhotoRequest(base64String); // Burada PhotoBase64 olarak gönderiliyor.
+                await UpdateProfilePhotoRequest(base64String);
             } catch (err) {
                 console.error("Fotoğraf yüklenirken hata:", err);
             }

@@ -4,6 +4,7 @@ import "./css/ArticleDetail.css";
 import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
 import {GetArticleRequest, IncreaseArticleViewCountRequest} from "../API/ArticleApi.js";
 import RichTextMarkdown from "../components/other/RichTextMarkdown.jsx";
+import Loading from "../components/other/Loading.jsx";
 
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
@@ -14,6 +15,7 @@ const ArticleDetail = () => {
     const [selectionRange, setSelectionRange] = useState({});
     const [markdownContent, setMarkdownContent] = useState("Article content is empty");
     const [articleid,setArticleid] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
@@ -78,8 +80,15 @@ const ArticleDetail = () => {
     };
 
     const GetArticle=async ()=>{
-        const article =await GetArticleRequest(url);
-        setMarkdownContent(article.data.data)
+        try {
+            const article =await GetArticleRequest(url);
+            setMarkdownContent(article.data.data)
+        }catch (error) {
+            console.log(error);
+        }finally {
+            setLoading(false);
+        }
+
     }
     useEffect(()=>{
         GetArticle();
@@ -92,7 +101,9 @@ const ArticleDetail = () => {
         return () => clearTimeout(timer);
     },[])
 
-
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
             <div className="page-container container-fluid">

@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
-import Navbar from "../components/Navbar.jsx";
 import header from "../assets/home-header.jpg"
 import AOS from "aos";
 import "aos/dist/aos.css";
 import './css/Home.css'
-import {CheckRoleRequest} from "../API/UserApi.js";
 const Home = () => {
 
     useEffect(() => {
