@@ -5,8 +5,7 @@ import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
-import ProcessPopup from "../components/popups/processPopup.jsx";
-import Information from "../components/other/Information.jsx";
+import RejectInformation from "../components/other/RejectInformation.jsx";
 
 const Login = () => {
     const { type } = useParams();
@@ -251,7 +250,7 @@ const Login = () => {
                 </div>
             </div>
             {isPopupOpen && (
-                <Information
+                <RejectInformation
                     onClose={(b) => {
                         if (b === false) setIsPopupOpen(b);
                     }}

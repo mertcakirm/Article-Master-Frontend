@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Information = ({onClose,infoText}) => {
+const RejectInformation = ({onClose,infoText}) => {
     return (
         <div className="popup-overlay">
         <div className="popup-content">
@@ -32,4 +32,4 @@ const Information = ({onClose,infoText}) => {
     );
 };
 
-export default Information;
+export default RejectInformation;

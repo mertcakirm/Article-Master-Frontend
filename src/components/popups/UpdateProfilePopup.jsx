@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../css/accepted.css';
+import RejectInformation from "../other/RejectInformation.jsx";
+import AcceptInformation from "../other/AcceptInformation.jsx";
 
 const UpdateProfilePopup = ({onClose}) => {
+    const [isPopupOpenReject, setIsPopupOpenReject] = useState(false);
+    const [isPopupOpenAccept, setIsPopupOpenAccept] = useState(false);
+    const [infoText, setInfoText] = useState("");
+
     return (
         <div className="popup-overlay">
             <div className="popup-content"  style={{color:'#fff'}} data-aos="zoom-in" >
@@ -19,6 +25,28 @@ const UpdateProfilePopup = ({onClose}) => {
                 </div>
 
             </div>
+
+            {isPopupOpenReject && (
+                <RejectInformation
+                    onClose={(b) => {
+                        if (b === false) setIsPopupOpenReject(b);
+                        onClose(false)
+                    }}
+                    infoText={infoText}
+
+                />
+            )}
+
+            {isPopupOpenAccept && (
+                <AcceptInformation
+                    onClose={(b) => {
+                        if (b === false) setIsPopupOpenAccept(b);
+                        onClose(false)
+                    }}
+                    infoText={infoText}
+
+                />
+            )}
         </div>
     );
 };

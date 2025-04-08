@@ -54,7 +54,7 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
                 </div>
                 <div className="row w-100 p-0 m-0 justify-content-center">
                     <p className="col-12 text-center"  style={{color:'#fff'}}>{acceptedText}</p>
-                    <button className="mt-3 col-4 popup-accepted-btn" onClick={()=>onClose(false)}>Tamam</button>
+                    <button className="mt-3 col-4 popup-accepted-btn" onClick={()=>onClose(false)}>Okey</button>
 
                 </div>
             </div>
