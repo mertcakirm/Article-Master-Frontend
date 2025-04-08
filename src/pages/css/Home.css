@@ -4,8 +4,6 @@
     z-index: 1;
 }
 
-
-
 .titles{
     font-size: 32px;
     font-weight: bold;
@@ -67,10 +65,8 @@
 
 
 .header-img{
-    height: 600px;
+    height: 600px!important;
     object-fit: cover;
-
-
 }
 
 .popular-row{
