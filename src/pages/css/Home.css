@@ -209,6 +209,12 @@
     text-decoration: none;
     color: #fff;
     text-align: center;
+    transition: .4s;
+}
+
+.writer-card:hover{
+    transform: scale(1.08);
+    transition: .4s;
 }
 
 

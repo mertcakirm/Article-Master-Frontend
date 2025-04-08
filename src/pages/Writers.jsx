@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from "../components/Navbar.jsx";
-import {WriterGetAllRequest} from "../API/AdminApi.js";
 import {WriterGetAll} from "../API/UserApi.js";
 
 const Writers = () => {
