@@ -7,13 +7,20 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import {deleteCookie, getCookie} from "../API/Cokkie.js";
 import {CheckRoleRequest} from "../API/UserApi.js";
 
-const Navbar = () => {
+const Navbar = ({popupOpen,setPopupOpen}) => {
     const token = getCookie('token');
     const [role, setRole] = useState("");
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
+    const getRole=async ()=>{
+        const data =await CheckRoleRequest();
+        setRole(data.data.data.role)
+    }
+
     useEffect(() => {
-        getRole();
+        if (token) {
+            getRole();
+        }
         AOS.init({ duration: 500 });
     }, []);
 
@@ -22,10 +29,15 @@ const Navbar = () => {
         window.location.href = "/sign/in";
     }
 
-    const getRole=async ()=>{
-        const data =await CheckRoleRequest();
-        setRole(data.data.data.role)
-    }
+
+
+    const OpenPopUpNavbar = () => {
+        if (typeof setPopupOpen === "function") {
+            setPopupOpen(true);
+        } else {
+            console.warn("popupOpen fonksiyon değil:", popupOpen);
+        }
+    };
 
     return (
         <div className="container-fluid nav-con py-2" data-aos="fade-in">
@@ -108,8 +120,7 @@ const Navbar = () => {
                         </svg>
                     </a>
                 </div>
-                <button className="btn col-3 p-0" type="button" data-bs-toggle="offcanvas"
-                         data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <button  onClick={() => setPopupOpen(true)} className="btn col-3 p-0" >
                         <svg fill="white" width="50" height="50" clipRule="evenodd" fillRule="evenodd"
                              strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
@@ -121,17 +132,6 @@ const Navbar = () => {
 
             </div>
 
-
-            <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight"
-                 aria-labelledby="offcanvasRightLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div className="offcanvas-body">
-                    ...
-                </div>
-            </div>
 
         </div>
     );

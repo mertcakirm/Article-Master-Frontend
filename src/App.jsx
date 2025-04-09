@@ -14,10 +14,12 @@ import {useEffect, useState} from "react";
 import {CheckRoleRequest} from "./API/UserApi.js";
 import {getCookie} from "./API/Cokkie.js";
 import Loading from "./components/other/Loading.jsx";
+import PopUpNavbar from "./components/PopUpNavbar.jsx";
 
 const AppContent = () => {
     const [role, setRole] = useState("");
     const [isRoleLoading, setIsRoleLoading] = useState(true);
+    const [popupOpen, setPopupOpen] = useState(false);
     const location = useLocation();
     const hideNavbar = location.pathname.startsWith("/sign");
 
@@ -62,7 +64,9 @@ const AppContent = () => {
 
     return (
         <>
-            {!hideNavbar && <Navbar />}
+            {!hideNavbar && <Navbar popupOpen={popupOpen} setPopupOpen={setPopupOpen} />}
+            {popupOpen && <PopUpNavbar setPopupOpen={setPopupOpen} />}
+
             <Routes>
                 <Route element={<Home />} path="/" />
                 <Route element={<Articles />} path="/articles" />

@@ -2,11 +2,10 @@
     background:black;
     padding: 10px 10px;
     border-bottom: 1px solid #fff;
-    z-index: 9999;
 }
 
 .nav-con>*{
-    z-index: 600!important;
+    z-index: 999!important;
 }
 
 .nav-lg-flex{
@@ -36,6 +35,31 @@
 .active-nav-link{
     border: 1px solid #FFFFFF;
     border-radius: 10px;
+}
+
+.navbar-card-sm{
+    aspect-ratio: 1;
+    background: #0000;
+    border: 1px solid #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 10px;
+    row-gap: 5px;
+    transition: .4s;
+}
+
+.navbar-card-sm:hover{
+    box-shadow: rgb(255, 255, 255) 0px 4px 20px;
+    transition: .4s;
+}
+
+.navbar-card-sm-text{
+    text-align: center;
+    font-size: 22px;
+    color: #FFFFFF;
 }
 
 

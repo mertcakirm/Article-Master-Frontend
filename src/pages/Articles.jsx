@@ -21,7 +21,6 @@ const Articles = () => {
             const data = await GetArticlesRequest(pageNum,10)
             setArticles(data.data.data.items)
             setLastPage(data.data.data.totalPages)
-            console.log(articles)
         }catch (error) {
             console.log(error);
         }finally {
