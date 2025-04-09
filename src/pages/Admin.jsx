@@ -32,19 +32,7 @@ const Admin = () => {
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
-                    <User
-                        toggleProcessPopup={(type, id, text, acceptedText) => {
-                        setProcessIsPopupOpen(true);
-                        setProcessState({
-                            processtype: type,
-                            text: text,
-                            acceptedText: acceptedText,
-                            id: id
-                        });
-                    }}
-                        refresh={refresh}
-                        setRefresh={setRefresh}
-                    />
+
                     <WriterAdmin
                         toggleProcessPopup={(type, id, text, acceptedText) => {
                             setProcessIsPopupOpen(true);
@@ -58,6 +46,21 @@ const Admin = () => {
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
+
+                    <User
+                        toggleProcessPopup={(type, id, text, acceptedText) => {
+                        setProcessIsPopupOpen(true);
+                        setProcessState({
+                            processtype: type,
+                            text: text,
+                            acceptedText: acceptedText,
+                            id: id
+                        });
+                    }}
+                        refresh={refresh}
+                        setRefresh={setRefresh}
+                    />
+
                     <ArticleAdmin
                         toggleProcessPopup={(type, id, text, acceptedText) => {
                             setProcessIsPopupOpen(true);

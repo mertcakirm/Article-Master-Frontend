@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { GetUsersRequests } from "../../API/AdminApi.js";
+import {WriterGetAll} from "../../API/UserApi.js";
 
 const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [lastPageNum, setLastPageNum] = useState(null);
     const [pageNumUser, setPageNumUser] = useState(1);
-    const [searchTimeout, setSearchTimeout] = useState(null);
+
     const GetUsers = async () => {
-        const userObj = await GetUsersRequests(pageNumUser, 5, search);
+        const userObj = await WriterGetAll(pageNumUser, 5, search);
         setLastPageNum(userObj.data.data.totalPages);
         setUsers(userObj.data.data.items);
     };
@@ -25,25 +26,11 @@ const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
         GetUsers();
     }, [refresh]);
 
-    const searchTextChanged = (searchStr) => {
-        if (searchTimeout !== null) {
-            clearTimeout(searchTimeout);
-        }
-        const newTimeout = setTimeout(() => {
-            setSearch(searchStr);
-            GetUsers();
-        }, 800);
-        setSearchTimeout(newTimeout);
-    };
 
     return (
         <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{ height: 'fit-content' }}>
-            <div className="row justify-content-between">
-                <input type="text" className="profile_inp admin-inp col-lg-3"  onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Writer"></input>
-                <div className="titles text-center admin-title mb-3 col-lg-6">WRITER</div>
-                <div className="col-lg-3"></div>
-            </div>
-            <table className="table table-striped table-dark text-center" style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                <div className="titles text-center admin-title mb-3 col-12">WRITER</div>
+            <table className="table table-striped col-12 table-dark text-center" style={{ borderRadius: '10px', overflow: 'hidden' }}>
                 <thead>
                 <tr>
                     <th scope="col">Username</th>
@@ -55,8 +42,8 @@ const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
                 {users.length > 0 ? (
                     users.map((user, index) => (
                         <tr key={index}>
-                            <th scope="row">{user.username}</th>
-                            <td>{user.email}</td>
+                            <th scope="row">{user.writerName}</th>
+                            <td>{user.rating}</td>
                             <td>
                                 <div className="my-notes-process-flex">
                                     <button

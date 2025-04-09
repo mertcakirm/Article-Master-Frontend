@@ -6,7 +6,7 @@ import CustomTooltip from "./CustomTooltip.jsx";
 const RichTextMarkdown = ({
                               markdown,
                               notes,
-                              setNotes
+                              setNotes, onNewNote = null,
                           }) => {
     const [selectedText, setSelectedText] = useState(null);
     const [newNoteText, setNewNoteText] = useState('');
@@ -69,6 +69,9 @@ const RichTextMarkdown = ({
             setNotes([...notes, newNote]);
             setSelectedText(null);
             setNewNoteText('');
+
+            if (onNewNote)
+                onNewNote(newNote);
         }
     };
 

@@ -103,7 +103,7 @@
 .article-card-img{
     object-fit: cover;
     position: relative;
-    height: 250px;
+    height: 250px!important;
     transition: .4s;
     z-index: 0;
 

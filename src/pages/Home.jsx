@@ -3,7 +3,10 @@ import header from "../assets/home-header.jpg"
 import AOS from "aos";
 import "aos/dist/aos.css";
 import './css/Home.css'
+import {getCookie} from "../API/Cokkie.js";
 const Home = () => {
+
+    const token = getCookie("token")
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
@@ -14,10 +17,15 @@ const Home = () => {
             <div className="page-container p-0 container-fluid">
                 <div className="row p-0 m-0 justify-content-center" style={{borderBottom: '3px solid /articles/1fff',position: 'relative'}}>
                     <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header} alt="header_photo" />
-                    <div className="header-link-row justify-content-center align-items-center column-gap-3"  data-aos="fade-up">
-                        <a className="up-writer-btn" href="/sign/writer-up">Sign up for writer</a>
-                        <a className="up-user-btn" href="/sign/up">Sign up for user</a>
-                    </div>
+
+                        {token? null:(
+                            <div className="header-link-row justify-content-center align-items-center column-gap-3"  data-aos="fade-up">
+                                <a className="up-writer-btn" href="/sign/writer-up">Sign up for writer</a>
+                                <a className="up-user-btn" href="/sign/up">Sign up for user</a>
+                            </div>
+                        )
+                        }
+
 
                 </div>
 

@@ -5,42 +5,19 @@ import CommnetsPopup from "../components/popups/CommnetsPopup.jsx";
 import {GetArticleRequest, IncreaseArticleViewCountRequest} from "../API/ArticleApi.js";
 import RichTextMarkdown from "../components/other/RichTextMarkdown.jsx";
 import Loading from "../components/other/Loading.jsx";
+import {AddNoteRequest, GetNoteRequest} from "../API/NoteApi.js";
+import {end} from "@popperjs/core";
 
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isPopupOpenComment, setIsPopupOpenComment] = useState(false);
-    const [noteColor, setNoteColor] = useState("#ffeb3b");
-    const [selectedText, setSelectedText] = useState("");
     const [selectionRange, setSelectionRange] = useState({});
     const [markdownContent, setMarkdownContent] = useState("Article content is empty");
     const [articleid,setArticleid] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const url = window.location.pathname.split("/").filter(Boolean).pop();
-
-    const saveNote = (noteText, noteColor) => {
-        const { startIndex, endIndex } = selectionRange;
-        if (!noteText.trim()) {
-            alert("Lütfen bir not girin!");
-            return;
-        }
-
-        const isAlreadySelected = notes.some(
-            (note) => note.startIndex === startIndex && note.endIndex === endIndex
-        );
-
-        if (!isAlreadySelected) {
-            setNotes([
-                ...notes,
-                { startIndex, endIndex, note: noteText, color: noteColor },
-            ]);
-        } else {
-            alert("Bu bölüme zaten not eklendi!");
-        }
-
-        setIsPopupOpen(false);
-    };
 
     const togglePopupComment = () => {
         setIsPopupOpenComment(!isPopupOpenComment);
@@ -56,7 +33,6 @@ const ArticleDetail = () => {
             const startIndex = range.startOffset;
             const endIndex = range.endOffset;
 
-            setSelectedText(selectedText);
             setSelectionRange({ startIndex, endIndex });
 
             setIsPopupOpen(true);
@@ -67,17 +43,6 @@ const ArticleDetail = () => {
         await IncreaseArticleViewCountRequest(url)
     }
 
-    const renderMarkdownWithNotes = (content) => {
-        let modifiedContent = content;
-
-        notes.forEach(({ startIndex, endIndex, note, color }) => {
-            const highlightedText = modifiedContent.substring(startIndex, endIndex);
-            const replacementText = `<span class="highlighted-text" style="background-color: ${color}" data-note="${note}">${highlightedText}</span>`;
-            modifiedContent = modifiedContent.replace(highlightedText, replacementText);
-        });
-
-        return <div dangerouslySetInnerHTML={{ __html: modifiedContent }} />;
-    };
 
     const GetArticle=async ()=>{
         try {
@@ -93,8 +58,21 @@ const ArticleDetail = () => {
         }
 
     }
+
+    const GetNotes = async ()=>{
+        const notes = await GetNoteRequest (url);
+        setNotes(notes.data.data.map(n=>({
+            start:n.insertStart,
+                end:n.insertEnd,
+            text:n.note,
+            color:n.color
+        })));
+    }
+
+
     useEffect(()=>{
         GetArticle();
+        GetNotes();
         setArticleid(url)
 
         const timer = setTimeout(() => {
@@ -140,18 +118,18 @@ const ArticleDetail = () => {
                             markdown={markdownContent.pdfText}
                             notes={notes}
                             setNotes={setNotes}
+                            onNewNote={({start, end, text, color}) => AddNoteRequest(
+                                {
+                                    "articleId":articleid,
+                                    "insertStart": start,
+                                    "insertEnd": end,
+                                    "note": text,
+                                    "color": color,
+                                }
+                            )}
                         />
                     </div>
                 </div>
-                {isPopupOpen && (
-                    <NotePopup
-                        selectedText={selectedText}
-                        noteColor={noteColor}
-                        setNoteColor={setNoteColor}
-                        onSaveNote={saveNote}
-                        onClose={() => setIsPopupOpen(false)}
-                    />
-                )}
 
                 {isPopupOpenComment && (
                     <CommnetsPopup
