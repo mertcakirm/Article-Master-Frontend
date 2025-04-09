@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PopUpNavbar = () => {
+const PopUpNavbar = ({onClose}) => {
     return (
         <div className="popup-overlay">
             <div className="popup-content checked-content-popup" data-aos="zoom-in" >

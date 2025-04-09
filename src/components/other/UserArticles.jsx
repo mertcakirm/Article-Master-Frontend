@@ -3,6 +3,7 @@ import ProcessPopup from "../popups/processPopup.jsx";
 import AddNewArticlePopup from "../popups/AddNewArticlePopup.jsx";
 import EditArticlePopup from "../popups/EditArticlePopup.jsx";
 import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
+import {parseJwt} from "../../Helper/JWTDecoder.js";
 
 const UserArticles = () => {
     const [updateId, setUpdateId] = useState(null);
@@ -30,6 +31,7 @@ const UserArticles = () => {
         }));
     };
 
+
     const toggleNewArticlePopup = () => {
         setNewArticlePopup(!newArticlePopup);
     };
@@ -38,7 +40,8 @@ const UserArticles = () => {
     };
 
     const GetMyArticles = async () => {
-        const articlesObj = await GetWriterArticleRequest( pageNum,4, 23 )
+        const jwt = await parseJwt()
+        const articlesObj = await GetWriterArticleRequest( pageNum,4, jwt.nameid )
         setArticles(articlesObj.data.data.items)
         setLastPage(articlesObj.data.data.totalPages)
     }
@@ -63,14 +66,28 @@ const UserArticles = () => {
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
                         <div className="col-lg-6" key={index} data-aos="fade-up">
-                            <a href="#" className="article-card pb-3">
+                            <a href={`article/${article.id}`} className="article-card pb-3">
                                 <img className="w-100 img-fluid article-card-img" alt="article-image"
-                                     src="https://bgcp.bionluk.com/images/portfolio/1400x788/d9792dfe-2379-4a8f-bc5f-3c1649310174.jpg"/>
+                                     src={
+                                         article.thumbnailBase64
+                                             ? (article.thumbnailBase64.startsWith("data:image")
+                                                 ? article.thumbnailBase64
+                                                 : `data:image/jpeg;base64,${article.thumbnailBase64}`)
+                                             : "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
+                                     }/>
                                 <p className="article-card-title">{article.title}</p>
                                 <p className="article-card-desc">{article.shortContent}</p>
                                 <div className="profile-article-card-btns col-12 px-3 justify-content-between">
-                                    <button className="my-notes-process-see" onClick={toggleEditArticlePopup}>Edit</button>
-                                    <button className="my-notes-process-see" onClick={()=>toggleProcessPopup('delete_article',1,"Should the article be deleted?","Transaction successful")}>Delete</button>
+                                    <button className="my-notes-process-see"  onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        toggleEditArticlePopup();
+                                    }}>Edit</button>
+                                    <button className="my-notes-process-see"   onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        toggleProcessPopup('delete_article', article.id, "Should the article be deleted?", "Transaction successful");
+                                    }}>Delete</button>
                                 </div>
                             </a>
                         </div>

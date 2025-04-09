@@ -34,7 +34,6 @@ const Profile = () => {
 
     const getRole=async ()=>{
         const data =await CheckRoleRequest();
-        console.log(data)
         setRole(data.data.data.role)
     }
 

@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     column-gap: 10px;
+    z-index: 100;
 }
 
 .my-notes-process-see{
@@ -11,6 +12,8 @@
     padding: 5px 10px;
     background: #5d5c5c;
     transition: .4s;
+    z-index: 101!important;
+    display: block;
 }
 
 .my-notes-process-bin{
@@ -19,6 +22,8 @@
     background: #5d5c5c;
     padding: 0 10px;
     transition: .4s;
+    z-index: 101!important;
+
 }
 
 .my-notes-process-bin:hover{

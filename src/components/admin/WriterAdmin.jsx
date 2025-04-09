@@ -4,12 +4,11 @@ import {WriterGetAll} from "../../API/UserApi.js";
 
 const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
     const [users, setUsers] = useState([]);
-    const [search, setSearch] = useState("");
     const [lastPageNum, setLastPageNum] = useState(null);
     const [pageNumUser, setPageNumUser] = useState(1);
 
     const GetUsers = async () => {
-        const userObj = await WriterGetAll(pageNumUser, 5, search);
+        const userObj = await WriterGetAll(pageNumUser, 5);
         setLastPageNum(userObj.data.data.totalPages);
         setUsers(userObj.data.data.items);
     };
@@ -29,7 +28,7 @@ const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
 
     return (
         <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{ height: 'fit-content' }}>
-                <div className="titles text-center admin-title mb-3 col-12">WRITER</div>
+                <div className="titles text-center mb-3 col-12">WRITER</div>
             <table className="table table-striped col-12 table-dark text-center" style={{ borderRadius: '10px', overflow: 'hidden' }}>
                 <thead>
                 <tr>
