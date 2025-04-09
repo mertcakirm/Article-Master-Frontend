@@ -13,6 +13,7 @@ const UserArticles = () => {
     const [editArticlePopup, setEditArticlePopup] = useState(false);
     const [lastPage, setLastPage] = useState(null);
     const [articles, setArticles] = useState([]);
+    const [refresh, setRefresh] = useState(false);
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
@@ -49,6 +50,10 @@ const UserArticles = () => {
     useEffect(() => {
         GetMyArticles();
     }, []);
+
+    useEffect(() => {
+        GetMyArticles();
+    }, [refresh]);
 
     useEffect(() => {
         GetMyArticles();
@@ -146,7 +151,11 @@ const UserArticles = () => {
             {newArticlePopup && (
                 <AddNewArticlePopup
                     onClose={(b) => {
-                        if (b === false) setNewArticlePopup(b);
+                        if (b === false) {
+                            setNewArticlePopup(b);
+                            setRefresh(!refresh);
+                        }
+
                     }}
                 />
             )}
