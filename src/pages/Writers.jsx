@@ -32,10 +32,10 @@ const Writers = () => {
                                     <img className="profile_photo"
                                          style={{aspectRatio:'1'}}
                                          src={
-                                             writers.thumbnailBase64
-                                                 ? (writers.thumbnailBase64.startsWith("data:image")
-                                                     ? writers.thumbnailBase64
-                                                     : `data:image/jpeg;base64,${writers.thumbnailBase64}`)
+                                             writer.profilePhoto
+                                                 ? (writer.profilePhoto.startsWith("data:image")
+                                                     ? writer.profilePhoto
+                                                     : `data:image/jpeg;base64,${writer.profilePhoto}`)
                                                  : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
                                          }
                                          alt="profile_photo"/>
