@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CustomTooltip from "./CustomTooltip.jsx";
+import {getCookie} from "../../API/Cokkie.js";
 
 const RichTextMarkdown = ({
                               markdown,
@@ -14,6 +15,7 @@ const RichTextMarkdown = ({
     const noteEditorRef = useRef(null);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
+    const token =getCookie("token")
     useEffect(() => {
         if (!noteEditorRef.current)
             return;
@@ -59,6 +61,9 @@ const RichTextMarkdown = ({
     };
 
     const addNote = (noteText, color) => {
+        if(!token){
+            window.location.href="/sign/in";
+        }
         if (selectedText) {
             const newNote = {
                 start: selectedText.start,
