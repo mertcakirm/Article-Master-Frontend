@@ -28,12 +28,12 @@ const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
 
     return (
         <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{ height: 'fit-content' }}>
-                <div className="titles text-center mb-3 col-12">WRITER</div>
+                <div className="titles text-center mb-3 col-12">WRITERS</div>
             <table className="table table-striped col-12 table-dark text-center" style={{ borderRadius: '10px', overflow: 'hidden' }}>
                 <thead>
                 <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Writer Name</th>
+                    <th scope="col">Rating</th>
                     <th scope="col">Process</th>
                 </tr>
                 </thead>
@@ -42,7 +42,7 @@ const WriterAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
                     users.map((user, index) => (
                         <tr key={index}>
                             <th scope="row">{user.writerName}</th>
-                            <td>{user.rating}</td>
+                            <td>{Number.isInteger(user.rating) ? user.rating : user.rating.toFixed(1)}/10</td>
                             <td>
                                 <div className="my-notes-process-flex">
                                     <button

@@ -51,6 +51,7 @@ const ArticleAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
                     <tr>
                         <th scope="col">Article Name</th>
                         <th scope="col">Writer Name</th>
+                        <th scope="col">View Count</th>
                         <th scope="col">Process</th>
                     </tr>
                 </thead>
@@ -59,6 +60,7 @@ const ArticleAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
                         articles.map((article, index) => (
                             <tr key={index}>
                                 <th scope="row">{article.title}</th>
+                                <td>{article.writerName}</td>
                                 <td>{article.viewCount}</td>
                                 <td>
                                     <div className="my-notes-process-flex">
