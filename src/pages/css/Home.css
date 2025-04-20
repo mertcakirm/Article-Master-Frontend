@@ -66,6 +66,7 @@
 .header-img{
     height: 600px!important;
     object-fit: cover;
+    border-bottom: 3px solid #FFFFFF;
 }
 
 .popular-row{

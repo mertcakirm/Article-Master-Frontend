@@ -12,7 +12,7 @@ import WriterArticles from "./pages/WriterArticles.jsx";
 import Navbar from "./components/Navbar.jsx";
 import {useEffect, useState} from "react";
 import {CheckRoleRequest} from "./API/UserApi.js";
-import {getCookie} from "./API/Cokkie.js";
+import {deleteCookie, getCookie} from "./API/Cokkie.js";
 import Loading from "./components/other/Loading.jsx";
 import PopUpNavbar from "./components/PopUpNavbar.jsx";
 
@@ -22,13 +22,17 @@ const AppContent = () => {
     const [popupOpen, setPopupOpen] = useState(false);
     const location = useLocation();
     const hideNavbar = location.pathname.startsWith("/sign");
-
+    const token = getCookie("token")
 
 
     const getRole = async () => {
         try {
             const data = await CheckRoleRequest();
             setRole(data.data.data.role);
+            console.log(data.data.data.role);
+            if (data.data.data.role === null) {
+                deleteCookie("token");
+            }
         } catch (error) {
             console.error("Rol alınamadı", error);
         } finally {
@@ -37,7 +41,8 @@ const AppContent = () => {
     };
 
     useEffect(() => {
-        getRole();
+            getRole();
+
     }, []);
 
     const ProtectedRoute = ({ children, requireAdmin = false }) => {

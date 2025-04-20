@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import header from "../assets/home-header.jpg"
+import header from "../assets/editor-checking-words-journal-article-befor-publish_53876-31529.jpg.avif"
 import AOS from "aos";
 import "aos/dist/aos.css";
 import './css/Home.css'

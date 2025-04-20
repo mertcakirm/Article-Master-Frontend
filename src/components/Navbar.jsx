@@ -12,9 +12,20 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
     const [role, setRole] = useState("");
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
+
+
     const getRole=async ()=>{
-        const data =await CheckRoleRequest();
-        setRole(data.data.data.role)
+        try {
+            const data =await CheckRoleRequest();
+            setRole(data.data.data.role)
+            if(data.data.data.role === "admin"){
+                deleteCookie("token");
+            }
+        }catch (error) {
+            console.log(error);
+            deleteCookie("token");
+        }
+
     }
 
     useEffect(() => {
