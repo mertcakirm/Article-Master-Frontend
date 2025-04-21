@@ -4,12 +4,20 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import {GetArticlesRequest} from "../API/ArticleApi.js";
 import Loading from "../components/other/Loading.jsx";
+import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 
 const Articles = () => {
     const [pageNum, setPageNum] = useState(1);
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const AddFavorite = async (id)=>{
+        const FavoriteObj ={
+            articleId:id,
+        }
+        await AddFavoriteRequest(FavoriteObj);
+    }
 
 
     useEffect(() => {
@@ -81,7 +89,7 @@ const Articles = () => {
                                         </div>
                                     </div>
                                 </a>
-                                <button className="article-card-like">
+                                <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
                                          strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">

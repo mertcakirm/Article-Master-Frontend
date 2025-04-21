@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import {useEffect} from "react";
 import {ApproveRequest, DeleteUsersRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
+import {AddFavoriteRequest} from "../../API/FavoriteApi.js";
 const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
     const HandleSubmit = async () => {
@@ -20,8 +21,16 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
                 await DeleteArticleRequest(id)
                 break;
             case "delete_user":
-                DeleteUsersRequest(id)
+                await DeleteUsersRequest(id)
                 break;
+            case "article_favorite":
+            {
+                const FavoriteObj={
+                    articleId:id,
+                }
+                await AddFavoriteRequest(FavoriteObj)
+                break;
+            }
             default:
                 console.error("Unknown type");
                 return;
