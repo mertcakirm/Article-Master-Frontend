@@ -7,11 +7,15 @@ import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 import UserArticles from "../components/other/UserArticles.jsx";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
 import {CheckRoleRequest} from "../API/UserApi.js";
+import AcceptInformation from "../components/other/AcceptInformation.jsx";
+import RejectInformation from "../components/other/RejectInformation.jsx";
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [photoBase64, setPhotoBase64] = useState("");
     const [role, setRole] = useState("");
+    const [acceptPopup, setAcceptPopup] = useState(false);
+    const [rejectPopup, setRejectPopup] = useState(false);
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
@@ -26,8 +30,11 @@ const Profile = () => {
                 const base64String = await convertToBase64(file);
                 setPhotoBase64(base64String);
                 await UpdateProfilePhotoRequest(base64String);
+                setAcceptPopup(!acceptPopup)
+
             } catch (err) {
                 console.error("Fotoğraf yüklenirken hata:", err);
+                setRejectPopup(!rejectPopup)
             }
         }
     };
@@ -100,13 +107,30 @@ const Profile = () => {
                     )}
 
                 </div>
-                {updatePopup && (
-                    <UpdateProfilePopup
-                        onClose={(b) => {
-                            if (b === false) setUpdatePopup(b);
-                        }}
-                    />
-                )}
+                    {updatePopup && (
+                        <UpdateProfilePopup
+                            onClose={(b) => {
+                                if (b === false) setUpdatePopup(b);
+                            }}
+                        />
+                    )}
+                    {acceptPopup && (
+                        <AcceptInformation
+                            onClose={(b) => {
+                                if (b === false) setAcceptPopup(b);
+                            }}
+                            infoText="Profile photo updated."
+                        />
+                    )}
+                    {rejectPopup && (
+                        <RejectInformation
+                            onClose={(b) => {
+                                if (b === false) setRejectPopup(b);
+                            }}
+                            infoText="An error occurred while changing the profile photo."
+                        />
+                    )}
+
             </div>
     );
 };

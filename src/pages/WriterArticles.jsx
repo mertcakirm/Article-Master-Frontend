@@ -19,7 +19,6 @@ const WriterArticles = () => {
         const data = await GetWriterArticleRequest(pageNum,12,url)
         setArticles(data.data.data.items)
         setLastPage(data.data.data.totalPages)
-        console.log(articles)
     }
 
     useEffect(() => {
