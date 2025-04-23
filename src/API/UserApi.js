@@ -10,3 +10,11 @@ export const WriterGetAll = async (page,size) => {
 export const CheckRoleRequest = async () => {
     return await api.post (`auth/role`)
 }
+
+export const GetUserInfoRequest=async () => {
+    return await api.get (`user`)
+}
+
+export const UpdateProfileRequest = async (userInfoObj) => {
+    return await api.patch (`user`,userInfoObj)
+}

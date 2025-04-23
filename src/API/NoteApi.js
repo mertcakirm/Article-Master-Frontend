@@ -11,3 +11,7 @@ export const DeleteNoteRequest = async (id) => {
 export const GetNoteRequest = async (id) => {
     return await api.get(`note/${id}`);
 };
+
+export const NoteGetAllRequests = async () => {
+    return await api.get(`note/all`);
+}

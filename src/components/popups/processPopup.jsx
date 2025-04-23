@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {ApproveRequest, DeleteUsersRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
 import {AddFavoriteRequest} from "../../API/FavoriteApi.js";
+import {DeleteNoteRequest} from "../../API/NoteApi.js";
 const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
     const HandleSubmit = async () => {
@@ -23,6 +24,9 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
             case "delete_user":
                 await DeleteUsersRequest(id)
                 break;
+            case "note_delete":
+                await DeleteNoteRequest(id)
+                break;
             case "article_favorite":
             {
                 const FavoriteObj={
@@ -40,6 +44,7 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
     useEffect(() => {
         AOS.init({ duration: 500 });
+        console.log(type,text,id,acceptedText)
     }, []);
 
 
