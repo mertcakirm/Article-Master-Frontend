@@ -99,10 +99,7 @@ const Profile = () => {
 
 
                                 <div className="col-lg-7 col-12 justify-content-center align-items-start row-gap-3" style={{display:'flex',flexDirection:'column'}}>
-                                    <div className="w-100 row justify-content-between align-items-center p-0 m-0">
-                                        <div className="col-9 profile-card-right-key">Article Count</div>
-                                        <div className="col-3 profile-card-right-value">{userData.articleCount}</div>
-                                    </div>
+
                                     <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
                                         <div className="col-9 profile-card-right-key">Note Count</div>
                                         <div className="col-3 profile-card-right-value">{userData.noteCount}</div>
@@ -111,14 +108,24 @@ const Profile = () => {
                                         <div className="col-9 profile-card-right-key">Comments Count</div>
                                         <div className="col-3 profile-card-right-value">{userData.commentCount}</div>
                                     </div>
-                                    <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
-                                        <div className="col-9 profile-card-right-key">Writer Rating</div>
-                                        <div className="col-3 profile-card-right-value">{userData.ratingOverall}</div>
-                                    </div>
-                                    <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
-                                        <div className="col-9 profile-card-right-key">View Count</div>
-                                        <div className="col-3 profile-card-right-value">{userData.viewCount}</div>
-                                    </div>
+
+                                    {role !== "USER" && (
+                                        <>
+                                            <div className="w-100 row justify-content-between align-items-center p-0 m-0">
+                                                <div className="col-9 profile-card-right-key">Article Count</div>
+                                                <div className="col-3 profile-card-right-value">{userData.articleCount}</div>
+                                            </div>
+                                            <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
+                                                <div className="col-9 profile-card-right-key">Writer Rating</div>
+                                                <div className="col-3 profile-card-right-value">{userData.ratingOverall}</div>
+                                            </div>
+                                            <div className="w-100 row justify-content-between align-items-center  p-0 m-0">
+                                                <div className="col-9 profile-card-right-key">View Count</div>
+                                                <div className="col-3 profile-card-right-value">{userData.viewCount}</div>
+                                            </div>
+                                        </>
+                                    )}
+
                                     <button onClick={toggleUpdatePopup} className="my-notes-process-see col-12">Update Other Information</button>
                                 </div>
                             </div>

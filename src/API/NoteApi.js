@@ -12,6 +12,6 @@ export const GetNoteRequest = async (id) => {
     return await api.get(`note/${id}`);
 };
 
-export const NoteGetAllRequests = async () => {
-    return await api.get(`note/all`);
+export const NoteGetAllRequests = async (page,size) => {
+    return await api.get(`note/all?PageNumber=${page}&PageSize=${size}`);
 }

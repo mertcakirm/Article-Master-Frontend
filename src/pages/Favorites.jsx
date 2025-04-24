@@ -77,9 +77,9 @@ const Favorites = () => {
                                     </tr>
                                 ))
                             ) : (
-                                <div className="text-center my-4 w-100">
-                                    There are no writers yet.
-                                </div>
+                                <tr>
+                                    <td colSpan="4" className="text-center py-4">No favorites found.</td>
+                                </tr>
 
                             )}
 
