@@ -5,7 +5,6 @@ import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 import {parseJwt} from "../../Helper/JWTDecoder.js";
 
 const UserArticles = () => {
-    const [updateId, setUpdateId] = useState(null);
     const [pageNum, setPageNum] = useState(1);
     const [processPopup, setProcessPopup] = useState(false);
     const [newArticlePopup, setNewArticlePopup] = useState(false);

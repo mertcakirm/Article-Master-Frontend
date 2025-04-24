@@ -108,6 +108,8 @@ const Home = () => {
                                             <div>{Number.isInteger(article.ratingOverall) ? article.ratingOverall : article.ratingOverall.toFixed(1)}/10</div>
                                         </div>
                                     </div>
+                                    <p className="article-card-writerName">{article.writerName}</p>
+
                                 </a>
                                 <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"

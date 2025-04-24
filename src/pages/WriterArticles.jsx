@@ -37,7 +37,7 @@ const WriterArticles = () => {
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div className="col-lg-3" data-aos="fade-up" key={index}>
-                                <a href={`/article/${article.id}`} className="article-card">
+                                <a href={`/article/${article.id}`} className="article-card pb-5">
                                     <img className="w-100 img-fluid article-card-img"
                                          src={
                                              article.thumbnailBase64
@@ -70,6 +70,7 @@ const WriterArticles = () => {
                                             <div>{Number.isInteger(article.ratingOverall) ? article.ratingOverall : article.ratingOverall.toFixed(1)}/10</div>
                                         </div>
                                     </div>
+
                                 </a>
                                 <button className="article-card-like">
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
