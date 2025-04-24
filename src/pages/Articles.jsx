@@ -11,13 +11,25 @@ const Articles = () => {
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [search, setSearch] = useState("");
+    const [searchTimeout, setSearchTimeout] = useState(null);
     const AddFavorite = async (id)=>{
         const FavoriteObj ={
             articleId:id,
         }
         await AddFavoriteRequest(FavoriteObj);
     }
+
+    const searchTextChanged = (searchStr) => {
+        if (searchTimeout !== null) {
+            clearTimeout(searchTimeout);
+        }
+        const newTimeout = setTimeout(() => {
+            setSearch(searchStr);
+            GetArticles();
+        }, 800);
+        setSearchTimeout(newTimeout);
+    };
 
 
     useEffect(() => {
@@ -51,7 +63,12 @@ const Articles = () => {
     return (
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">
-                    <div className="col-12 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
+                    <div className="col-lg-3 mt-5">
+                        <input type="text" className="profile_inp admin-inp w-100" onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Article"></input>
+
+                    </div>
+                    <div className="col-lg-6 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
+                    <div className="col-lg-3"></div>
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div className="col-lg-3" data-aos="fade-up" key={index}>

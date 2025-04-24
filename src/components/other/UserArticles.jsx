@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import ProcessPopup from "../popups/processPopup.jsx";
 import AddNewArticlePopup from "../popups/AddNewArticlePopup.jsx";
-import EditArticlePopup from "../popups/EditArticlePopup.jsx";
 import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 import {parseJwt} from "../../Helper/JWTDecoder.js";
 
@@ -10,7 +9,6 @@ const UserArticles = () => {
     const [pageNum, setPageNum] = useState(1);
     const [processPopup, setProcessPopup] = useState(false);
     const [newArticlePopup, setNewArticlePopup] = useState(false);
-    const [editArticlePopup, setEditArticlePopup] = useState(false);
     const [lastPage, setLastPage] = useState(null);
     const [articles, setArticles] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -36,9 +34,7 @@ const UserArticles = () => {
     const toggleNewArticlePopup = () => {
         setNewArticlePopup(!newArticlePopup);
     };
-    const toggleEditArticlePopup = () => {
-        setEditArticlePopup(!editArticlePopup);
-    };
+
 
     const GetMyArticles = async () => {
         const jwt = await parseJwt()
@@ -83,12 +79,7 @@ const UserArticles = () => {
                                 <p className="article-card-title">{article.title}</p>
                                 <p className="article-card-desc">{article.shortContent}</p>
                                 <div className="profile-article-card-btns col-12 px-3 justify-content-between">
-                                    <button className="my-notes-process-see"  onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        toggleEditArticlePopup();
-                                    }}>Edit</button>
-                                    <button className="my-notes-process-see"   onClick={(e) => {
+                                    <button className="my-notes-process-see w-100"   onClick={(e) => {
                                         e.preventDefault();
                                         e.stopPropagation();
                                         toggleProcessPopup('delete_article', article.id, "Should the article be deleted?", "Transaction successful");
@@ -160,14 +151,7 @@ const UserArticles = () => {
                 />
             )}
 
-            {editArticlePopup && (
-                <EditArticlePopup
-                    onClose={(b) => {
-                        if (b === false) setEditArticlePopup(b);
-                    }}
-                    id={updateId}
-                />
-            )}
+
         </div>
     );
 };
