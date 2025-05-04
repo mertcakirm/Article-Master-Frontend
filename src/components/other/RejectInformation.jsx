@@ -3,7 +3,7 @@ import React from 'react';
 const RejectInformation = ({onClose,infoText}) => {
     return (
         <div className="popup-overlay">
-        <div className="popup-content">
+        <div className="popup-content" data-aos="zoom-in">
             <div className="success-checkmark">
                 <div className="ui-error">
                     <svg viewBox="0 0 87 87" version="1.1" xmlns="http://www.w3.org/2000/svg"

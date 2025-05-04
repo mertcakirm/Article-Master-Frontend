@@ -3,7 +3,7 @@ import React from 'react';
 const AcceptInformation = ({onClose,infoText}) => {
     return (
         <div className="popup-overlay">
-            <div className="popup-content">
+            <div className="popup-content" data-aos="zoom-in">
                 <div className="success-checkmark">
                     <div className="check-icon">
                         <span className="icon-line line-tip"></span>
