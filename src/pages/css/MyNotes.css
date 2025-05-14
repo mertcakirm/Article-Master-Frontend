@@ -47,6 +47,22 @@
     flex-wrap: wrap;
 }
 
+.add-folder-btn{
+    position: absolute;
+    top: 50px;
+    bottom: unset;
+    right: 2%;
+    width: fit-content;
+    border-radius: 10px;
+    border: 1px solid #FFFFFF;
+    padding: 10px 20px;
+    transition: .4s;
+}
+
+.add-folder-btn:hover{
+    transition: .4s;
+    transform: scale(1.1);
+}
 
 .folder-card{
     display: flex;
@@ -72,4 +88,15 @@
 .color-swatch:hover {
     transform: scale(1.1);
     transition: transform 0.2s ease;
+}
+
+@media only screen and (max-width: 1200px) {
+    .add-folder-btn{
+        bottom: 10px;
+        top: unset;
+        height: fit-content;
+        position: fixed;
+    }
+
+
 }

@@ -1,53 +1,39 @@
 import React, {useState} from 'react';
 import './css/MyNotes.css'
 import NotesPopup from "../components/popups/NotesPopup.jsx";
+import AddFolderPopup from "../components/popups/AddFolderPopup.jsx";
 
 const MyNotes = () => {
     const [pageNum, setPageNum] = useState(1);
     const [lastPage, setLastPage] = useState(null);
-    const [folderColor, setFolderColor] = useState("blue");
     const [notesPopupState, setNotesPopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const [folderIdState, setFolderIdState] = useState("");
+    const [addNotePopupState, setAddNotePopupState] = useState(false);
 
     const ToggleNotePopup = (folderId)=>{
         setFolderIdState(folderId);
         setNotesPopupState(!notesPopupState);
     }
 
-    const colorList=["blue", "red", "green", "purple", "orange"]
+    const ToggleAddNotePopup = ()=>{
+        setAddNotePopupState(!addNotePopupState);
+    }
 
     return (
             <div className="page-container container-fluid">
-                <div className="row">
+                <div className="row" style={{position:'relative'}}>
                     <div className="titles col-12 text-center mt-5" data-aos="fade-in">My Note Folders</div>
-                    <div className="color-palette d-flex justify-content-center mt-3" data-aos="fade-in">
-                        {colorList.map((color) => (
-                            <button
-                                key={color}
-                                className="color-swatch mx-2"
-                                style={{
-                                    backgroundColor: color,
-                                    width: "30px",
-                                    height: "30px",
-                                    borderRadius: "50%",
-                                    border: folderColor === color ? "3px solid black" : "1px solid #ccc",
-                                    cursor: "pointer"
-                                }}
-                                onClick={() => setFolderColor(color)}
-                            />
-                        ))}
-                    </div>
+                    <button className="add-folder-btn" onClick={ToggleAddNotePopup} >Add New Folder</button>
+
+
                     <div className="col-12 px-5 mt-5 justify-content-center" data-aos="fade-in">
                         <div className="folder-row">
                             <button className="folder-card" onClick={()=>ToggleNotePopup(1)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill={folderColor} width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="blue" width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
                                 <div className="folder-name">folder Name</div>
                             </button>
-
                         </div>
-
-
 
                         <div  className="my-notes-process-flex">
                             {pageNum > 1 && (
@@ -89,6 +75,16 @@ const MyNotes = () => {
                         folderId={folderIdState}
                     />
                 )}
+
+                {addNotePopupState && (
+                    <AddFolderPopup
+                        onClose={(b) => {
+                            if (b === false) setAddNotePopupState(b);
+                            setRefresh(!refresh);
+                        }}
+                    />
+                )}
+
 
             </div>
     );
