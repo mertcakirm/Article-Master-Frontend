@@ -27,6 +27,9 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
             case "note_delete":
                 await DeleteNoteRequest(id)
                 break;
+            case "folder_delete":
+                await DeleteNoteRequest(id)
+                break;
             case "article_favorite":
             {
                 const FavoriteObj={

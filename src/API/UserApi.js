@@ -7,6 +7,14 @@ export const WriterGetAll = async (page,size) => {
     );
 };
 
+
+export const PopularWriterGetAllRequest = async () => {
+    return await api.get(`user/popular`, {
+            headers: { NoAuth: true }
+        }
+    );
+};
+
 export const CheckRoleRequest = async () => {
     return await api.post (`auth/role`)
 }

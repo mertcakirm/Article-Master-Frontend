@@ -24,6 +24,14 @@ export const GetArticlesRequest = async (Page, Size) => {
     });
 };
 
+//article popular get all
+
+export const GetPopularArticlesRequest = async () => {
+    return await api.get(`article/popular`, {
+        headers: { NoAuth: true }
+    });
+};
+
 export const AddCommentRequest = async (newCommentData) => {
     return await api.post("comment", newCommentData);
 };

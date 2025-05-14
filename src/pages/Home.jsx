@@ -4,9 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import './css/Home.css'
 import {getCookie} from "../API/Cokkie.js";
-import {GetArticlesRequest} from "../API/ArticleApi.js";
+import {GetPopularArticlesRequest} from "../API/ArticleApi.js";
 import Loading from "../components/other/Loading.jsx";
-import {WriterGetAll} from "../API/UserApi.js";
+import {PopularWriterGetAllRequest} from "../API/UserApi.js";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 const Home = () => {
     const [articles, setArticles] = useState([]);
@@ -16,8 +16,9 @@ const Home = () => {
 
     const GetArticles = async () => {
         try {
-            const data = await GetArticlesRequest(1,10)
-            setArticles(data.data.data.items)
+            const data = await GetPopularArticlesRequest()
+            setArticles(data.data)
+            console.log(data.data)
         }catch (error) {
             console.log(error);
         }finally {
@@ -26,8 +27,16 @@ const Home = () => {
 
     }
     const GetWriters = async () => {
-        const data = await WriterGetAll(1,36);
-        setWriters(data.data.data.items);
+        try {
+            const data = await PopularWriterGetAllRequest();
+            setWriters(data.data);
+            console.log(data.data)
+
+        }catch (error) {
+            console.log(error);
+        }finally {
+            setLoading(false);
+        }
     }
 
 
@@ -78,10 +87,10 @@ const Home = () => {
                                 <a href={`/article/${article.id}`} className="article-card">
                                     <img className="w-100 img-fluid article-card-img"
                                          src={
-                                             article.thumbnailBase64
-                                                 ? (article.thumbnailBase64.startsWith("data:image")
-                                                     ? article.thumbnailBase64
-                                                     : `data:image/jpeg;base64,${article.thumbnailBase64}`)
+                                             article.photoBase64
+                                                 ? (article.photoBase64.startsWith("data:image")
+                                                     ? article.photoBase64
+                                                     : `data:image/jpeg;base64,${article.photoBase64}`)
                                                  : "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
                                          }
                                          alt="Article Thumbnail"
@@ -105,7 +114,7 @@ const Home = () => {
                                                 <path
                                                     d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
                                             </svg>
-                                            <div>{Number.isInteger(article.ratingOverall) ? article.ratingOverall : article.ratingOverall.toFixed(1)}/10</div>
+                                            <div></div>
                                         </div>
                                     </div>
                                     <p className="article-card-writerName">{article.writerName}</p>

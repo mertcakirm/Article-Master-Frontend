@@ -36,3 +36,40 @@
     transform: scale(1.05);
     transition: .4s;
 }
+
+.folder-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    column-gap: 50px;
+    row-gap: 50px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+
+.folder-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    background: transparent;
+    border: none;
+    transition: .4s;
+}
+
+.folder-card:hover{
+    transform: scale(1.1);
+    transition: .4s;
+}
+
+.folder-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}

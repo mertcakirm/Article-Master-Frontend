@@ -1,96 +1,54 @@
-import React, {useEffect, useState} from 'react';
-import Navbar from "../components/Navbar.jsx";
+import React, {useState} from 'react';
 import './css/MyNotes.css'
-import ProcessPopup from "../components/popups/processPopup.jsx";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import {NoteGetAllRequests} from "../API/NoteApi.js";
+import NotesPopup from "../components/popups/NotesPopup.jsx";
+
 const MyNotes = () => {
     const [pageNum, setPageNum] = useState(1);
-    const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
-    const [notesList, setNotesList] = useState([]);
     const [lastPage, setLastPage] = useState(null);
+    const [folderColor, setFolderColor] = useState("blue");
+    const [notesPopupState, setNotesPopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    const [processState, setProcessState] = useState({
-        processtype: null,
-        text: "",
-        acceptedText: "",
-        id: null,
-    });
+    const [folderIdState, setFolderIdState] = useState("");
 
-    const toggleProcessPopup = (type, id, text, acceptedText) => {
-        setProcessIsPopupOpen(!isProcessPopupOpen);
-        setProcessState(prevState => ({
-            ...prevState,
-            processtype: type,
-            text: text,
-            acceptedText: acceptedText,
-            id: id
-        }));
-    };
-
-    const GetNotes=async() => {
-        const notes = await NoteGetAllRequests(pageNum,10);
-        setNotesList(notes.data.data.items);
-        setLastPage(notes.data.data.totalPages)
-        console.log(notes.data.data.totalPages)
+    const ToggleNotePopup = (folderId)=>{
+        setFolderIdState(folderId);
+        setNotesPopupState(!notesPopupState);
     }
 
-    useEffect(() => {
-        GetNotes();
-        AOS.init({ duration: 1000 });
-    }, []);
-
-    useEffect(() => {
-        GetNotes();
-    }, [refresh]);
+    const colorList=["blue", "red", "green", "purple", "orange"]
 
     return (
             <div className="page-container container-fluid">
                 <div className="row">
-                    <div className="titles col-12 text-center mt-5" data-aos="fade-in">My Notes</div>
+                    <div className="titles col-12 text-center mt-5" data-aos="fade-in">My Note Folders</div>
+                    <div className="color-palette d-flex justify-content-center mt-3" data-aos="fade-in">
+                        {colorList.map((color) => (
+                            <button
+                                key={color}
+                                className="color-swatch mx-2"
+                                style={{
+                                    backgroundColor: color,
+                                    width: "30px",
+                                    height: "30px",
+                                    borderRadius: "50%",
+                                    border: folderColor === color ? "3px solid black" : "1px solid #ccc",
+                                    cursor: "pointer"
+                                }}
+                                onClick={() => setFolderColor(color)}
+                            />
+                        ))}
+                    </div>
                     <div className="col-12 px-5 mt-5 justify-content-center" data-aos="fade-in">
-                        <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
-                            <thead>
-                            <tr>
-                                <th scope="col">Article Name</th>
-                                <th scope="col">Note Count</th>
-                                <th scope="col">Writer</th>
-                                <th scope="col">Process</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div className="folder-row">
+                            <button className="folder-card" onClick={()=>ToggleNotePopup(1)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill={folderColor} width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
+                                <div className="folder-name">folder Name</div>
+                            </button>
 
-                            {notesList.length > 0 ? (
-                                notesList.map((note, index) => (
-                                    <tr key={index}>
-                                        <th scope="row">{note.articleName}</th>
-                                        <td>{note.noteCount}</td>
-                                        <td>{note.writer}</td>
-                                        <td>
-                                            <div className="my-notes-process-flex">
-                                                <a style={{background: 'orange'}} href={`/article/${note.id}`} className="my-notes-process-see">
-                                                    <svg clipRule="evenodd" fill="white" width="30" height="30" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.998 5c-4.078 0-7.742 3.093-9.853 6.483-.096.159-.145.338-.145.517s.048.358.144.517c2.112 3.39 5.776 6.483 9.854 6.483 4.143 0 7.796-3.09 9.864-6.493.092-.156.138-.332.138-.507s-.046-.351-.138-.507c-2.068-3.403-5.721-6.493-9.864-6.493zm.002 3c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4zm0 1.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z" fillRule="nonzero"/></svg>
-                                                </a>
-                                                <button style={{background: 'red'}} onClick={() => toggleProcessPopup('note_delete', note.id, "Are you sure you want to delete your notes for this article?", "Transaction successful")} className="my-notes-process-bin">
-                                                    <svg fill="white" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/></svg>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan="4" className="text-center py-4">No notes found.</td>
-                                </tr>
-                            )}
+                        </div>
 
 
 
-
-
-                            </tbody>
-                        </table>
                         <div  className="my-notes-process-flex">
                             {pageNum > 1 && (
                                 <button onClick={() => setPageNum(pageNum - 1)} className="my-notes-process-see">
@@ -121,18 +79,17 @@ const MyNotes = () => {
                         </div>
                     </div>
                 </div>
-                {isProcessPopupOpen && (
-                    <ProcessPopup
+
+                {notesPopupState && (
+                    <NotesPopup
                         onClose={(b) => {
-                            if (b === false) setProcessIsPopupOpen(b);
+                            if (b === false) setNotesPopupState(b);
                             setRefresh(!refresh);
                         }}
-                        text={processState.text}
-                        acceptedText={processState.acceptedText}
-                        type={processState.processtype}
-                        id={processState.id}
+                        folderId={folderIdState}
                     />
                 )}
+
             </div>
     );
 };
