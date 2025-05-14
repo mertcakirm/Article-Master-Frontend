@@ -4,6 +4,10 @@ export const ApproveRequest =async (id)=> {
     return await api.patch(`admin/approve/writer/${id}`);
 }
 
+export const RejectRoleRequest =async (id)=> {
+    return await api.patch(`admin/decline/writer/${id}`);
+}
+
 
 export const WriterGetAllRequest =async (page,size)=> {
     return await api.get(`admin/writer/all?PageNumber=${page}&PageSize=${size}`);

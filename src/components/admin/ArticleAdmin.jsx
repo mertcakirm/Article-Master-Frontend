@@ -10,7 +10,7 @@ const ArticleAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
 
 
     const GetArticles = async () => {
-        const articleObj = await GetArticlesRequest(pageNumArticle, 5);
+        const articleObj = await GetArticlesRequest(pageNumArticle, 5,search);
         setLastPageNum(articleObj.data.data.totalPages);
         setArticles(articleObj.data.data.items);
     };
@@ -82,7 +82,7 @@ const ArticleAdmin = ({ toggleProcessPopup, refresh, setRefresh }) => {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="3" className="text-center my-4">
+                            <td colSpan="4" className="text-center my-4">
                                 There are no articles yet.
                             </td>
                         </tr>

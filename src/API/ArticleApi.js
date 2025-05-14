@@ -18,8 +18,8 @@ export const DeleteArticleRequest = async (id) => {
 };
 
 //article get all
-export const GetArticlesRequest = async (Page, Size) => {
-    return await api.get(`article/paged/all?PageNumber=${Page}&PageSize=${Size}`, {
+export const GetArticlesRequest = async (Page, Size,search) => {
+    return await api.get(`article/paged/all?PageNumber=${Page}&PageSize=${Size}&ArticleNameSearch=${search}`, {
         headers: { NoAuth: true }
     });
 };

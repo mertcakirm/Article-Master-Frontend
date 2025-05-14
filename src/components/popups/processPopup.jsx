@@ -2,7 +2,7 @@ import '../css/accepted.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {useEffect} from "react";
-import {ApproveRequest, DeleteUsersRequest} from "../../API/AdminApi.js";
+import {ApproveRequest, DeleteUsersRequest, RejectRoleRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
 import {AddFavoriteRequest} from "../../API/FavoriteApi.js";
 import {DeleteNoteRequest} from "../../API/NoteApi.js";
@@ -17,6 +17,9 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
         switch (type) {
             case "approve_user":
                 await ApproveRequest(id)
+                break;
+            case "role_reject":
+                await RejectRoleRequest(id)
                 break;
             case "delete_article":
                 await DeleteArticleRequest(id)
