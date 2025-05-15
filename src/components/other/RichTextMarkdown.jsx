@@ -155,32 +155,19 @@ const RichTextMarkdown = ({
             </div>
 
             {selectedText && (
-                <div ref={noteEditorRef}
-                     style={{
-                         position: 'fixed',
-                         border: '1px solid #ccc',
-                         padding: '20px 5px',
-                         borderRadius: '8px',
-                         backgroundColor: '#232323',
-                         display: 'flex',
-                         flexDirection:'row',
-                         justifyContent:'center',
-                         flexWrap:'wrap',
-                         columnGap:'10px',
-                         rowGap:'10px'
-                     }}>
+                <div ref={noteEditorRef} className="add-note-rich-con">
                       <textarea
                           placeholder="Enter your note"
                           value={newNoteText}
                           onChange={(e) => setNewNoteText(e.target.value)}
                           style={{
-                              width: '75%',
-                              marginBottom: '16px',
+                              width: '50%',
                               padding: '8px',
                               borderRadius: '4px',
                               resize:'none'
                           }}
                       />
+
                     <select
                         className="form-select"
                         style={{ width: '20%', height: '100%', padding: '20px', fontSize: '16px', color: '#fff', background: '#212121' }}
@@ -196,11 +183,16 @@ const RichTextMarkdown = ({
                         ))}
                     </select>
 
+                    <button className="add-folder-btn2" >
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm6 11v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg>
+                    </button>
+
                         <div style={{
                             display: 'flex',
                             width: '100%',
                             gap: '8px',
-                            justifyContent:'center'
+                            justifyContent:'center',
+                            flexWrap:'wrap',
                         }}>
                         {noteColors.map((color) => (
                             <button
