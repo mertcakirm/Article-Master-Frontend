@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { AddArticleRequest } from "../../API/ArticleApi.js";
 import {convertToBase64} from "../../Helper/ConverterBase64.js";
-import RejectInformation from "../other/RejectInformation.jsx";
-import AcceptInformation from "../other/AcceptInformation.jsx";
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddNewArticlePopup = ({ onClose }) => {
     const [articleData, setArticleData] = useState({
@@ -11,10 +10,6 @@ const AddNewArticlePopup = ({ onClose }) => {
         pdfBase64: '',
         photoBase64: ''
     });
-    const [isPopupOpenReject, setIsPopupOpenReject] = useState(false);
-    const [isPopupOpenAccept, setIsPopupOpenAccept] = useState(false);
-    const [infoText, setInfoText] = useState("");
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setArticleData(prevState => ({ ...prevState, [name]: value }));
@@ -41,17 +36,17 @@ const AddNewArticlePopup = ({ onClose }) => {
 
 
         if (!articleData.title || !articleData.content || !articleData.pdfBase64 || !articleData.photoBase64) {
-            setInfoText("Please fill in all fields.");
-            setIsPopupOpenReject(true);
+            toast.error( "Please fill in all fields.");
             return;
         }
         try {
             await AddArticleRequest(articleData);
-            setIsPopupOpenAccept(true);
+            toast.success("Article Added successfully.");
+            onClose(false);
         } catch (error) {
             const errorMessage = error?.response?.data?.errorMessage || "Add failed.";
-            setInfoText(errorMessage);
-            setIsPopupOpenReject(true);
+            toast.error( errorMessage || "Article add failed.");
+            onClose(false);
         }
     };
 
@@ -74,30 +69,7 @@ const AddNewArticlePopup = ({ onClose }) => {
                     <button onClick={handleSubmit} className="profile_btn">Post Article</button>
                 </div>
             </div>
-            {isPopupOpenReject && (
-                <RejectInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpenReject(b);
-                        onClose(false)
-                    }}
-                    infoText={infoText}
-
-                />
-            )}
-
-            {isPopupOpenAccept && (
-                <AcceptInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpenAccept(b);
-                        onClose(false)
-                    }}
-                    infoText={infoText}
-
-                />
-            )}
-
-
-
+            <ToastContainer theme="dark" />
         </div>
     );
 };

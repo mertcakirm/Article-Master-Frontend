@@ -5,13 +5,12 @@ import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
-import RejectInformation from "../components/other/RejectInformation.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Login = () => {
     const { type } = useParams();
     const [authType, setAuthType] = useState("in");
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [infoText, setInfoText] = useState("");
 
     const [loginObj, setLoginObj] = useState({
         email: "",
@@ -79,8 +78,7 @@ const Login = () => {
 
     const handleLogin = async () => {
         if (!loginObj.email || !loginObj.password) {
-            setInfoText("Please fill in all fields.");
-            setIsPopupOpen(true);
+            toast.error("Please fill in all fields.");
             return;
         }
         try {
@@ -88,15 +86,14 @@ const Login = () => {
             window.location.href = "/";
         } catch (error) {
             const errorMessage = error?.response?.data?.errorMessage || "Login failed.";
-            setInfoText(errorMessage);
-            setIsPopupOpen(true);
+            toast.error(errorMessage || "Login failed.");
+
         }
     };
 
     const handleSignUp = async () => {
         if (!signObj.username || !signObj.email || !signObj.password) {
-            setInfoText("Please fill in all fields.");
-            setIsPopupOpen(true);
+            toast.error("Please fill in all fields.");
             return;
         }
         try {
@@ -104,15 +101,13 @@ const Login = () => {
             window.location.href = "/sign/in";
         } catch (error) {
             const errorMessage = error?.response?.data?.errorMessage || "Registration failed.";
-            setInfoText(errorMessage);
-            setIsPopupOpen(true);
+            toast.error(errorMessage || "Registration failed.");
         }
     };
 
     const handleWriterSignIn = async () => {
         if (!writerObj.username || !writerObj.email || !writerObj.password || !writerObj.pdfBase64) {
-            setInfoText("Please fill in all fields and upload the file.");
-            setIsPopupOpen(true);
+            toast.error("Please fill in all fields and upload the file.");
             return;
         }
         try {
@@ -120,8 +115,7 @@ const Login = () => {
             window.location.href = "/sign/in";
         } catch (error) {
             const errorMessage = error?.response?.data?.errorMessage || "Writer registration failed.";
-            setInfoText(errorMessage);
-            setIsPopupOpen(true);
+            toast.error(errorMessage || "Writer registration failed.");
         }
     };
     return (
@@ -249,15 +243,8 @@ const Login = () => {
 
                 </div>
             </div>
-            {isPopupOpen && (
-                <RejectInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpen(b);
-                    }}
-                    infoText={infoText}
+            <ToastContainer theme="dark" />
 
-                />
-            )}
         </div>
     );
 };

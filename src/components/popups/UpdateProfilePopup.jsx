@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
 import '../css/accepted.css';
-import RejectInformation from "../other/RejectInformation.jsx";
-import AcceptInformation from "../other/AcceptInformation.jsx";
 import {UpdateProfileRequest} from "../../API/UserApi.js";
+import { ToastContainer, toast } from 'react-toastify';
 
 const UpdateProfilePopup = ({onClose}) => {
-    const [isPopupOpenReject, setIsPopupOpenReject] = useState(false);
-    const [isPopupOpenAccept, setIsPopupOpenAccept] = useState(false);
-    const [infoText, setInfoText] = useState("");
     const [updateInfoObj, setUpdateInfoObj] = useState({
         userName: "",
         lastPassword: "",
@@ -22,12 +18,12 @@ const UpdateProfilePopup = ({onClose}) => {
     const HandleSubmit = async () => {
         try {
             await UpdateProfileRequest(updateInfoObj);
-            setInfoText("Profile successfully updated.");
-            setIsPopupOpenAccept(true);
+            toast.success("Profile successfully updated.");
+            onClose(false);
         } catch (error) {
             console.log(error);
-            setInfoText("An error occurred while updating the profile.");
-            setIsPopupOpenReject(true);
+            toast.success("An error occurred while updating the profile.");
+            onClose(false);
         }
     }
 
@@ -63,26 +59,8 @@ const UpdateProfilePopup = ({onClose}) => {
                     <button onClick={HandleSubmit} className="profile_btn">Update Information</button>
                 </div>
             </div>
+            <ToastContainer theme="dark" />
 
-            {isPopupOpenReject && (
-                <RejectInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpenReject(b);
-                        onClose(false);
-                    }}
-                    infoText={infoText}
-                />
-            )}
-
-            {isPopupOpenAccept && (
-                <AcceptInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpenAccept(b);
-                        onClose(false);
-                    }}
-                    infoText={infoText}
-                />
-            )}
         </div>
     );
 };

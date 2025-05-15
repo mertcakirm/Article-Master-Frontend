@@ -12,65 +12,37 @@ const Admin = () => {
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
-        acceptedText: "",
         id: null,
     });
+
+    const handleToggleProcessPopup = (type, id, text) => {
+        setProcessIsPopupOpen(true);
+        setProcessState({ processtype: type, text, id });
+    };
 
     return (
             <div className="page-container mb-5 container-fluid">
                 <div className="row justify-content-between row-gap-5 popular-row">
                     <RoleRequests
-                        toggleProcessPopup={(type, id, text, acceptedText) => {
-                            setProcessIsPopupOpen(true);
-                            setProcessState({
-                                processtype: type,
-                                text: text,
-                                acceptedText: acceptedText,
-                                id: id
-                            });
-                        }}
+                        toggleProcessPopup={handleToggleProcessPopup}
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
 
                     <WriterAdmin
-                        toggleProcessPopup={(type, id, text, acceptedText) => {
-                            setProcessIsPopupOpen(true);
-                            setProcessState({
-                                processtype: type,
-                                text: text,
-                                acceptedText: acceptedText,
-                                id: id
-                            });
-                        }}
+                        toggleProcessPopup={handleToggleProcessPopup}
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
 
                     <User
-                        toggleProcessPopup={(type, id, text, acceptedText) => {
-                        setProcessIsPopupOpen(true);
-                        setProcessState({
-                            processtype: type,
-                            text: text,
-                            acceptedText: acceptedText,
-                            id: id
-                        });
-                    }}
+                        toggleProcessPopup={handleToggleProcessPopup}
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
 
                     <ArticleAdmin
-                        toggleProcessPopup={(type, id, text, acceptedText) => {
-                            setProcessIsPopupOpen(true);
-                            setProcessState({
-                                processtype: type,
-                                text: text,
-                                acceptedText: acceptedText,
-                                id: id
-                            });
-                        }}
+                        toggleProcessPopup={handleToggleProcessPopup}
                         refresh={refresh}
                         setRefresh={setRefresh}
                     />
@@ -84,7 +56,6 @@ const Admin = () => {
                             }
                         }}
                         text={processState.text}
-                        acceptedText={processState.acceptedText}
                         type={processState.processtype}
                         id={processState.id}
                     />

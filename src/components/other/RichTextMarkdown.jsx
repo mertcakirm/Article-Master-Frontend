@@ -4,7 +4,8 @@ import rehypeRaw from "rehype-raw";
 import CustomTooltip from "./CustomTooltip.jsx";
 import {getCookie} from "../../API/Cokkie.js";
 import AddFolderPopup from "../popups/AddFolderPopup.jsx";
-import RejectInformation from "./RejectInformation.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
     const [selectedText, setSelectedText] = useState(null);
@@ -15,7 +16,7 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [addNotePopupState, setAddNotePopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
-    const [isPopupOpenReject, setIsPopupOpenReject] = useState(false);
+
 
     const token =getCookie("token")
 
@@ -196,8 +197,7 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                                  if (selectedFolder!==null){
                                      addNote(newNoteText, color)
                                  }else{
-                                     setIsPopupOpenReject(true);
-
+                                    toast.error("Folder is not selected")
                                  }
                                 }
                             }
@@ -215,15 +215,6 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                 </div>
             )}
 
-            {isPopupOpenReject && (
-                <RejectInformation
-                    onClose={(b) => {
-                        if (b === false) setIsPopupOpenReject(b);
-                    }}
-                    infoText="Folder name is not selected!"
-                />
-            )}
-
             {addNotePopupState && (
                 <AddFolderPopup
                     onClose={(b) => {
@@ -232,6 +223,8 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                     }}
                 />
             )}
+            <ToastContainer theme="dark" />
+
         </div>
     );
 };

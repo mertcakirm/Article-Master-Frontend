@@ -8,6 +8,7 @@ import {GetPopularArticlesRequest} from "../API/ArticleApi.js";
 import Loading from "../components/other/Loading.jsx";
 import {PopularWriterGetAllRequest} from "../API/UserApi.js";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
+import {toast} from "react-toastify";
 const Home = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,7 +42,13 @@ const Home = () => {
         const FavoriteObj ={
             articleId:id,
         }
-        await AddFavoriteRequest(FavoriteObj);
+        try {
+            await AddFavoriteRequest(FavoriteObj);
+            toast.success("Makale favorilere eklendi!");
+        }catch (error){
+            toast.error("favoriye eklenemedi")
+            console.log(error);
+        }
     }
 
 

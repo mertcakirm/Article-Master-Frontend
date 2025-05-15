@@ -17,23 +17,27 @@ const ArticleDetail = () => {
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
     const handleTextSelection = () => {
-        const selection = window.getSelection();
-        const selectedText = selection.toString();
+        if (typeof window !== 'undefined') {
+            const selection = window.getSelection();
+            const selectedText = selection.toString();
 
-        if (selectedText.trim()) {
-            const range = selection.getRangeAt(0);
-            setSelectionRange({
-                startIndex: range.startOffset,
-                endIndex: range.endOffset
-            });
+            if (selectedText.trim()) {
+                const range = selection.getRangeAt(0);
+                setSelectionRange({
+                    startIndex: range.startOffset,
+                    endIndex: range.endOffset
+                });
+            }
         }
     };
 
     const fetchArticle = async () => {
         try {
             const article = await GetArticleRequest(url);
-            setMarkdownContent(article.data.data);
-            setLoading(article.data === null);
+            if (article?.data?.data) {
+                setMarkdownContent(article.data.data);
+                setLoading(false);
+            }
         } catch (error) {
             console.error("Error fetching article:", error);
         }

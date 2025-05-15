@@ -11,7 +11,6 @@ const AddFolderPopup = ({onClose}) => {
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
-        acceptedText: "",
         id: null,
     });
 
@@ -68,7 +67,6 @@ const AddFolderPopup = ({onClose}) => {
                         onClose(false)
                     }}
                     text={processState.text}
-                    acceptedText={processState.acceptedText}
                     type={processState.processtype}
                     id={processState.id}
                 />

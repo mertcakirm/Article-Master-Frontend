@@ -14,17 +14,15 @@ const UserArticles = () => {
     const [processState, setProcessState] = useState({
         processtype: null,
         text: "",
-        acceptedText: "",
         id: null,
     });
 
-    const toggleProcessPopup = (type, id, text, acceptedText) => {
+    const toggleProcessPopup = (type, id, text) => {
         setProcessPopup(!processPopup);
         setProcessState(prevState => ({
             ...prevState,
             processtype: type,
             text: text,
-            acceptedText: acceptedText,
             id: id
         }));
     };
@@ -81,7 +79,7 @@ const UserArticles = () => {
                                     <button className="my-notes-process-see w-100"   onClick={(e) => {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        toggleProcessPopup('delete_article', article.id, "Should the article be deleted?", "Transaction successful");
+                                        toggleProcessPopup('delete_article', article.id, "Should the article be deleted?");
                                     }}>Delete</button>
                                 </div>
                             </a>
@@ -133,7 +131,6 @@ const UserArticles = () => {
                         setRefresh(!refresh);
                     }}
                     text={processState.text}
-                    acceptedText={processState.acceptedText}
                     type={processState.processtype}
                     id={processState.id}
                 />

@@ -7,22 +7,23 @@ import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 import UserArticles from "../components/other/UserArticles.jsx";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
 import {CheckRoleRequest, GetUserInfoRequest} from "../API/UserApi.js";
-import AcceptInformation from "../components/other/AcceptInformation.jsx";
-import RejectInformation from "../components/other/RejectInformation.jsx";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
     const [photoBase64, setPhotoBase64] = useState("");
     const [role, setRole] = useState("");
-    const [acceptPopup, setAcceptPopup] = useState(false);
-    const [rejectPopup, setRejectPopup] = useState(false);
     const [userData, setUserData] = useState({});
     const [refresh, setRefresh] = useState(false);
 
-    const GetUserInfo=async ()=>{
-        const userData=await GetUserInfoRequest();
-        setUserData(userData.data.data);
-    }
+    const GetUserInfo = async () => {
+        try {
+            const userData = await GetUserInfoRequest();
+            setUserData(userData.data.data);
+        } catch (err) {
+            console.error("Kullanıcı bilgisi alınamadı:", err);
+        }
+    };
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
@@ -37,12 +38,12 @@ const Profile = () => {
                 const base64String = await convertToBase64(file);
                 setPhotoBase64(base64String);
                 await UpdateProfilePhotoRequest(base64String);
-                setAcceptPopup(!acceptPopup)
                 setRefresh(!refresh);
+                toast.success("Profile photo updated.");
 
             } catch (err) {
-                console.error("Fotoğraf yüklenirken hata:", err);
-                setRejectPopup(!rejectPopup)
+                console.error("photo is not loaded", err);
+                toast.error("An error occurred while changing the profile photo.");
             }
         }
     };
@@ -143,22 +144,7 @@ const Profile = () => {
                             }}
                         />
                     )}
-                    {acceptPopup && (
-                        <AcceptInformation
-                            onClose={(b) => {
-                                if (b === false) setAcceptPopup(b);
-                            }}
-                            infoText="Profile photo updated."
-                        />
-                    )}
-                    {rejectPopup && (
-                        <RejectInformation
-                            onClose={(b) => {
-                                if (b === false) setRejectPopup(b);
-                            }}
-                            infoText="An error occurred while changing the profile photo."
-                        />
-                    )}
+                <ToastContainer theme="dark" />
 
             </div>
     );

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import Navbar from "../components/Navbar.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {GetArticlesRequest} from "../API/ArticleApi.js";
 import Loading from "../components/other/Loading.jsx";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Articles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -17,7 +17,13 @@ const Articles = () => {
         const FavoriteObj ={
             articleId:id,
         }
-        await AddFavoriteRequest(FavoriteObj);
+        try {
+            await AddFavoriteRequest(FavoriteObj);
+            toast.success("Makale favorilere eklendi!");
+        }catch (error){
+            toast.error("favoriye eklenemedi")
+            console.log(error);
+        }
     }
 
     const searchTextChanged = (searchStr) => {
@@ -149,7 +155,7 @@ const Articles = () => {
                         </button>
                     )}
                 </div>
-
+                <ToastContainer theme="dark" />
             </div>
 
     );
