@@ -18,7 +18,6 @@ const Home = () => {
         try {
             const data = await GetPopularArticlesRequest()
             setArticles(data.data.data)
-            console.log(data.data)
         }catch (error) {
             console.log(error);
         }finally {
@@ -30,8 +29,6 @@ const Home = () => {
         try {
             const data = await PopularWriterGetAllRequest();
             setWriters(data.data.data);
-            console.log(data.data)
-
         }catch (error) {
             console.log(error);
         }finally {

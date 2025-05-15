@@ -21,7 +21,6 @@ const Profile = () => {
 
     const GetUserInfo=async ()=>{
         const userData=await GetUserInfoRequest();
-        console.log(userData.data.data);
         setUserData(userData.data.data);
     }
 
@@ -80,7 +79,7 @@ const Profile = () => {
                                                 className="profile_photo"
                                                 src={
                                                     userData.image
-                                                        ? (userData.image.startsWith("data:image")
+                                                        ? (typeof userData.image === "string" && userData.image.startsWith("data:image")
                                                             ? userData.image
                                                             : `data:image/jpeg;base64,${userData.image}`)
                                                         : "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
@@ -93,7 +92,7 @@ const Profile = () => {
                                             </div>
                                         </div>
 
-                                        <div className="profile-card-left-info col-lg-8 col-12 text-center">{userData.username}</div>
+                                        <div className="profile-card-left-info col-lg-8 col-12 text-center">{userData?.username || "-"}</div>
                                         <div className="profile-card-left-info col-lg-8 col-12 border-0 text-center">{userData.role}</div>
                                     </div>
 

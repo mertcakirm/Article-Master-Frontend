@@ -50,7 +50,6 @@ const ProcessPopup = ({ type , text , id, onClose , acceptedText, }) => {
 
     useEffect(() => {
         AOS.init({ duration: 500 });
-        console.log(type,text,id,acceptedText)
     }, []);
 
 

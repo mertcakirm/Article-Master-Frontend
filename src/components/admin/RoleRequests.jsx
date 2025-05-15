@@ -10,13 +10,11 @@ const RoleRequests = ({ toggleProcessPopup, refresh, setRefresh }) => {
     const GetWriters = async () => {
         const writersObj = await WriterGetAllRequest(pageNum, 5);
         setLastPageNum(writersObj.data.data.totalPages);
-        console.log(writersObj.data.data.totalPages)
         setWriters(writersObj.data.data.items);
     }
 
     useEffect(() => {
         GetWriters();
-        console.log(pageNum)
     }, [refresh, pageNum]);
 
     const DownloadwriterDoc = async (id) => {

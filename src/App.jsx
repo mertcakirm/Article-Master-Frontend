@@ -22,14 +22,12 @@ const AppContent = () => {
     const [popupOpen, setPopupOpen] = useState(false);
     const location = useLocation();
     const hideNavbar = location.pathname.startsWith("/sign");
-    const token = getCookie("token")
 
 
     const getRole = async () => {
         try {
             const data = await CheckRoleRequest();
             setRole(data.data.data.role);
-            console.log(data.data.data.role);
             if (data.data.data.role === null) {
                 deleteCookie("token");
             }

@@ -9,9 +9,9 @@ const UpdateProfilePopup = ({onClose}) => {
     const [isPopupOpenAccept, setIsPopupOpenAccept] = useState(false);
     const [infoText, setInfoText] = useState("");
     const [updateInfoObj, setUpdateInfoObj] = useState({
-        userName:null,
-        lastPassword:null,
-        newPassword:null
+        userName: "",
+        lastPassword: "",
+        newPassword: ""
     });
 
     const handleChange = (e) => {
@@ -21,7 +21,7 @@ const UpdateProfilePopup = ({onClose}) => {
 
     const HandleSubmit = async () => {
         try {
-            const response = await UpdateProfileRequest(updateInfoObj);
+            await UpdateProfileRequest(updateInfoObj);
             setInfoText("Profile successfully updated.");
             setIsPopupOpenAccept(true);
         } catch (error) {
@@ -41,7 +41,7 @@ const UpdateProfilePopup = ({onClose}) => {
                         placeholder="New Username"
                         type="text"
                         name="userName"
-                        value={updateInfoObj.userName}
+                        value={updateInfoObj.userName ?? ""}
                         onChange={handleChange}
                     />
                     <input
@@ -49,7 +49,7 @@ const UpdateProfilePopup = ({onClose}) => {
                         placeholder="Last Password"
                         type="password"
                         name="lastPassword"
-                        value={updateInfoObj.lastPassword}
+                        value={updateInfoObj.lastPassword ?? ""}
                         onChange={handleChange}
                     />
                     <input
@@ -57,7 +57,7 @@ const UpdateProfilePopup = ({onClose}) => {
                         placeholder="New Password"
                         type="password"
                         name="newPassword"
-                        value={updateInfoObj.newPassword}
+                        value={updateInfoObj.newPassword ?? ""}
                         onChange={handleChange}
                     />
                     <button onClick={HandleSubmit} className="profile_btn">Update Information</button>

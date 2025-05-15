@@ -4,12 +4,9 @@ import rehypeRaw from "rehype-raw";
 import CustomTooltip from "./CustomTooltip.jsx";
 import {getCookie} from "../../API/Cokkie.js";
 import AddFolderPopup from "../popups/AddFolderPopup.jsx";
+import RejectInformation from "./RejectInformation.jsx";
 
-const RichTextMarkdown = ({
-                              markdown,
-                              notes,
-                              setNotes, onNewNote = null,
-                          }) => {
+const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
     const [selectedText, setSelectedText] = useState(null);
     const [newNoteText, setNewNoteText] = useState('');
     const markdownRef = useRef(null);
@@ -18,6 +15,8 @@ const RichTextMarkdown = ({
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [addNotePopupState, setAddNotePopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [isPopupOpenReject, setIsPopupOpenReject] = useState(false);
+
     const token =getCookie("token")
 
     const folders = ['Test 1', 'Test 2', 'Test 3'];
@@ -193,7 +192,15 @@ const RichTextMarkdown = ({
                         {noteColors.map((color) => (
                             <button
                                 key={color}
-                                onClick={() => addNote(newNoteText, color)}
+                                onClick={() => {
+                                 if (selectedFolder!==null){
+                                     addNote(newNoteText, color)
+                                 }else{
+                                     setIsPopupOpenReject(true);
+
+                                 }
+                                }
+                            }
                                 style={{
                                     backgroundColor: color,
                                     width: '30px',
@@ -206,6 +213,15 @@ const RichTextMarkdown = ({
                         ))}
                     </div>
                 </div>
+            )}
+
+            {isPopupOpenReject && (
+                <RejectInformation
+                    onClose={(b) => {
+                        if (b === false) setIsPopupOpenReject(b);
+                    }}
+                    infoText="Folder name is not selected!"
+                />
             )}
 
             {addNotePopupState && (

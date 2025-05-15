@@ -130,6 +130,7 @@ const UserArticles = () => {
                 <ProcessPopup
                     onClose={(b) => {
                         if (b === false) setProcessPopup(b);
+                        setRefresh(!refresh);
                     }}
                     text={processState.text}
                     acceptedText={processState.acceptedText}
