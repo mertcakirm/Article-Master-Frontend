@@ -15,7 +15,8 @@ import {CheckRoleRequest} from "./API/UserApi.js";
 import {deleteCookie, getCookie} from "./API/Cokkie.js";
 import Loading from "./components/other/Loading.jsx";
 import PopUpNavbar from "./components/PopUpNavbar.jsx";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AppContent = () => {
     const [role, setRole] = useState("");
     const [isRoleLoading, setIsRoleLoading] = useState(true);
@@ -91,7 +92,10 @@ const AppContent = () => {
 const App = () => {
     return (
         <BrowserRouter>
+            <ToastContainer theme="dark" position="bottom-right" autoClose={3000} />
+
             <AppContent />
+
         </BrowserRouter>
     );
 };
