@@ -42,19 +42,13 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
 
 
 
-    const OpenPopUpNavbar = () => {
-        if (typeof setPopupOpen === "function") {
-            setPopupOpen(true);
-        } else {
-            console.warn("popupOpen fonksiyon değil:", popupOpen);
-        }
-    };
+
 
     return (
         <div className="container-fluid nav-con py-2" data-aos="fade-in">
 
             <div className="row align-items-center nav-row-lg">
-                <div className="col-lg-5 p-0 align-items-center row">
+                <div className="col-lg-3 p-0 align-items-center row">
                     <a href="/" className="col-lg-1 p-0 navbar-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
                             <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
@@ -73,7 +67,7 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
                     </a>
                 </div>
 
-                <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-7 m-0">
+                <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-9 m-0">
                     <a href="/" className={` navbar-link ${url === undefined ? "active-nav-link" : ""}`}>Home</a>
                     <a href="/articles" className={` navbar-link ${url === "articles" ? "active-nav-link" : ""}`}>Articles</a>
                     <a href="/writers" className={`navbar-link ${url === "writers" ? "active-nav-link" : ""}`}>

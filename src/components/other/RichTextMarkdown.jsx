@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import CustomTooltip from "./CustomTooltip.jsx";
 import {getCookie} from "../../API/Cokkie.js";
+import AddFolderPopup from "../popups/AddFolderPopup.jsx";
 
 const RichTextMarkdown = ({
                               markdown,
@@ -15,11 +16,15 @@ const RichTextMarkdown = ({
     const noteEditorRef = useRef(null);
     const [selectedFolder, setSelectedFolder] = useState(null);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
+    const [addNotePopupState, setAddNotePopupState] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     const token =getCookie("token")
 
     const folders = ['Test 1', 'Test 2', 'Test 3'];
 
+    const ToggleAddNotePopup = ()=>{
+        setAddNotePopupState(!addNotePopupState);
+    }
     useEffect(() => {
         if (!noteEditorRef.current)
             return;
@@ -158,42 +163,33 @@ const RichTextMarkdown = ({
                 <div ref={noteEditorRef} className="add-note-rich-con">
                       <textarea
                           placeholder="Enter your note"
+                          className="add-note-rich-text"
                           value={newNoteText}
                           onChange={(e) => setNewNoteText(e.target.value)}
-                          style={{
-                              width: '50%',
-                              padding: '8px',
-                              borderRadius: '4px',
-                              resize:'none'
-                          }}
                       />
 
-                    <select
-                        className="form-select"
-                        style={{ width: '20%', height: '100%', padding: '20px', fontSize: '16px', color: '#fff', background: '#212121' }}
-                        value={selectedFolder || ''}
-                        required
-                        onChange={(e) => setSelectedFolder(e.target.value)}
-                    >
-                        <option value="">Select Folder</option>
-                        {folders.map((folder, index) => (
-                            <option key={index} value={folder}>
-                                {folder}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="rich-child-flex">
+                        <select
+                            className="form-select add-note-rich-select"
+                            value={selectedFolder || ''}
+                            required
+                            onChange={(e) => setSelectedFolder(e.target.value)}
+                        >
+                            <option value="">Select Folder</option>
+                            {folders.map((folder, index) => (
+                                <option key={index} value={folder}>
+                                    {folder}
+                                </option>
+                            ))}
+                        </select>
 
-                    <button className="add-folder-btn2" >
-                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm6 11v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg>
-                    </button>
+                        <button onClick={ToggleAddNotePopup} className="add-folder-btn2" >
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm6 11v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg>
+                        </button>
+                    </div>
 
-                        <div style={{
-                            display: 'flex',
-                            width: '100%',
-                            gap: '8px',
-                            justifyContent:'center',
-                            flexWrap:'wrap',
-                        }}>
+
+                        <div className="add-note-rich-colors">
                         {noteColors.map((color) => (
                             <button
                                 key={color}
@@ -210,6 +206,15 @@ const RichTextMarkdown = ({
                         ))}
                     </div>
                 </div>
+            )}
+
+            {addNotePopupState && (
+                <AddFolderPopup
+                    onClose={(b) => {
+                        if (b === false) setAddNotePopupState(b);
+                        setRefresh(!refresh);
+                    }}
+                />
             )}
         </div>
     );

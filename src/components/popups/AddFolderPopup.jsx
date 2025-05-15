@@ -15,10 +15,22 @@ const AddFolderPopup = ({onClose}) => {
         id: null,
     });
 
-    const colorList=["blue", "red", "green", "purple", "orange"]
-
+    const colorList = [
+        "blue",        // Klasik mavi
+        "red",         // Canlı kırmızı
+        "green",       // Doygun yeşil
+        "purple",      // Mor
+        "orange",      // Turuncu
+        "teal",        // Mavi-yeşil karışımı
+        "yellow",      // Canlı ama yumuşak sarı
+        "pink",        // Pastel pembe
+        "cyan",        // Açık mavi ton
+        "lime",        // Açık yeşil-sarı
+        "lightBlue",   // Açık mavi
+        "lightGreen",  // Açık yeşil
+    ];
     useEffect(() => {
-        AOS.init({ duration: 1000 });
+        AOS.init({ duration: 500 });
     }, []);
     return (
         <div className="popup-overlay">
@@ -27,7 +39,7 @@ const AddFolderPopup = ({onClose}) => {
                 <div className="row row-gap-4 justify-content-center">
                     <div className="article-card-title col-12 text-center ">Create New Folder</div>
                     <input type="text" placeholder="New folder name" className="profile_inp" />
-                    <div className="color-palette d-flex justify-content-center col-12" >
+                    <div className="color-palette d-flex flex-wrap row-gap-3 justify-content-center col-12" >
                         {colorList.map((color) => (
                             <button
                                 key={color}
@@ -37,7 +49,7 @@ const AddFolderPopup = ({onClose}) => {
                                     width: "30px",
                                     height: "30px",
                                     borderRadius: "50%",
-                                    border: folderColor === color ? "3px solid black" : "1px solid #ccc",
+                                    border: folderColor === color ? "3px solid #ccc" : "1px solid black",
                                     cursor: "pointer"
                                 }}
                                 onClick={() => setFolderColor(color)}

@@ -118,6 +118,66 @@
 
 }
 
+.add-note-rich-con{
+    position: fixed;
+    border: 1px solid #ccc;
+    padding: 20px 0;
+    border-radius: 8px;
+    background: #232323;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 20px;
+    align-items: center;
+    width: 900px;
+
+}
+
+.add-note-rich-text{
+    width: 50%;
+    padding: 8px;
+    border-radius: 4px;
+    resize: none;
+}
+
+.add-note-rich-select{
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+    font-size: 16px;
+    background: #212121;
+    color: #FFFFFF;
+}
+
+.add-note-rich-colors{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.add-folder-btn2{
+    border-radius: 10px;
+    border: 1px solid #FFFFFF;
+    transition: .4s;
+    height: fit-content;
+    padding: 20px 20px;
+}
+
+.rich-child-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    width: 45%;
+
+}
+
 @media screen and (max-width: 1600px) {
     .mark-text{
         padding: 10px 10px;
@@ -129,8 +189,51 @@
     }
 }
 
+
+@media only screen and (max-width: 1200px) {
+
+    .add-note-rich-con{
+        flex-direction: column;
+        width: fit-content;
+    }
+
+    .add-note-rich-text{
+        width: 80%;
+    }
+
+    .add-note-rich-select{
+        width: 60%;
+    }
+
+
+    .add-folder-btn{
+        bottom: 10px;
+        top: unset;
+        height: fit-content;
+        position: fixed;
+    }
+
+    .add-folder-btn2{
+        width: 20%;
+        padding: 20px 20px;
+
+    }
+
+    .add-note-rich-colors{
+        width: 100%;
+        padding: 0 7%;
+    }
+
+    .rich-child-flex{
+        column-gap: 10px;
+        width: 90%;
+    }
+
+
+}
+
 @media screen and (max-width: 800px) {
-    .add-note-btn{
+    .add-note-btn {
         right: 33%;
     }
 }
