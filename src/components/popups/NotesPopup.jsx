@@ -58,8 +58,9 @@ const NotesPopup = ({onClose,folderId}) => {
                 <table className="table table-striped table-dark text-center" style={{borderRadius: '10px',overflow: 'hidden'}} >
                     <thead>
                     <tr>
+                        <th scope="col">Note Description</th>
+                        <th scope="col">Note Color</th>
                         <th scope="col">Article Name</th>
-                        <th scope="col">Note Count</th>
                         <th scope="col">Writer</th>
                         <th scope="col">Process</th>
                     </tr>
@@ -69,8 +70,22 @@ const NotesPopup = ({onClose,folderId}) => {
                     {notesList.length > 0 ? (
                         notesList.map((note, index) => (
                             <tr key={index}>
+                                <th scope="row">bu bölümü araştır</th>
+                                <th scope="row">
+                                    <div
+                                    className="color-swatch mx-auto"
+                                    style={{
+                                        backgroundColor: "red",
+                                        width: "30px",
+                                        height: "30px",
+                                        borderRadius: "50%",
+                                        border: "3px solid #ccc",
+                                        cursor: "pointer"
+                                    }}
+
+                                />
+                                </th>
                                 <th scope="row">{note.articleName}</th>
-                                <td>{note.noteCount}</td>
                                 <td>{note.writer}</td>
                                 <td>
                                     <div className="my-notes-process-flex">

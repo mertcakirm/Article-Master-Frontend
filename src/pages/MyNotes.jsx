@@ -30,8 +30,16 @@ const MyNotes = () => {
                     <div className="col-12 px-5 mt-5 justify-content-center" data-aos="fade-in">
                         <div className="folder-row">
                             <button className="folder-card" onClick={()=>ToggleNotePopup(1)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="red" width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
+                                <div className="folder-name">Important Folder</div>
+                            </button>
+                            <button className="folder-card" onClick={()=>ToggleNotePopup(1)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="blue" width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
-                                <div className="folder-name">folder Name</div>
+                                <div className="folder-name">Software</div>
+                            </button>
+                            <button className="folder-card" onClick={()=>ToggleNotePopup(1)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="green" width="80" height="80" viewBox="0 0 24 24"><path d="M11 5c-1.629 0-2.305-1.058-4-3h-7v20h24v-17h-13z"/></svg>
+                                <div className="folder-name">Education</div>
                             </button>
                         </div>
 
