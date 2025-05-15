@@ -13,9 +13,13 @@ const RichTextMarkdown = ({
     const [newNoteText, setNewNoteText] = useState('');
     const markdownRef = useRef(null);
     const noteEditorRef = useRef(null);
+    const [selectedFolder, setSelectedFolder] = useState(null);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
     const token =getCookie("token")
+
+    const folders = ['Test 1', 'Test 2', 'Test 3'];
+
     useEffect(() => {
         if (!noteEditorRef.current)
             return;
@@ -68,12 +72,14 @@ const RichTextMarkdown = ({
             const newNote = {
                 start: selectedText.start,
                 end: selectedText.end,
+                listName: selectedFolder,
                 text: noteText,
                 color
             };
             setNotes([...notes, newNote]);
             setSelectedText(null);
             setNewNoteText('');
+            setSelectedFolder(null);
 
             if (onNewNote)
                 onNewNote(newNote);
@@ -153,26 +159,49 @@ const RichTextMarkdown = ({
                      style={{
                          position: 'fixed',
                          border: '1px solid #ccc',
-                         padding: '16px',
+                         padding: '20px 5px',
                          borderRadius: '8px',
                          backgroundColor: '#232323',
+                         display: 'flex',
+                         flexDirection:'row',
+                         justifyContent:'center',
+                         flexWrap:'wrap',
+                         columnGap:'10px',
+                         rowGap:'10px'
                      }}>
-          <textarea
-              placeholder="Enter your note"
-              value={newNoteText}
-              onChange={(e) => setNewNoteText(e.target.value)}
-              style={{
-                  width: '100%',
-                  marginBottom: '16px',
-                  padding: '8px',
-                  borderRadius: '4px',
-                  resize:'none'
-              }}
-          />
-                    <div style={{
-                        display: 'flex',
-                        gap: '8px'
-                    }}>
+                      <textarea
+                          placeholder="Enter your note"
+                          value={newNoteText}
+                          onChange={(e) => setNewNoteText(e.target.value)}
+                          style={{
+                              width: '75%',
+                              marginBottom: '16px',
+                              padding: '8px',
+                              borderRadius: '4px',
+                              resize:'none'
+                          }}
+                      />
+                    <select
+                        className="form-select"
+                        style={{ width: '20%', height: '100%', padding: '20px', fontSize: '16px', color: '#fff', background: '#212121' }}
+                        value={selectedFolder || ''}
+                        required
+                        onChange={(e) => setSelectedFolder(e.target.value)}
+                    >
+                        <option value="">Select Folder</option>
+                        {folders.map((folder, index) => (
+                            <option key={index} value={folder}>
+                                {folder}
+                            </option>
+                        ))}
+                    </select>
+
+                        <div style={{
+                            display: 'flex',
+                            width: '100%',
+                            gap: '8px',
+                            justifyContent:'center'
+                        }}>
                         {noteColors.map((color) => (
                             <button
                                 key={color}
