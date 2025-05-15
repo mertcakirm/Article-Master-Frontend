@@ -87,10 +87,10 @@ const Home = () => {
                                 <a href={`/article/${article.id}`} className="article-card">
                                     <img className="w-100 img-fluid article-card-img"
                                          src={
-                                             article.photoBase64
-                                                 ? (article.photoBase64.startsWith("data:image")
-                                                     ? article.photoBase64
-                                                     : `data:image/jpeg;base64,${article.photoBase64}`)
+                                             article.thumbnailBase64
+                                                 ? (article.thumbnailBase64.startsWith("data:image")
+                                                     ? article.thumbnailBase64
+                                                     : `data:image/jpeg;base64,${article.thumbnailBase64}`)
                                                  : "https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg"
                                          }
                                          alt="Article Thumbnail"
