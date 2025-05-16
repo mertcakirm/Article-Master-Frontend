@@ -15,8 +15,10 @@ import {CheckRoleRequest} from "./API/UserApi.js";
 import {deleteCookie, getCookie} from "./API/Cokkie.js";
 import Loading from "./components/other/Loading.jsx";
 import PopUpNavbar from "./components/PopUpNavbar.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import About from "./pages/About.jsx";
+
 const AppContent = () => {
     const [role, setRole] = useState("");
     const [isRoleLoading, setIsRoleLoading] = useState(true);
@@ -46,22 +48,17 @@ const AppContent = () => {
 
     const ProtectedRoute = ({ children, requireAdmin = false }) => {
         const token = getCookie("token");
-
         if (!token) {
             return <Navigate to="/sign/in" replace />;
         }
-
         if (isRoleLoading) {
             return null;
         }
-
         if (requireAdmin && role !== "ADMIN") {
             return <Navigate to="/" replace />;
         }
-
         return children;
     };
-
     if (isRoleLoading) {
         return <Loading />;
     }
@@ -73,13 +70,13 @@ const AppContent = () => {
 
             <Routes>
                 <Route element={<Home />} path="/" />
+                <Route element={<About />} path="/about" />
                 <Route element={<Articles />} path="/articles" />
                 <Route element={<ArticleDetail />} path="/article/:id" />
                 <Route element={<Login />} path="/sign/:type" />
                 <Route element={<Login />} path="/sign" />
                 <Route element={<Writers />} path="/writers" />
                 <Route element={<WriterArticles />} path="/writer/:id" />
-
                 <Route element={<ProtectedRoute><Profile /></ProtectedRoute>} path="/profile" />
                 <Route element={<ProtectedRoute><MyNotes /></ProtectedRoute>} path="/my-notes" />
                 <Route element={<ProtectedRoute><Favorites /></ProtectedRoute>} path="/favorites" />
@@ -92,10 +89,8 @@ const AppContent = () => {
 const App = () => {
     return (
         <BrowserRouter>
-            <ToastContainer theme="dark" position="bottom-right" autoClose={3000} />
-
+            <ToastContainer theme="colored" closeOnClick position="bottom-right" autoClose={3000} />
             <AppContent />
-
         </BrowserRouter>
     );
 };
