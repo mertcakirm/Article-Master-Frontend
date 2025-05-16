@@ -59,8 +59,6 @@ const UpdateProfilePopup = ({onClose}) => {
                     <button onClick={HandleSubmit} className="profile_btn">Update Information</button>
                 </div>
             </div>
-            <ToastContainer theme="dark" />
-
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {AddCommentRequest, GetAllCommentsRequest} from "../../API/ArticleApi.js";
 import {getCookie} from '../../API/Cokkie.js'
+import {toast} from "react-toastify";
 
 const CommentsPopup = ({ onClose, id }) => {
     const [comments, setComments] = useState([]);
@@ -32,8 +33,10 @@ const CommentsPopup = ({ onClose, id }) => {
             await AddCommentRequest(newCommentData);
             setNewCommentData({ content: "", rating: 1, articleId: id });
             setRefresh(!refresh);
+            toast.success("Comment successfully added!");
         } catch (error) {
             console.error("Error while sending comment:", error.response?.data || error.message);
+            toast.error("Comment is not send!");
         }
     };
 

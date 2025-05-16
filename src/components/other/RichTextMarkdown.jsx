@@ -196,6 +196,7 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                                 onClick={() => {
                                  if (selectedFolder!==null){
                                      addNote(newNoteText, color)
+                                     toast.success("Note is saved")
                                  }else{
                                     toast.error("Folder is not selected")
                                  }
@@ -223,7 +224,6 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                     }}
                 />
             )}
-            <ToastContainer theme="dark" />
 
         </div>
     );

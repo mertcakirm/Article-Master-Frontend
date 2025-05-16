@@ -53,7 +53,7 @@
     top: 50px;
     bottom: unset;
     right: 2%;
-    width: fit-content;
+    width: fit-content!important;
     border-radius: 10px;
     border: 1px solid #FFFFFF;
     padding: 10px 20px;

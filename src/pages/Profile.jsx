@@ -144,7 +144,6 @@ const Profile = () => {
                             }}
                         />
                     )}
-                <ToastContainer theme="dark" />
 
             </div>
     );

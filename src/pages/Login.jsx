@@ -243,8 +243,6 @@ const Login = () => {
 
                 </div>
             </div>
-            <ToastContainer theme="dark" />
-
         </div>
     );
 };

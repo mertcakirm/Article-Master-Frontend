@@ -69,7 +69,6 @@ const AddNewArticlePopup = ({ onClose }) => {
                     <button onClick={handleSubmit} className="profile_btn">Post Article</button>
                 </div>
             </div>
-            <ToastContainer theme="dark" />
         </div>
     );
 };

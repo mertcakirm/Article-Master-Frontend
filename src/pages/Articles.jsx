@@ -155,7 +155,6 @@ const Articles = () => {
                         </button>
                     )}
                 </div>
-                <ToastContainer theme="dark" />
             </div>
 
     );

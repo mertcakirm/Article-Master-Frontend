@@ -130,7 +130,6 @@ const WriterArticles = () => {
                     </button>
                 )}
             </div>
-            <ToastContainer theme="dark" />
         </div>
     );
 };
