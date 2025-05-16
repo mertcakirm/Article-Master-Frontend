@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {NoteGetAllRequests} from "../../API/NoteApi.js";
 import ProcessPopup from "./processPopup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";

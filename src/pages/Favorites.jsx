@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import ProcessPopup from "../components/popups/processPopup.jsx";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import {GetFavoriteRequest} from "../API/FavoriteApi.js";
 
 const Favorites = () => {
@@ -34,7 +32,6 @@ const Favorites = () => {
 
     useEffect(() => {
         GetFavorites();
-        AOS.init({ duration: 1000 });
     }, []);
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AddArticleRequest } from "../../API/ArticleApi.js";
 import {convertToBase64} from "../../Helper/ConverterBase64.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const AddNewArticlePopup = ({ onClose }) => {
     const [articleData, setArticleData] = useState({

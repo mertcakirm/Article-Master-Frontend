@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/accepted.css';
 import {UpdateProfileRequest} from "../../API/UserApi.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const UpdateProfilePopup = ({onClose}) => {
     const [updateInfoObj, setUpdateInfoObj] = useState({

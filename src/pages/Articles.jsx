@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import AOS from "aos";
-import "aos/dist/aos.css";
 import {GetArticlesRequest} from "../API/ArticleApi.js";
 import Loading from "../components/other/Loading.jsx";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Articles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -38,9 +36,6 @@ const Articles = () => {
     };
 
 
-    useEffect(() => {
-        AOS.init({ duration: 1000 });
-    }, []);
 
     const GetArticles = async () => {
         try {
@@ -70,7 +65,7 @@ const Articles = () => {
             <div className="page-container mb-5 container-fluid">
                 <div className="row row-gap-5 popular-row">
                     <div className="col-12 row align-items-center align-content-center mt-3">
-                        <input type="text" className="profile_inp admin-inp col-lg-3" onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Article"></input>
+                        <input type="text" className="profile_inp admin-inp col-lg-3" data-aos="fade-in" onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Article"></input>
                         <div className="col-lg-6 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
                         <div className="col-lg-3"></div>
                     </div>

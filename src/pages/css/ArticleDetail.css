@@ -121,14 +121,13 @@
 .add-note-rich-con{
     position: fixed;
     border: 1px solid #ccc;
-    padding: 20px 0;
+    padding: 20px 3%;
     border-radius: 8px;
     background: #232323;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    column-gap: 10px;
     row-gap: 20px;
     align-items: center;
     width: 900px;
@@ -136,19 +135,19 @@
 }
 
 .add-note-rich-text{
-    width: 50%;
+    width: 64%;
     padding: 8px;
     border-radius: 4px;
     resize: none;
 }
 
 .add-note-rich-select{
-    width: 60%;
-    height: 100%;
-    padding: 20px;
-    font-size: 16px;
-    background: #212121;
-    color: #FFFFFF;
+    width: 60%!important;
+    height: 100%!important;
+    padding: 20px!important;
+    font-size: 16px!important;
+    background: #212121!important;
+    color: #FFFFFF!important;
 }
 
 .add-note-rich-colors{
@@ -165,16 +164,16 @@
     border: 1px solid #FFFFFF;
     transition: .4s;
     height: fit-content;
-    padding: 20px 20px;
+    padding: 20px;
 }
 
 .rich-child-flex{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     column-gap: 10px;
-    width: 45%;
+    width: 35%;
 
 }
 
@@ -228,6 +227,7 @@
     .rich-child-flex{
         column-gap: 10px;
         width: 90%;
+        justify-content: center;
     }
 
 
@@ -237,4 +237,5 @@
     .add-note-btn {
         right: 33%;
     }
+
 }

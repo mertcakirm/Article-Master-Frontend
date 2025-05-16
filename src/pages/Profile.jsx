@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './css/profile.css'
 import UpdateProfilePopup from "../components/popups/UpdateProfilePopup.jsx";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 import UserArticles from "../components/other/UserArticles.jsx";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
@@ -56,7 +54,6 @@ const Profile = () => {
     useEffect(() => {
         getRole();
         GetUserInfo();
-        AOS.init({ duration: 500 });
     }, []);
 
     useEffect(() => {

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NoteGetAllRequests} from "../../API/NoteApi.js";
-import ProcessPopup from "./processPopup.jsx";
-import AOS from "aos";
-import "aos/dist/aos.css";
+
 
 const NotesPopup = ({onClose,folderId}) => {
     const [notesList, setNotesList] = useState([]);
@@ -32,10 +30,6 @@ const NotesPopup = ({onClose,folderId}) => {
         setLastPage(notes.data.data.totalPages)
     }
 
-    useEffect(() => {
-        GetNotes();
-        AOS.init({ duration: 1000 });
-    }, []);
 
     useEffect(() => {
         GetNotes();

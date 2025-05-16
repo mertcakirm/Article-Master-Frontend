@@ -18,6 +18,8 @@ import PopUpNavbar from "./components/PopUpNavbar.jsx";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from "./pages/About.jsx";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AppContent = () => {
     const [role, setRole] = useState("");
@@ -43,7 +45,7 @@ const AppContent = () => {
 
     useEffect(() => {
             getRole();
-
+        AOS.init({ duration: 1000 });
     }, []);
 
     const ProtectedRoute = ({ children, requireAdmin = false }) => {
@@ -63,6 +65,7 @@ const AppContent = () => {
         return <Loading />;
     }
 
+
     return (
         <>
             {!hideNavbar && <Navbar popupOpen={popupOpen} setPopupOpen={setPopupOpen} />}
@@ -81,6 +84,7 @@ const AppContent = () => {
                 <Route element={<ProtectedRoute><MyNotes /></ProtectedRoute>} path="/my-notes" />
                 <Route element={<ProtectedRoute><Favorites /></ProtectedRoute>} path="/favorites" />
                 <Route element={<ProtectedRoute requireAdmin={true}><Admin /></ProtectedRoute>} path="/admin" />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </>
     );

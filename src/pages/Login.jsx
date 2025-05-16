@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./css/Login.css";
 import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const Login = () => {
@@ -63,9 +61,6 @@ const Login = () => {
             }
         }
     };
-    useEffect(() => {
-        AOS.init({ duration: 1000 });
-    }, []);
 
 
     useEffect(() => {

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import AOS from "aos";
-import "aos/dist/aos.css";
 import {GetWriterArticleRequest} from "../API/ArticleApi.js";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 
 const WriterArticles = () => {
@@ -10,11 +8,6 @@ const WriterArticles = () => {
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
     const url = window.location.pathname.split("/").filter(Boolean).pop();
-
-
-    useEffect(() => {
-        AOS.init({ duration: 1000 });
-    }, []);
 
     const GetArticles = async () => {
         const data = await GetWriterArticleRequest(pageNum,12,url)

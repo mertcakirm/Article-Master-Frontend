@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import header from "../assets/editor-checking-words-journal-article-befor-publish_53876-31529.jpg.avif"
-import AOS from "aos";
-import "aos/dist/aos.css";
 import './css/Home.css'
 import {getCookie} from "../API/Cokkie.js";
 import {GetPopularArticlesRequest} from "../API/ArticleApi.js";
@@ -57,9 +55,7 @@ const Home = () => {
         GetWriters();
     }, []);
 
-    useEffect(() => {
-        AOS.init({ duration: 1000 });
-    }, []);
+
 
     if (loading) {
         return <Loading />;
@@ -188,8 +184,31 @@ const Home = () => {
                             </div>
                         </a>
                     </div>
+                </div>
+
+                <div className="row row-gap-5 m-0 my-5 popular-row">
+                    <div className="col-12 titles mb-4 text-center" data-aos="fade-up">ABOUT ARTICLE MASTER</div>
+
+
+                    <div className="about-text text-center" data-aos="fade-up">
+                        <p>
+                            <strong>Article Master</strong>, bilgiye erişimi kolaylaştırmak ve bireylerin içeriklerle etkileşim kurma biçimini dönüştürmek amacıyla geliştirilmiş yenilikçi bir web platformudur. Temel hedefimiz, kullanıcıların yalnızca makaleleri okuması değil; aynı zamanda bu içerikler üzerinde derinlemesine düşünmesi, notlar alması ve bilgiyi kişiselleştirerek kalıcı öğrenme sağlamasıdır.
+                        </p>
+                        <p>
+                            Modern bilgi çağında okuma alışkanlıkları hızla değişiyor. Article Master olarak bu değişime ayak uydurmakla kalmayıp, okuma deneyimini daha <strong>etkileşimli</strong>, <strong>kişisel</strong> ve <strong>sosyal</strong> hale getirmeyi amaçlıyoruz.
+                        </p>
+                    </div>
+
+                    <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
+                        <a href="/about" className="animation-btn">
+                            <div className="btn animation-btn-child">
+                                <span>VISIT</span>
+                            </div>
+                        </a>
+                    </div>
 
                 </div>
+
             </div>
         </div>
     );
