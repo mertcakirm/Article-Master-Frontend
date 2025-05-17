@@ -43,6 +43,7 @@ const Favorites = () => {
 
     useEffect(() => {
         GetFavorites();
+
     }, [refresh]);
 
     useEffect(() => {

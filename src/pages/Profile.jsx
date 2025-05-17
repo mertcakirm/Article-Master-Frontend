@@ -5,11 +5,10 @@ import {UpdateProfilePhotoRequest} from "../API/ProfileApi.js";
 import UserArticles from "../components/other/UserArticles.jsx";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
 import {CheckRoleRequest, GetUserInfoRequest} from "../API/UserApi.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
     const [updatePopup, setUpdatePopup] = useState(false);
-    const [photoBase64, setPhotoBase64] = useState("");
     const [role, setRole] = useState("");
     const [userData, setUserData] = useState({});
     const [refresh, setRefresh] = useState(false);
@@ -33,7 +32,6 @@ const Profile = () => {
         if (file) {
             try {
                 const base64String = await convertToBase64(file);
-                setPhotoBase64(base64String);
                 await UpdateProfilePhotoRequest(base64String);
                 setRefresh(!refresh);
                 toast.success("Profile photo updated.");

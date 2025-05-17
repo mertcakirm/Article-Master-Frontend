@@ -44,7 +44,6 @@ const UserArticles = () => {
         }catch (error) {
             console.error(error);
             toast.error("Error while getting articles!");
-
         }
     }
 
