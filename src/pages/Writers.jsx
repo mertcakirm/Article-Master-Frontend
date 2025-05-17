@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { WriterGetAll } from "../API/UserApi.js";
 import Pagination from "../components/other/Pagination.jsx";
 import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
 
 const Writers = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -35,7 +36,7 @@ const Writers = () => {
                 {writers.length > 0 ? (
                     writers.map((writer, index) => (
                         <div key={index} className="col-lg-1 col-3" data-aos="fade-up">
-                            <a href={`/writer/${writer.id}`} className="writer-card">
+                            <Link to={`/writer/${writer.id}`} className="writer-card">
                                 <img
                                     className="profile_photo"
                                     style={{ aspectRatio: '1' }}
@@ -55,7 +56,7 @@ const Writers = () => {
                                     </svg>
                                     <div>{Number.isInteger(writer.rating) ? writer.rating : writer.rating.toFixed(1)}/10</div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     ))
                 ) : (

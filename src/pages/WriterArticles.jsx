@@ -3,6 +3,7 @@ import {GetWriterArticleRequest} from "../API/ArticleApi.js";
 import {toast} from "react-toastify";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 import Pagination from "../components/other/Pagination.jsx";
+import {Link} from "react-router-dom";
 
 const WriterArticles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -53,7 +54,7 @@ const WriterArticles = () => {
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
                         <div className="col-lg-3" data-aos="fade-up" key={index}>
-                            <a href={`/article/${article.id}`} className="article-card">
+                            <Link to={`/article/${article.id}`} className="article-card">
                                 <img className="w-100 img-fluid article-card-img"
                                      src={
                                          article.thumbnailBase64
@@ -88,7 +89,7 @@ const WriterArticles = () => {
                                 </div>
                                 <p className="article-card-writerName">{article.writerName}</p>
 
-                            </a>
+                            </Link>
                             <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
                                 <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
                                      strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"

@@ -5,6 +5,7 @@ import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 import {parseJwt} from "../../Helper/JWTDecoder.js";
 import Pagination from "./Pagination.jsx";
 import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
 
 const UserArticles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -71,7 +72,7 @@ const UserArticles = () => {
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
                         <div className="col-lg-6" key={index} data-aos="fade-up">
-                            <a href={`article/${article.id}`} className="article-card pb-3">
+                            <Link to={`article/${article.id}`} className="article-card pb-3">
                                 <img className="w-100 img-fluid article-card-img" alt="article-image"
                                      src={
                                          article.thumbnailBase64
@@ -89,7 +90,7 @@ const UserArticles = () => {
                                         toggleProcessPopup('delete_article', article.id, "Should the article be deleted?");
                                     }}>Delete</button>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     ))
                 ) : (

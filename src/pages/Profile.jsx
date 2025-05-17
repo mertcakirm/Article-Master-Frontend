@@ -86,7 +86,7 @@ const Profile = () => {
                                             />
                                             <div className="overlay">
                                                 <input type="file" className="file-input" onChange={handleFileChange} />
-                                                <span className="overlay-text">Fotoğraf Yükle</span>
+                                                <span className="overlay-text">Upload photo</span>
                                             </div>
                                         </div>
 

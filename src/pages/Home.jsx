@@ -7,6 +7,7 @@ import Loading from "../components/other/Loading.jsx";
 import {PopularWriterGetAllRequest} from "../API/UserApi.js";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
 const Home = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -85,7 +86,7 @@ const Home = () => {
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div className="col-lg-3" data-aos="fade-up" key={index}>
-                                <a href={`/article/${article.id}`} className="article-card">
+                                <Link to={`/article/${article.id}`} className="article-card">
                                     <img className="w-100 img-fluid article-card-img"
                                          src={
                                              article.thumbnailBase64
@@ -120,7 +121,7 @@ const Home = () => {
                                     </div>
                                     <p className="article-card-writerName">{article.writerName}</p>
 
-                                </a>
+                                </Link>
                                 <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
                                          strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"
@@ -135,11 +136,11 @@ const Home = () => {
                     )}
 
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
-                        <a href="/articles" className="animation-btn">
+                        <Link to="/articles" className="animation-btn">
                             <div className="btn animation-btn-child">
                                 <span>Show All</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                 </div>
@@ -151,7 +152,7 @@ const Home = () => {
                     {writers.length > 0 ? (
                         writers.map((writer,index) => (
                             <div key={index} className="col-lg-1 col-3" data-aos="fade-up">
-                                <a href={`/writer/${writer.id}`} className="writer-card">
+                                <Link to={`/writer/${writer.id}`} className="writer-card">
                                     <img className="profile_photo"
                                          style={{aspectRatio:'1'}}
                                          src={
@@ -171,7 +172,7 @@ const Home = () => {
                                         </svg>
                                         <div>{Number.isInteger(writer.rating) ? writer.rating : writer.rating.toFixed(1)}/10</div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         ))
                     ) : (
@@ -179,11 +180,11 @@ const Home = () => {
                     )}
 
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
-                        <a href="/writers" className="animation-btn">
+                        <Link to="/writers" className="animation-btn">
                             <div className="btn animation-btn-child">
                                 <span>Show All</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -201,11 +202,11 @@ const Home = () => {
                     </div>
 
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
-                        <a href="/about" className="animation-btn">
+                        <Link to="/about" className="animation-btn">
                             <div className="btn animation-btn-child">
                                 <span>VISIT</span>
                             </div>
-                        </a>
+                        </Link>
                     </div>
 
                 </div>

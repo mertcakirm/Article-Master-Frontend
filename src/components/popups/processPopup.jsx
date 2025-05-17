@@ -55,6 +55,7 @@ const ProcessPopup = ({ type , text , id, onClose , }) => {
         } catch (error) {
             console.error("An error occurred during the process:", error);
             toast.error("An error occurred while processing your request.");
+            onClose(false);
         }
     };
 

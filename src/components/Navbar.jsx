@@ -6,13 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import {deleteCookie, getCookie} from "../API/Cokkie.js";
 import {CheckRoleRequest} from "../API/UserApi.js";
+import {Link} from "react-router-dom";
 
 const Navbar = ({popupOpen,setPopupOpen}) => {
     const token = getCookie('token');
     const [role, setRole] = useState("");
-    const url = window.location.pathname.split("/").filter(Boolean).pop();
-
-
+    const url = window.location.pathname.split("/").filter(Boolean).pop()
 
     const getRole=async ()=>{
         try {
@@ -25,7 +24,6 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
             console.log(error);
             deleteCookie("token");
         }
-
     }
 
     useEffect(() => {
@@ -40,16 +38,12 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
         window.location.href = "/sign/in";
     }
 
-
-
-
-
     return (
         <div className="container-fluid nav-con py-2" data-aos="fade-in">
 
             <div className="row align-items-center nav-row-lg">
                 <div className="col-lg-3 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link">
+                    <Link to="/" className="col-lg-1 p-0 navbar-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
                             <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
                             <path d="M120,60 L120,140 L140,120 L140,80 Z" fill="#F8F9F9" stroke="#4A235A" strokeWidth="1"/>
@@ -64,33 +58,33 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
 
                             <line x1="250" y1="150" x2="520" y2="150" stroke="#4A235A" strokeWidth="3"/>
                         </svg>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="nav-lg-flex align-items-center justify-content-end column-gap-3 col-lg-9 m-0">
-                    <a href="/" className={` navbar-link ${url === undefined ? "active-nav-link" : ""}`}>Home</a>
-                    <a href="/articles" className={` navbar-link ${url === "articles" ? "active-nav-link" : ""}`}>Articles</a>
-                    <a href="/writers" className={`navbar-link ${url === "writers" ? "active-nav-link" : ""}`}>
+                    <Link to="/" className={` navbar-link ${url === undefined ? "active-nav-link" : ""}`}>Home</Link>
+                    <Link to="/articles" className={` navbar-link ${url === "articles" ? "active-nav-link" : ""}`}>Articles</Link>
+                    <Link to="/writers" className={`navbar-link ${url === "writers" ? "active-nav-link" : ""}`}>
                         Writers
-                    </a>
+                    </Link>
 
                     {token ? (
                         <>
 
-                            <a href="/favorites" className={` navbar-link ${url === "favorites" ? "active-nav-link" : ""}`}>
+                            <Link to="/favorites" className={` navbar-link ${url === "favorites" ? "active-nav-link" : ""}`}>
                                 Favorites
-                            </a>
-                            <a href="/my-notes" className={`navbar-link ${url === "my-notes" ? "active-nav-link" : ""}`}>
+                            </Link>
+                            <Link to="/my-notes" className={`navbar-link ${url === "my-notes" ? "active-nav-link" : ""}`}>
                                 Notes
-                            </a>
-                            <a href="/profile" className={`navbar-link ${url === "profile" ? "active-nav-link" : ""}`}>
+                            </Link>
+                            <Link to="/profile" className={`navbar-link ${url === "profile" ? "active-nav-link" : ""}`}>
                                 Profile
-                            </a>
+                            </Link>
 
                             {role === "ADMIN" && (
-                                <a href="/admin" className={` navbar-link ${url === "admin" ? "active-nav-link" : ""}`}>
+                                <Link to="/admin" className={` navbar-link ${url === "admin" ? "active-nav-link" : ""}`}>
                                     Admin
-                                </a>
+                                </Link>
                             )}
                             <button
                                 className=" navbar-link bg-transparent border-0 p-0"
@@ -99,7 +93,7 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
                             </button>
                         </>
                     ) : (
-                        <a href="/sign/in" className=" navbar-link">Log In</a>
+                        <Link to="/sign/in" className=" navbar-link">Log In</Link>
                     )}
                 </div>
             </div>
@@ -108,7 +102,7 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
 
             <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm m-0">
                 <div className="col-3 p-0 align-items-center row">
-                    <a href="/" className="col-lg-1 p-0 navbar-link">
+                    <Link to="/" className="col-lg-1 p-0 navbar-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
                             <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
                             <path d="M120,60 L120,140 L140,120 L140,80 Z" fill="#F8F9F9" stroke="#4A235A" strokeWidth="1"/>
@@ -123,7 +117,7 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
 
                             <line x1="250" y1="150" x2="520" y2="150" stroke="#4A235A" strokeWidth="3"/>
                         </svg>
-                    </a>
+                    </Link>
                 </div>
                 <button  onClick={() => setPopupOpen(true)} className="btn col-3 p-0" >
                         <svg fill="white" width="50" height="50" clipRule="evenodd" fillRule="evenodd"
@@ -134,10 +128,7 @@ const Navbar = ({popupOpen,setPopupOpen}) => {
                                 fillRule="nonzero"/>
                         </svg>
                     </button>
-
             </div>
-
-
         </div>
     );
 };
