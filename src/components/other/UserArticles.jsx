@@ -3,6 +3,7 @@ import ProcessPopup from "../popups/processPopup.jsx";
 import AddNewArticlePopup from "../popups/AddNewArticlePopup.jsx";
 import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 import {parseJwt} from "../../Helper/JWTDecoder.js";
+import Pagination from "./Pagination.jsx";
 
 const UserArticles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -54,7 +55,7 @@ const UserArticles = () => {
 
     return (
         <div className="row profile-col-2 col-xl-6 col-12">
-            <div className="row row-gap-5 col-12" style={{position:'relative'}}>
+            <div className="row row-gap-5 mb-5 col-12" style={{position:'relative'}}>
                 <h3 className="text-center mt-3 col-12" data-aos="fade-in">My Article List</h3>
                 <button className="add-article-btn-profile " onClick={toggleNewArticlePopup}>Add New Article</button>
                 <button className="add-article-btn-profile-sm" onClick={toggleNewArticlePopup}>
@@ -94,36 +95,8 @@ const UserArticles = () => {
 
             </div>
 
-            <div  className="my-notes-process-flex my-5" data-aos="fade-up" style={{height:'fit-content'}} >
-                {pageNum > 1 && (
-                    <button onClick={() => setPageNum(pageNum - 1)} className="my-notes-process-see">
-                        <svg
-                            fill="white"
-                            width="34"
-                            height="36"
-                            clipRule="evenodd"
-                            fillRule="evenodd"
-                            strokeLinejoin="round"
-                            strokeMiterlimit="2"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="m13.789 7.155c.141-.108.3-.157.456-.157.389 0 .755.306.755.749v8.501c0 .445-.367.75-.755.75-.157 0-.316-.05-.457-.159-1.554-1.203-4.199-3.252-5.498-4.258-.184-.142-.29-.36-.29-.592 0-.23.107-.449.291-.591 1.299-1.002 3.945-3.044 5.498-4.243z"/>
-                        </svg>
-                    </button>
-                )}
+            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage} />
 
-                <div className="my-notes-process-see text-center" style={{width:'40px',lineHeight:'40px'}}>{pageNum}</div>
-
-                {(lastPage !== pageNum && lastPage !== 0) && (
-                    <button onClick={() => setPageNum(pageNum + 1)} className="my-notes-process-see">
-                        <svg fill="white" width="34" height="36" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="m10.211 7.155c-.141-.108-.3-.157-.456-.157-.389 0-.755.306-.755.749v8.501c0 .445.367.75.755.75.157 0 .316-.05.457-.159 1.554-1.203 4.199-3.252 5.498-4.258.184-.142.29-.36.29-.592 0-.23-.107-.449-.291-.591-1.299-1.002-3.945-3.044-5.498-4.243z" />
-                        </svg>
-                    </button>
-                )}
-
-            </div>
             {processPopup && (
                 <ProcessPopup
                     onClose={(b) => {
