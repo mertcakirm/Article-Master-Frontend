@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { WriterGetAll } from "../API/UserApi.js";
 import Pagination from "../components/other/Pagination.jsx";
+import {toast} from "react-toastify";
 
 const Writers = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -8,9 +9,14 @@ const Writers = () => {
     const [lastPage, setLastPage] = useState(null);
 
     const GetWriters = async () => {
-        const data = await WriterGetAll(pageNum, 36);
-        setWriters(data.data.data.items);
-        setLastPage(data.data.data.totalPages);
+        try {
+            const data = await WriterGetAll(pageNum, 36);
+            setWriters(data.data.data.items);
+            setLastPage(data.data.data.totalPages);
+        }catch (error) {
+            console.log(error);
+            toast.error("Error while getting writers!");
+        }
     };
 
     useEffect(() => {

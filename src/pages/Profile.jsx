@@ -19,15 +19,14 @@ const Profile = () => {
             const userData = await GetUserInfoRequest();
             setUserData(userData.data.data);
         } catch (err) {
-            console.error("Kullanıcı bilgisi alınamadı:", err);
+            console.error("Error while getting user profile!", err);
+            toast.error("Error while getting user profile!");
         }
     };
 
     const toggleUpdatePopup = () => {
         setUpdatePopup(!updatePopup);
     };
-
-
 
     const handleFileChange = async (event) => {
         const file = event.target.files[0];
@@ -47,8 +46,12 @@ const Profile = () => {
     };
 
     const getRole=async ()=>{
-        const data =await CheckRoleRequest();
-        setRole(data.data.data.role)
+        try {
+            const data =await CheckRoleRequest();
+            setRole(data.data.data.role)
+        }catch (error) {
+            console.error("Could not get a role!", error);
+        }
     }
 
     useEffect(() => {
@@ -58,7 +61,6 @@ const Profile = () => {
 
     useEffect(() => {
         GetUserInfo();
-
     }, [refresh]);
 
     return (

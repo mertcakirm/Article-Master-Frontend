@@ -5,6 +5,7 @@ import { GetArticleRequest, IncreaseArticleViewCountRequest } from "../API/Artic
 import RichTextMarkdown from "../components/other/RichTextMarkdown.jsx";
 import Loading from "../components/other/Loading.jsx";
 import { AddNoteRequest, GetNoteRequest } from "../API/NoteApi.js";
+import {toast} from "react-toastify";
 
 const ArticleDetail = () => {
     const [notes, setNotes] = useState([]);
@@ -55,6 +56,8 @@ const ArticleDetail = () => {
             setNotes(formattedNotes);
         } catch (error) {
             console.error("Error fetching notes:", error);
+            toast.error("Error while getting notes from the list!");
+
         }
     };
 

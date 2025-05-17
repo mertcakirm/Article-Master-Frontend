@@ -4,6 +4,7 @@ import AddNewArticlePopup from "../popups/AddNewArticlePopup.jsx";
 import {GetWriterArticleRequest} from "../../API/ArticleApi.js";
 import {parseJwt} from "../../Helper/JWTDecoder.js";
 import Pagination from "./Pagination.jsx";
+import {toast} from "react-toastify";
 
 const UserArticles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -35,10 +36,16 @@ const UserArticles = () => {
 
 
     const GetMyArticles = async () => {
-        const jwt = await parseJwt()
-        const articlesObj = await GetWriterArticleRequest( pageNum,4, jwt.nameid )
-        setArticles(articlesObj.data.data.items)
-        setLastPage(articlesObj.data.data.totalPages)
+        try {
+            const jwt = await parseJwt()
+            const articlesObj = await GetWriterArticleRequest( pageNum,4, jwt.nameid )
+            setArticles(articlesObj.data.data.items)
+            setLastPage(articlesObj.data.data.totalPages)
+        }catch (error) {
+            console.error(error);
+            toast.error("Error while getting articles!");
+
+        }
     }
 
     useEffect(() => {
@@ -90,13 +97,8 @@ const UserArticles = () => {
                     <p className="text-center my-4">There are no articles yet.</p>
                 )}
 
-
-
-
             </div>
-
             <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage} />
-
             {processPopup && (
                 <ProcessPopup
                     onClose={(b) => {
@@ -108,7 +110,6 @@ const UserArticles = () => {
                     id={processState.id}
                 />
             )}
-
             {newArticlePopup && (
                 <AddNewArticlePopup
                     onClose={(b) => {
@@ -120,8 +121,6 @@ const UserArticles = () => {
                     }}
                 />
             )}
-
-
         </div>
     );
 };

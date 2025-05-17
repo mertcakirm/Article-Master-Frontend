@@ -4,54 +4,54 @@ import './css/About.css'
 const About = () => {
     return (
         <div className="page-container">
-            <div className="row justify-content-center text-center mb-5" data-aos="fade-up">
+            <div className="row justify-content-center text-center m-0" data-aos="fade-up">
                 <div className="col-12 titles my-5">Article Master</div>
                 <div className="about-text mb-5 text-start">
                     <p>
-                        <strong>Article Master</strong>, bilgiye erişimi kolaylaştırmak ve bireylerin içeriklerle etkileşim kurma biçimini dönüştürmek amacıyla geliştirilmiş yenilikçi bir web platformudur. Temel hedefimiz, kullanıcıların yalnızca makaleleri okuması değil; aynı zamanda bu içerikler üzerinde derinlemesine düşünmesi, notlar alması ve bilgiyi kişiselleştirerek kalıcı öğrenme sağlamasıdır.
+                        <strong>Article Master</strong> is an innovative web platform developed to simplify access to information and transform how individuals interact with content. Our primary goal is not only for users to read articles but also to reflect deeply on the content, take notes, and personalize information for lasting learning.
                     </p>
                     <p>
-                        Modern bilgi çağında okuma alışkanlıkları hızla değişiyor. Article Master olarak bu değişime ayak uydurmakla kalmayıp, okuma deneyimini daha <strong>etkileşimli</strong>, <strong>kişisel</strong> ve <strong>sosyal</strong> hale getirmeyi amaçlıyoruz.
+                        In the modern age of information, reading habits are rapidly evolving. At Article Master, we not only keep up with this change but also aim to make the reading experience more <strong>interactive</strong>, <strong>personalized</strong>, and <strong>social</strong>.
                     </p>
-                    <p><strong>Hedeflerimiz:</strong></p>
+                    <p><strong>Our Goals:</strong></p>
                     <ul>
-                        <li>Bilgiye erişimi sadeleştirmek ve kişiselleştirmek</li>
-                        <li>Not alma ve bilgi yönetimi alışkanlıklarını dijital ortamda güçlendirmek</li>
-                        <li>Yazarlarla okuyucuları bir araya getirerek içerik etkileşimini artırmak</li>
-                        <li>Eğitimsel ve entelektüel gelişimi destekleyen bir dijital ortam sunmak</li>
+                        <li>Simplify and personalize access to information</li>
+                        <li>Enhance note-taking and information management habits in a digital environment</li>
+                        <li>Increase content interaction by bringing authors and readers together</li>
+                        <li>Provide a digital space that supports educational and intellectual development</li>
                     </ul>
 
-                    <p><strong>Platform rolleri ve yetkileri:</strong></p>
-                    <p><strong>Kullanıcılar:</strong></p>
+                    <p><strong>Platform roles and permissions:</strong></p>
+                    <p><strong>Users:</strong></p>
                     <ul>
-                        <li>Makaleler arasında arama yaparak içeriklere erişebilir</li>
-                        <li>Okudukları makaleleri favorilerine ekleyebilir</li>
-                        <li>İçerikler üzerine kişiselleştirilmiş notlar alabilir</li>
-                        <li>Notlarını klasör sistemi ile düzenleyebilir</li>
-                        <li>Kullanıcı adı ve şifresini güncelleyebilir</li>
+                        <li>Can search articles and access content</li>
+                        <li>Can add read articles to their favorites</li>
+                        <li>Can take personalized notes on content</li>
+                        <li>Can organize notes using a folder system</li>
+                        <li>Can update username and password</li>
                     </ul>
 
-                    <p><strong>Yazarlar (Kullanıcı yetkilerine ek olarak):</strong></p>
+                    <p><strong>Authors (in addition to user permissions):</strong></p>
                     <ul>
-                        <li>Yeni makale ekleyebilir ve mevcut makaleleri silebilir</li>
-                        <li>Kendi makalelerinin popülerliğini izleyebilir</li>
-                        <li>Kendi profil istatistiklerini takip edebilir</li>
+                        <li>Can add new articles and delete existing ones</li>
+                        <li>Can track the popularity of their own articles</li>
+                        <li>Can monitor their profile statistics</li>
                     </ul>
 
-                    <p><strong>Yöneticiler (Yazar ve kullanıcı yetkilerine ek olarak):</strong></p>
+                    <p><strong>Administrators (in addition to author and user permissions):</strong></p>
                     <ul>
-                        <li>Makaleleri, kullanıcıları ve yazarları silebilir</li>
-                        <li>Kullanıcı ve yazar listelerini görüntüleyebilir</li>
-                        <li>Kullanıcılar arasında arama yapabilir</li>
-                        <li>Yazar başvuru taleplerini onaylayabilir veya reddedebilir</li>
+                        <li>Can delete articles, users, and authors</li>
+                        <li>Can view lists of users and authors</li>
+                        <li>Can search among users</li>
+                        <li>Can approve or reject author application requests</li>
                     </ul>
 
                     <p>
-                        <strong>Article Master</strong>, yalnızca bir okuma platformu değil; bilginin üretildiği, düzenlendiği ve kişiselleştirildiği etkileşimli bir dijital öğrenme ortamıdır. Siz de bu deneyimin bir parçası olun, bilgiyi birlikte keşfedelim ve geliştirelim!
+                        <strong>Article Master</strong> is not just a reading platform; it is an interactive digital learning environment where knowledge is created, organized, and personalized. Be a part of this experience—let’s explore and grow knowledge together!
                     </p>
                 </div>
-                <div className="col-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="300" viewBox="0 0 600 200">
+                <div className="col-5 row justify-content-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="col-12" height="200" viewBox="100 0 400 400">
                         <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A" strokeWidth="1"/>
                         <path d="M120,60 L120,140 L140,120 L140,80 Z" fill="#F8F9F9" stroke="#4A235A" strokeWidth="1"/>
 

@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 
 const UpdateProfilePopup = ({onClose}) => {
     const [updateInfoObj, setUpdateInfoObj] = useState({
-        userName: "",
-        lastPassword: "",
-        newPassword: ""
+        userName: null,
+        lastPassword: null,
+        newPassword: null
     });
 
     const handleChange = (e) => {
@@ -18,11 +18,11 @@ const UpdateProfilePopup = ({onClose}) => {
     const HandleSubmit = async () => {
         try {
             await UpdateProfileRequest(updateInfoObj);
-            toast.success("Profile successfully updated.");
+            toast.success("Profile informations successfully updated.");
             onClose(false);
         } catch (error) {
             console.log(error);
-            toast.success("An error occurred while updating the profile.");
+            toast.error("An error occurred while updating the profile.");
             onClose(false);
         }
     }

@@ -11,9 +11,15 @@ const WriterArticles = () => {
     const url = window.location.pathname.split("/").filter(Boolean).pop();
 
     const GetArticles = async () => {
-        const data = await GetWriterArticleRequest(pageNum,12,url)
-        setArticles(data.data.data.items)
-        setLastPage(data.data.data.totalPages)
+        try {
+            const data = await GetWriterArticleRequest(pageNum,12,url)
+            setArticles(data.data.data.items)
+            setLastPage(data.data.data.totalPages)
+        }catch (error) {
+            console.log(error);
+            toast.error("Error while getting articles!");
+
+        }
     }
 
     useEffect(() => {

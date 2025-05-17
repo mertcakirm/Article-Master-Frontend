@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ProcessPopup from "../components/popups/processPopup.jsx";
 import {GetFavoriteRequest} from "../API/FavoriteApi.js";
 import Pagination from "../components/other/Pagination.jsx";
+import {toast} from "react-toastify";
 
 const Favorites = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -26,9 +27,14 @@ const Favorites = () => {
     };
 
     const GetFavorites = async () => {
-        const data = await GetFavoriteRequest(pageNum);
-        setFavorites(data.data.data.items);
-        setLastPage(data.data.totalPages)
+        try {
+            const data = await GetFavoriteRequest(pageNum);
+            setFavorites(data.data.data.items);
+            setLastPage(data.data.totalPages)
+        }catch (error) {
+            console.log(error);
+            toast.error("Error while getting favorites from the list!");
+        }
     }
 
     useEffect(() => {

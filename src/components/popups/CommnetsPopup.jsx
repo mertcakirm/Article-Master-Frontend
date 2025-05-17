@@ -42,10 +42,16 @@ const CommentsPopup = ({ onClose, id }) => {
     };
 
     const GetAllComment=async ()=>{
-        const CommentsObj = await GetAllCommentsRequest(pageNum,5,id)
-        const CommentsObjFiltered = CommentsObj.data.data
-        setLastPage(CommentsObj.data.data.totalPages)
-        setComments(CommentsObjFiltered.items);
+        try {
+            const CommentsObj = await GetAllCommentsRequest(pageNum,5,id)
+            const CommentsObjFiltered = CommentsObj.data.data
+            setLastPage(CommentsObj.data.data.totalPages)
+            setComments(CommentsObjFiltered.items);
+        }catch (error) {
+            console.log(error)
+            toast.error("Error while getting comments from the list!");
+        }
+
     };
 
     useEffect(() => {

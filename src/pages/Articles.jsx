@@ -45,6 +45,7 @@ const Articles = () => {
             setLastPage(data.data.data.totalPages)
         }catch (error) {
             console.log(error);
+            toast.error("Error while getting articles!");
         }finally {
             setLoading(false);
         }

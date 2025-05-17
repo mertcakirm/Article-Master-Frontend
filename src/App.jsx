@@ -15,7 +15,7 @@ import {CheckRoleRequest} from "./API/UserApi.js";
 import {deleteCookie, getCookie} from "./API/Cokkie.js";
 import Loading from "./components/other/Loading.jsx";
 import PopUpNavbar from "./components/PopUpNavbar.jsx";
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import About from "./pages/About.jsx";
 import AOS from "aos";
@@ -37,7 +37,7 @@ const AppContent = () => {
                 deleteCookie("token");
             }
         } catch (error) {
-            console.error("Rol alınamadı", error);
+            console.error("Could not get a role!", error);
         } finally {
             setIsRoleLoading(false);
         }

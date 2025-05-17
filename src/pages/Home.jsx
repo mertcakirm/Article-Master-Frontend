@@ -19,17 +19,19 @@ const Home = () => {
             setArticles(data.data.data)
         }catch (error) {
             console.log(error);
+            toast.error("Error while getting popular articles!");
         }finally {
             setLoading(false);
         }
-
     }
+
     const GetWriters = async () => {
         try {
             const data = await PopularWriterGetAllRequest();
             setWriters(data.data.data);
         }catch (error) {
             console.log(error);
+            toast.error("Error while getting popular writers!");
         }finally {
             setLoading(false);
         }
@@ -42,9 +44,9 @@ const Home = () => {
         }
         try {
             await AddFavoriteRequest(FavoriteObj);
-            toast.success("Makale favorilere eklendi!");
+            toast.success("Article added to favorites!");
         }catch (error){
-            toast.error("favoriye eklenemedi")
+            toast.error("The article could not be added to favorites!")
             console.log(error);
         }
     }
@@ -55,11 +57,10 @@ const Home = () => {
         GetWriters();
     }, []);
 
-
-
     if (loading) {
         return <Loading />;
     }
+
     return (
         <div>
             <div className="page-container p-0 container-fluid">
@@ -192,10 +193,10 @@ const Home = () => {
 
                     <div className="about-text text-center" data-aos="fade-up">
                         <p>
-                            <strong>Article Master</strong>, bilgiye erişimi kolaylaştırmak ve bireylerin içeriklerle etkileşim kurma biçimini dönüştürmek amacıyla geliştirilmiş yenilikçi bir web platformudur. Temel hedefimiz, kullanıcıların yalnızca makaleleri okuması değil; aynı zamanda bu içerikler üzerinde derinlemesine düşünmesi, notlar alması ve bilgiyi kişiselleştirerek kalıcı öğrenme sağlamasıdır.
+                            <strong>Article Master</strong> is an innovative web platform developed to simplify access to information and transform how individuals interact with content. Our primary goal is not only for users to read articles but also to reflect deeply on the content, take notes, and personalize information for lasting learning.
                         </p>
                         <p>
-                            Modern bilgi çağında okuma alışkanlıkları hızla değişiyor. Article Master olarak bu değişime ayak uydurmakla kalmayıp, okuma deneyimini daha <strong>etkileşimli</strong>, <strong>kişisel</strong> ve <strong>sosyal</strong> hale getirmeyi amaçlıyoruz.
+                            In the modern age of information, reading habits are rapidly evolving. At Article Master, we not only keep up with this change but also aim to make the reading experience more <strong>interactive</strong>, <strong>personalized</strong>, and <strong>social</strong>.
                         </p>
                     </div>
 

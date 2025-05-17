@@ -105,11 +105,9 @@ const NotesPopup = ({onClose,folderId}) => {
 
                     </tbody>
                 </table>
-
                 <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage} />
-
-
             </div>
+
             {isProcessPopupOpen && (
                 <ProcessPopup
                     onClose={(b) => {
