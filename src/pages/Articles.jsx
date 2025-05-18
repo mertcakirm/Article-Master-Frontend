@@ -5,6 +5,7 @@ import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 import { toast } from 'react-toastify';
 import Pagination from "../components/other/Pagination.jsx";
 import {Link} from "react-router-dom";
+import {getCookie} from "../API/Cokkie.js";
 
 const Articles = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -13,6 +14,7 @@ const Articles = () => {
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
     const [searchTimeout, setSearchTimeout] = useState(null);
+    const token = getCookie("token");
     const AddFavorite = async (id)=>{
         const FavoriteObj ={
             articleId:id,
@@ -22,6 +24,9 @@ const Articles = () => {
             toast.success("Article added to favorites!");
         }catch (error){
             toast.error("The article could not be added to favorites!")
+            if (!token){
+                window.location.href = "/sign/in";
+            }
             console.log(error);
         }
     }

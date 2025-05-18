@@ -47,7 +47,10 @@ const Home = () => {
             await AddFavoriteRequest(FavoriteObj);
             toast.success("Article added to favorites!");
         }catch (error){
-            toast.error("The article could not be added to favorites!")
+            toast.error("The article could not be added to favorites!");
+            if (!token){
+                window.location.href = "/sign/in";
+            }
             console.log(error);
         }
     }

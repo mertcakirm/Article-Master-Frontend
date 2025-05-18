@@ -4,13 +4,14 @@ import {toast} from "react-toastify";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 import Pagination from "../components/other/Pagination.jsx";
 import {Link} from "react-router-dom";
+import {getCookie} from "../API/Cokkie.js";
 
 const WriterArticles = () => {
     const [pageNum, setPageNum] = useState(1);
     const [articles, setArticles] = useState([]);
     const [lastPage, setLastPage] = useState(null);
     const url = window.location.pathname.split("/").filter(Boolean).pop();
-
+    const token = getCookie("token");
     const GetArticles = async () => {
         try {
             const data = await GetWriterArticleRequest(pageNum,12,url)
@@ -40,6 +41,9 @@ const WriterArticles = () => {
             toast.success("Article added to favorites!");
         }catch (error){
             toast.error("The article could not be added to favorites!")
+            if (!token){
+                window.location.href = "/sign/in";
+            }
             console.log(error);
         }
     }

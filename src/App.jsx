@@ -61,10 +61,17 @@ const AppContent = () => {
         }
         return children;
     };
+
+    const LoginRoute = ({ children }) => {
+        const token = getCookie("token");
+        if (token) {
+            return <Navigate to="/" replace />;
+        }
+        return children;
+    };
     if (isRoleLoading) {
         return <Loading />;
     }
-
 
     return (
         <>
@@ -76,8 +83,8 @@ const AppContent = () => {
                 <Route element={<About />} path="/about" />
                 <Route element={<Articles />} path="/articles" />
                 <Route element={<ArticleDetail />} path="/article/:id" />
-                <Route element={<Login />} path="/sign/:type" />
-                <Route element={<Login />} path="/sign" />
+                <Route element={<LoginRoute><Login /></LoginRoute>} path="/sign/:type" />
+                <Route element={<LoginRoute><Login /></LoginRoute>} path="/sign" />
                 <Route element={<Writers />} path="/writers" />
                 <Route element={<WriterArticles />} path="/writer/:id" />
                 <Route element={<ProtectedRoute><Profile /></ProtectedRoute>} path="/profile" />
