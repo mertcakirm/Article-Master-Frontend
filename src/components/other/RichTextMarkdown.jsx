@@ -4,25 +4,24 @@ import rehypeRaw from "rehype-raw";
 import CustomTooltip from "./CustomTooltip.jsx";
 import {getCookie} from "../../API/Cokkie.js";
 import AddFolderPopup from "../popups/AddFolderPopup.jsx";
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify';
 
 
-const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
+const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
     const [selectedText, setSelectedText] = useState(null);
     const [newNoteText, setNewNoteText] = useState('');
     const markdownRef = useRef(null);
     const noteEditorRef = useRef(null);
     const [selectedFolder, setSelectedFolder] = useState(null);
-    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [cursorPosition, setCursorPosition] = useState({x: 0, y: 0});
     const [addNotePopupState, setAddNotePopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
 
-
-    const token =getCookie("token")
+    const token = getCookie("token")
 
     const folders = ['Test 1', 'Test 2', 'Test 3'];
 
-    const ToggleAddNotePopup = ()=>{
+    const ToggleAddNotePopup = () => {
         setAddNotePopupState(!addNotePopupState);
     }
     useEffect(() => {
@@ -70,8 +69,8 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
     };
 
     const addNote = (noteText, color) => {
-        if(!token){
-            window.location.href="/sign/in";
+        if (!token) {
+            window.location.href = "/sign/in";
         }
         if (selectedText) {
             const newNote = {
@@ -134,16 +133,16 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
     ];
 
     return (
-        <div style={{ maxWidth: '100%', padding: '16px' }}>
+        <div style={{maxWidth: '100%', padding: '16px'}}>
             <div
                 ref={markdownRef}
                 onMouseUp={handleTextSelection}
-                style={{ marginBottom: '16px' }}
+                style={{marginBottom: '16px'}}
             >
                 <ReactMarkdown
                     rehypePlugins={[rehypeRaw]}
                     components={{
-                        span: ({ node, ...props }) => (
+                        span: ({node, ...props}) => (
                             <span
                                 {...props}
                                 style={{
@@ -156,9 +155,8 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                 >
                     {renderMarkdownWithNotes()}
                 </ReactMarkdown>
-                <CustomTooltip />
+                <CustomTooltip/>
             </div>
-
             {selectedText && (
                 <div ref={noteEditorRef} className="add-note-rich-con">
                       <textarea
@@ -167,7 +165,6 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                           value={newNoteText}
                           onChange={(e) => setNewNoteText(e.target.value)}
                       />
-
                     <div className="rich-child-flex">
                         <select
                             className="form-select add-note-rich-select"
@@ -183,25 +180,27 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                             ))}
                         </select>
 
-                        <button onClick={ToggleAddNotePopup} className="add-folder-btn2" >
-                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm6 11v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/></svg>
+                        <button onClick={ToggleAddNotePopup} className="add-folder-btn2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                 fillRule="evenodd" clipRule="evenodd">
+                                <path
+                                    d="M7 2c1.695 1.942 2.371 3 4 3h13v17h-24v-20h7zm6 11v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3z"/>
+                            </svg>
                         </button>
                     </div>
-
-
-                        <div className="add-note-rich-colors">
+                    <div className="add-note-rich-colors">
                         {noteColors.map((color) => (
                             <button
                                 key={color}
                                 onClick={() => {
-                                 if (selectedFolder!==null){
-                                     addNote(newNoteText, color)
-                                     toast.success("Note is saved")
-                                 }else{
-                                    toast.error("Folder is not selected")
-                                 }
+                                    if (selectedFolder !== null) {
+                                        addNote(newNoteText, color)
+                                        toast.success("Note is saved")
+                                    } else {
+                                        toast.error("Folder is not selected")
+                                    }
                                 }
-                            }
+                                }
                                 style={{
                                     backgroundColor: color,
                                     width: '30px',
@@ -215,7 +214,6 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                     </div>
                 </div>
             )}
-
             {addNotePopupState && (
                 <AddFolderPopup
                     onClose={(b) => {
@@ -224,7 +222,6 @@ const RichTextMarkdown = ({ markdown,notes,setNotes, onNewNote = null }) => {
                     }}
                 />
             )}
-
         </div>
     );
 };

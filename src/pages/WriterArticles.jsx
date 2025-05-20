@@ -14,10 +14,10 @@ const WriterArticles = () => {
     const token = getCookie("token");
     const GetArticles = async () => {
         try {
-            const data = await GetWriterArticleRequest(pageNum,12,url)
+            const data = await GetWriterArticleRequest(pageNum, 12, url)
             setArticles(data.data.data.items)
             setLastPage(data.data.data.totalPages)
-        }catch (error) {
+        } catch (error) {
             console.log(error);
             toast.error("Error while getting articles!");
 
@@ -32,16 +32,16 @@ const WriterArticles = () => {
         GetArticles()
     }, [pageNum]);
 
-    const AddFavorite = async (id)=>{
-        const FavoriteObj ={
-            articleId:id,
+    const AddFavorite = async (id) => {
+        const FavoriteObj = {
+            articleId: id,
         }
         try {
             await AddFavoriteRequest(FavoriteObj);
             toast.success("Article added to favorites!");
-        }catch (error){
+        } catch (error) {
             toast.error("The article could not be added to favorites!")
-            if (!token){
+            if (!token) {
                 window.location.href = "/sign/in";
             }
             console.log(error);
@@ -54,7 +54,6 @@ const WriterArticles = () => {
                 <div className="col-12 row align-items-center align-content-center mt-3">
                     <div className="col-lg-6 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
                 </div>
-
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
                         <div className="col-lg-3" data-aos="fade-up" key={index}>
@@ -94,11 +93,13 @@ const WriterArticles = () => {
                                 <p className="article-card-writerName">{article.writerName}</p>
 
                             </Link>
-                            <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
+                            <button className="article-card-like" onClick={() => AddFavorite(article.id)}>
                                 <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
                                      strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fillRule="nonzero"/>
+                                    <path
+                                        d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z"
+                                        fillRule="nonzero"/>
                                 </svg>
                             </button>
                         </div>
@@ -106,11 +107,8 @@ const WriterArticles = () => {
                 ) : (
                     <p className="text-center my-4">There are no articles yet.</p>
                 )}
-
-
             </div>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage} />
-
+            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
         </div>
     );
 };

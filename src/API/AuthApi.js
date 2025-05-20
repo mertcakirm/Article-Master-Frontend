@@ -1,4 +1,4 @@
-import { setCookie } from "./Cokkie.js";
+import {setCookie} from "./Cokkie.js";
 import api from "../Helper/api.js";
 
 export const LoginRequest = async (loginObj) => {

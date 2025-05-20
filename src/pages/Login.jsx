@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import "./css/Login.css";
 import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 
 const Login = () => {
-    const { type } = useParams();
+    const {type} = useParams();
     const [authType, setAuthType] = useState("in");
 
     const [loginObj, setLoginObj] = useState({
@@ -29,8 +29,8 @@ const Login = () => {
     });
 
     const handleInputChange = (event, setState) => {
-        const { name, value } = event.target;
-        setState(prevState => ({ ...prevState, [name]: value }));
+        const {name, value} = event.target;
+        setState(prevState => ({...prevState, [name]: value}));
     };
 
     const handleFileChange = async (event) => {
@@ -38,7 +38,7 @@ const Login = () => {
         if (selectedFile) {
             try {
                 const base64String = await convertToBase64(selectedFile);
-                setWriterObj(prev => ({ ...prev, pdfBase64: base64String }));
+                setWriterObj(prev => ({...prev, pdfBase64: base64String}));
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -55,7 +55,7 @@ const Login = () => {
         if (droppedFile) {
             try {
                 const base64String = await convertToBase64(droppedFile);
-                setWriterObj(prev => ({ ...prev, pdfBase64: base64String }));
+                setWriterObj(prev => ({...prev, pdfBase64: base64String}));
             } catch (error) {
                 console.error("File conversion error:", error);
             }
@@ -70,6 +70,29 @@ const Login = () => {
             setAuthType("in");
         }
     }, [type]);
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Enter") {
+                switch (authType) {
+                    case "in":
+                        handleLogin();
+                        break;
+                    case "up":
+                        handleSignUp();
+                        break;
+                    case "writer-up":
+                        handleWriterSignIn();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [authType, loginObj, signObj, writerObj]);
 
     const handleLogin = async () => {
         if (!loginObj.email || !loginObj.password) {
@@ -109,7 +132,7 @@ const Login = () => {
             await WriterSignRequest(writerObj);
             window.location.href = "/sign/in";
         } catch (error) {
-            const errorMessage = error?.response?.data?.errorMessage || "Writer registration failed.";
+            const errorMessage = error?.response.data.errorMessage || "Writer registration failed.";
             toast.error(errorMessage || "Writer registration failed.");
         }
     };
@@ -118,14 +141,16 @@ const Login = () => {
             <div className="row p-0 m-0">
 
                 <div className="col-lg-8 d-none d-lg-block p-0 m-0" data-aos="fade-in">
-                    <img src="https://images.pexels.com/photos/1438190/pexels-photo-1438190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                         className="img-fluid w-100"
-                         style={{ height: "100vh", objectFit: "cover" }}
-                         alt="Login Banner"
+                    <img
+                        src="https://images.pexels.com/photos/1438190/pexels-photo-1438190.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        className="img-fluid w-100"
+                        style={{height: "100vh", objectFit: "cover"}}
+                        alt="Login Banner"
                     />
                 </div>
 
-                <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center" data-aos="fade-in" style={{ height: "100vh",position: "relative" }}>
+                <div className="col-lg-4 col-12 p-0 m-0 row justify-content-center align-items-center"
+                     data-aos="fade-in" style={{height: "100vh", position: "relative"}}>
                     {authType === "in" && (
                         <div className="col-12 login-flex text-center">
                             <h3>Log In</h3>
@@ -179,7 +204,9 @@ const Login = () => {
                             />
                             <button className="profile_btn" onClick={handleSignUp}>Sign Up</button>
                             <button className="login-btn-switch" onClick={() => setAuthType("in")}>Log In</button>
-                            <button className="login-btn-switch" onClick={() => setAuthType("writer-up")}>Writer Sign Up</button>
+                            <button className="login-btn-switch" onClick={() => setAuthType("writer-up")}>Writer Sign
+                                Up
+                            </button>
                         </div>
                     )}
 
@@ -225,7 +252,7 @@ const Login = () => {
                                     id="fileInput"
                                     type="file"
                                     onChange={handleFileChange}
-                                    style={{ display: "none" }}
+                                    style={{display: "none"}}
                                 />
                             </div>
                             <button className="profile_btn" onClick={handleWriterSignIn}>Sign Up</button>
@@ -234,7 +261,12 @@ const Login = () => {
                     )}
 
 
-                    <Link to="/" className="login-home-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="white" width="34" height="34" viewBox="0 0 24 24"><path d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/></svg></Link>
+                    <Link to="/" className="login-home-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="34" height="34" viewBox="0 0 24 24">
+                            <path
+                                d="M20 7.093v-5.093h-3v2.093l3 3zm4 5.907l-12-12-12 12h3v10h7v-5h4v5h7v-10h3zm-5 8h-3v-5h-8v5h-3v-10.26l7-6.912 7 6.99v10.182z"/>
+                        </svg>
+                    </Link>
 
                 </div>
             </div>

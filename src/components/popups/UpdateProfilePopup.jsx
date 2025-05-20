@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/accepted.css';
 import {UpdateProfileRequest} from "../../API/UserApi.js";
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 const UpdateProfilePopup = ({onClose}) => {
     const [updateInfoObj, setUpdateInfoObj] = useState({
@@ -11,8 +11,8 @@ const UpdateProfilePopup = ({onClose}) => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUpdateInfoObj(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setUpdateInfoObj(prev => ({...prev, [name]: value}));
     }
 
     const HandleSubmit = async () => {
@@ -29,7 +29,7 @@ const UpdateProfilePopup = ({onClose}) => {
 
     return (
         <div className="popup-overlay">
-            <div className="popup-content" style={{ color: '#fff' }} data-aos="zoom-in">
+            <div className="popup-content" style={{color: '#fff'}} data-aos="zoom-in">
                 <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
                 <div className="row justify-content-center align-items-center row-gap-3">
                     <input

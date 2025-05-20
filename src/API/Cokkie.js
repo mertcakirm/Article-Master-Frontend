@@ -26,4 +26,4 @@ const updateCookie = (name, value, days) => {
     setCookie(name, value, days);
 };
 
-export { setCookie, getCookie, deleteCookie, updateCookie };
+export {setCookie, getCookie, deleteCookie, updateCookie};

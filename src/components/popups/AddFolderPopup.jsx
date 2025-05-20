@@ -28,16 +28,16 @@ const AddFolderPopup = ({onClose}) => {
         "lightGreen",  // Açık yeşil
     ];
     useEffect(() => {
-        AOS.init({ duration: 500 });
+        AOS.init({duration: 500});
     }, []);
     return (
         <div className="popup-overlay">
-            <div className="popup-content " style={{ color: '#fff'}} data-aos="zoom-in">
+            <div className="popup-content " style={{color: '#fff'}} data-aos="zoom-in">
                 <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
                 <div className="row row-gap-4 justify-content-center">
                     <div className="article-card-title col-12 text-center ">Create New Folder</div>
-                    <input type="text" placeholder="New folder name" className="profile_inp" />
-                    <div className="color-palette d-flex flex-wrap row-gap-3 justify-content-center col-12" >
+                    <input type="text" placeholder="New folder name" className="profile_inp"/>
+                    <div className="color-palette d-flex flex-wrap row-gap-3 justify-content-center col-12">
                         {colorList.map((color) => (
                             <button
                                 key={color}
@@ -55,7 +55,6 @@ const AddFolderPopup = ({onClose}) => {
                         ))}
                     </div>
                     <button className="profile_btn col-12">Create Folder</button>
-
                 </div>
             </div>
             {isProcessPopupOpen && (

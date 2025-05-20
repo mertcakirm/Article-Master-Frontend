@@ -4,7 +4,7 @@ const CustomTooltip = () => {
     const [tooltip, setTooltip] = useState({
         visible: false,
         content: '',
-        position: { x: 0, y: 0 }
+        position: {x: 0, y: 0}
     });
     const [hoveredElement, setHoveredElement] = useState(null);
 
@@ -15,7 +15,7 @@ const CustomTooltip = () => {
             if (element === hoveredElement) {
                 setTooltip(prev => ({
                     ...prev,
-                    position: { x: e.clientX, y: e.clientY }
+                    position: {x: e.clientX, y: e.clientY}
                 }));
                 return;
             }
@@ -27,15 +27,15 @@ const CustomTooltip = () => {
                 setTooltip({
                     visible: true,
                     content,
-                    position: { x: e.clientX, y: e.clientY }
+                    position: {x: e.clientX, y: e.clientY}
                 });
             } else {
-                setTooltip(prev => ({ ...prev, visible: false }));
+                setTooltip(prev => ({...prev, visible: false}));
             }
         };
 
         const handleMouseLeave = () => {
-            setTooltip(prev => ({ ...prev, visible: false }));
+            setTooltip(prev => ({...prev, visible: false}));
             setHoveredElement(null);
         };
 

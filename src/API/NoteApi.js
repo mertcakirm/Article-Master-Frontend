@@ -1,7 +1,7 @@
 import api from "../Helper/api.js";
 
 export const AddNoteRequest = async (noteObj) => {
-    return await api.post(`note`,noteObj);
+    return await api.post(`note`, noteObj);
 };
 
 export const DeleteNoteRequest = async (id) => {
@@ -12,6 +12,6 @@ export const GetNoteRequest = async (id) => {
     return await api.get(`note/${id}`);
 };
 
-export const NoteGetAllRequests = async (page,size) => {
+export const NoteGetAllRequests = async (page, size) => {
     return await api.get(`note/all?PageNumber=${page}&PageSize=${size}`);
 }

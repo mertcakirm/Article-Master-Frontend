@@ -8,10 +8,15 @@ const About = () => {
                 <div className="col-12 titles my-5">Article Master</div>
                 <div className="about-text mb-5 text-start">
                     <p>
-                        <strong>Article Master</strong> is an innovative web platform developed to simplify access to information and transform how individuals interact with content. Our primary goal is not only for users to read articles but also to reflect deeply on the content, take notes, and personalize information for lasting learning.
+                        <strong>Article Master</strong> is an innovative web platform developed to simplify access to
+                        information and transform how individuals interact with content. Our primary goal is not only
+                        for users to read articles but also to reflect deeply on the content, take notes, and
+                        personalize information for lasting learning.
                     </p>
                     <p>
-                        In the modern age of information, reading habits are rapidly evolving. At Article Master, we not only keep up with this change but also aim to make the reading experience more <strong>interactive</strong>, <strong>personalized</strong>, and <strong>social</strong>.
+                        In the modern age of information, reading habits are rapidly evolving. At Article Master, we not
+                        only keep up with this change but also aim to make the reading experience
+                        more <strong>interactive</strong>, <strong>personalized</strong>, and <strong>social</strong>.
                     </p>
                     <p><strong>Our Goals:</strong></p>
                     <ul>
@@ -47,7 +52,9 @@ const About = () => {
                     </ul>
 
                     <p>
-                        <strong>Article Master</strong> is not just a reading platform; it is an interactive digital learning environment where knowledge is created, organized, and personalized. Be a part of this experience—let’s explore and grow knowledge together!
+                        <strong>Article Master</strong> is not just a reading platform; it is an interactive digital
+                        learning environment where knowledge is created, organized, and personalized. Be a part of this
+                        experience—let’s explore and grow knowledge together!
                     </p>
                 </div>
                 <div className="col-5 row justify-content-center">
@@ -60,8 +67,12 @@ const About = () => {
                         <line x1="160" y1="110" x2="200" y2="110" stroke="#4A235A" strokeWidth="3"/>
                         <line x1="160" y1="125" x2="190" y2="125" stroke="#4A235A" strokeWidth="3"/>
 
-                        <text x="250" y="95" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#4A235A">ARTICLE</text>
-                        <text x="250" y="135" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold" fill="#8E44AD">MASTER</text>
+                        <text x="250" y="95" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold"
+                              fill="#4A235A">ARTICLE
+                        </text>
+                        <text x="250" y="135" fontFamily="Arial, sans-serif" fontSize="36" fontWeight="bold"
+                              fill="#8E44AD">MASTER
+                        </text>
 
                         <line x1="250" y1="150" x2="520" y2="150" stroke="#4A235A" strokeWidth="3"/>
                     </svg>

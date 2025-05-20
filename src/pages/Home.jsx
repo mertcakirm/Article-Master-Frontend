@@ -8,6 +8,7 @@ import {PopularWriterGetAllRequest} from "../API/UserApi.js";
 import {AddFavoriteRequest} from "../API/FavoriteApi.js";
 import {toast} from "react-toastify";
 import {Link} from "react-router-dom";
+
 const Home = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -18,10 +19,10 @@ const Home = () => {
         try {
             const data = await GetPopularArticlesRequest()
             setArticles(data.data.data)
-        }catch (error) {
+        } catch (error) {
             console.log(error);
             toast.error("Error while getting popular articles!");
-        }finally {
+        } finally {
             setLoading(false);
         }
     }
@@ -30,31 +31,30 @@ const Home = () => {
         try {
             const data = await PopularWriterGetAllRequest();
             setWriters(data.data.data);
-        }catch (error) {
+        } catch (error) {
             console.log(error);
             toast.error("Error while getting popular writers!");
-        }finally {
+        } finally {
             setLoading(false);
         }
     }
 
 
-    const AddFavorite = async (id)=>{
-        const FavoriteObj ={
-            articleId:id,
+    const AddFavorite = async (id) => {
+        const FavoriteObj = {
+            articleId: id,
         }
         try {
             await AddFavoriteRequest(FavoriteObj);
             toast.success("Article added to favorites!");
-        }catch (error){
+        } catch (error) {
             toast.error("The article could not be added to favorites!");
-            if (!token){
+            if (!token) {
                 window.location.href = "/sign/in";
             }
             console.log(error);
         }
     }
-
 
     useEffect(() => {
         GetArticles()
@@ -62,26 +62,25 @@ const Home = () => {
     }, []);
 
     if (loading) {
-        return <Loading />;
+        return <Loading/>;
     }
 
     return (
         <div>
             <div className="page-container p-0 container-fluid">
-                <div className="row p-0 m-0 justify-content-center" style={{borderBottom: '3px solid /articles/1fff',position: 'relative'}}>
-                    <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header} alt="header_photo" />
-
-                        {token? null:(
-                            <div className="header-link-row justify-content-center align-items-center column-gap-3"  data-aos="fade-up">
-                                <a className="up-writer-btn" href="/sign/writer-up">Sign up for writer</a>
-                                <a className="up-user-btn" href="/sign/up">Sign up for user</a>
-                            </div>
-                        )
-                        }
-
-
+                <div className="row p-0 m-0 justify-content-center"
+                     style={{borderBottom: '3px solid /articles/1fff', position: 'relative'}}>
+                    <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header}
+                         alt="header_photo"/>
+                    {token ? null : (
+                        <div className="header-link-row justify-content-center align-items-center column-gap-3"
+                             data-aos="fade-up">
+                            <a className="up-writer-btn" href="/sign/writer-up">Sign up for writer</a>
+                            <a className="up-user-btn" href="/sign/up">Sign up for user</a>
+                        </div>
+                    )
+                    }
                 </div>
-
 
                 <div className="row row-gap-5 m-0  my-5 popular-row">
                     <div className="col-12 titles mb-4 text-center" data-aos="fade-up">Popular Articles</div>
@@ -125,11 +124,13 @@ const Home = () => {
                                     <p className="article-card-writerName">{article.writerName}</p>
 
                                 </Link>
-                                <button className="article-card-like" onClick={()=>AddFavorite(article.id)} >
+                                <button className="article-card-like" onClick={() => AddFavorite(article.id)}>
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
                                          strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
-                                        <path d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z" fillRule="nonzero"/>
+                                        <path
+                                            d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z"
+                                            fillRule="nonzero"/>
                                     </svg>
                                 </button>
                             </div>
@@ -137,7 +138,6 @@ const Home = () => {
                     ) : (
                         <p className="text-center my-4">There are no articles yet.</p>
                     )}
-
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
                         <Link to="/articles" className="animation-btn">
                             <div className="btn animation-btn-child">
@@ -145,19 +145,17 @@ const Home = () => {
                             </div>
                         </Link>
                     </div>
-
                 </div>
-
-
-                <div className="row row-gap-5 m-0 my-5 popular-row justify-content-center  column-gap-5 align-items-center">
+                <div
+                    className="row row-gap-5 m-0 my-5 popular-row justify-content-center  column-gap-5 align-items-center">
                     <div className="col-12 titles mb-4 text-center" data-aos="fade-up">Popular Writers</div>
 
                     {writers.length > 0 ? (
-                        writers.map((writer,index) => (
+                        writers.map((writer, index) => (
                             <div key={index} className="col-lg-1 col-3" data-aos="fade-up">
                                 <Link to={`/writer/${writer.id}`} className="writer-card">
                                     <img className="profile_photo"
-                                         style={{aspectRatio:'1'}}
+                                         style={{aspectRatio: '1'}}
                                          src={
                                              writer.profilePhoto
                                                  ? (writer.profilePhoto.startsWith("data:image")
@@ -181,7 +179,6 @@ const Home = () => {
                     ) : (
                         <p className="text-center my-4">There are no writers yet.</p>
                     )}
-
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
                         <Link to="/writers" className="animation-btn">
                             <div className="btn animation-btn-child">
@@ -190,20 +187,22 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-
                 <div className="row row-gap-5 m-0 my-5 popular-row">
                     <div className="col-12 titles mb-4 text-center" data-aos="fade-up">ABOUT ARTICLE MASTER</div>
-
-
                     <div className="about-text text-center" data-aos="fade-up">
                         <p>
-                            <strong>Article Master</strong> is an innovative web platform developed to simplify access to information and transform how individuals interact with content. Our primary goal is not only for users to read articles but also to reflect deeply on the content, take notes, and personalize information for lasting learning.
+                            <strong>Article Master</strong> is an innovative web platform developed to simplify access
+                            to information and transform how individuals interact with content. Our primary goal is not
+                            only for users to read articles but also to reflect deeply on the content, take notes, and
+                            personalize information for lasting learning.
                         </p>
                         <p>
-                            In the modern age of information, reading habits are rapidly evolving. At Article Master, we not only keep up with this change but also aim to make the reading experience more <strong>interactive</strong>, <strong>personalized</strong>, and <strong>social</strong>.
+                            In the modern age of information, reading habits are rapidly evolving. At Article Master, we
+                            not only keep up with this change but also aim to make the reading experience
+                            more <strong>interactive</strong>, <strong>personalized</strong>,
+                            and <strong>social</strong>.
                         </p>
                     </div>
-
                     <div className="col-12 mb-5 row justify-content-center" data-aos="fade-up">
                         <Link to="/about" className="animation-btn">
                             <div className="btn animation-btn-child">
@@ -211,9 +210,7 @@ const Home = () => {
                             </div>
                         </Link>
                     </div>
-
                 </div>
-
             </div>
         </div>
     );
