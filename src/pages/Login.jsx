@@ -246,7 +246,7 @@ const Login = () => {
                                 {writerObj.file ? (
                                     <p className="dropzone-p">File uploaded</p>
                                 ) : (
-                                    <p className="dropzone-p">Drag your file here or click to select it</p>
+                                    <p className="dropzone-p">Drag your authorship certificate here or click to select it</p>
                                 )}
                                 <input
                                     id="fileInput"
