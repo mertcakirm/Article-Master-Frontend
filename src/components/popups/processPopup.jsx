@@ -5,7 +5,7 @@ import {useEffect} from "react";
 import {ApproveRequest, DeleteUsersRequest, RejectRoleRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
 import {AddFavoriteRequest} from "../../API/FavoriteApi.js";
-import {DeleteNoteRequest, DeleteNotesRequest} from "../../API/NoteApi.js";
+import {DeleteFolderRequest, DeleteNoteRequest, DeleteNotesRequest} from "../../API/NoteApi.js";
 import {toast} from 'react-toastify';
 
 const ProcessPopup = ({type, text, id, onClose,}) => {
@@ -34,7 +34,7 @@ const ProcessPopup = ({type, text, id, onClose,}) => {
                     toast.success("Note deleted successfully.");
                     break;
                 case "folder_delete":
-                    await DeleteNoteRequest(id);
+                    await DeleteFolderRequest(id);
                     toast.success("Folder deleted successfully.");
                     break;
                 case "article_favorite": {

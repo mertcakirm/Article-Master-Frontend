@@ -129,6 +129,7 @@ const NotesPopup = ({onClose, folderId}) => {
                     onClose={(b) => {
                         if (b === false) setProcessIsPopupOpen(b);
                         setRefresh(!refresh);
+                        onClose(false);
                     }}
                     text={processState.text}
                     type={processState.processtype}

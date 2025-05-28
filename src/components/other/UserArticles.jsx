@@ -73,7 +73,7 @@ const UserArticles = () => {
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
                         <div className="col-lg-6" key={index} data-aos="fade-up">
-                            <Link to={`article/${article.id}`} className="article-card pb-3">
+                            <a href={`article/${article.id}`} className="article-card pb-3">
                                 <img className="w-100 img-fluid article-card-img" alt="article-image"
                                      src={
                                          article.thumbnailBase64
@@ -92,7 +92,7 @@ const UserArticles = () => {
                                     }}>Delete
                                     </button>
                                 </div>
-                            </Link>
+                            </a>
                         </div>
                     ))
                 ) : (

@@ -4,7 +4,6 @@ import NotesPopup from "../components/popups/NotesPopup.jsx";
 import AddFolderPopup from "../components/popups/AddFolderPopup.jsx";
 import Pagination from "../components/other/Pagination.jsx";
 import {GetFoldersRequest} from "../API/NoteApi.js";
-import {Link} from "react-router-dom";
 
 const MyNotes = () => {
     const [pageNum, setPageNum] = useState(1);
@@ -32,7 +31,9 @@ const MyNotes = () => {
     useEffect(() => {
         GetFolders();
     }, []);
-
+    useEffect(() => {
+        GetFolders();
+    }, [refresh]);
     return (
         <div className="page-container container-fluid">
             <div className="row" style={{position: 'relative'}}>
@@ -50,16 +51,12 @@ const MyNotes = () => {
                                     <div className="folder-name">
                                         {folder.name}
                                     </div>
-                                    <div className="folder-queantity">6 Items</div>
+                                    <div className="folder-queantity">{folder.notesCount} Items</div>
                                 </button>
                             ))
                         ) : (
                             <div className="text-center w-100">No folders found.</div>
                         )}
-
-
-
-
                     </div>
                     <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
                 </div>

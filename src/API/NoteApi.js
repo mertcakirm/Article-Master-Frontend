@@ -16,6 +16,10 @@ export const DeleteNoteRequest = async (id) => {
     return await api.delete(`note/single/${id}`);
 };
 
+export const DeleteFolderRequest = async (id) => {
+    return await api.delete(`folder?folderId=${id}`);
+};
+
 export const DeleteNotesRequest = async (id) => {
     return await api.delete(`note/${id}`);
 };
