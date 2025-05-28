@@ -4,12 +4,15 @@ import "./css/Login.css";
 import {LoginRequest, SignRequest, WriterSignRequest} from "../API/AuthApi.js";
 import {convertToBase64} from "../Helper/ConverterBase64.js";
 import {toast} from 'react-toastify';
+import KvkkPopup from "../components/popups/KvkkPopup.jsx";
 
 
 const Login = () => {
     const {type} = useParams();
     const [authType, setAuthType] = useState("in");
-
+    const [kvkkPopupState, setKvkkPopupState] = useState(false)
+    const [kvkkAcceptedUser, setKvkkAcceptedUser] = useState(false);
+    const [kvkkAcceptedWriter, setKvkkAcceptedWriter] = useState(false);
     const [loginObj, setLoginObj] = useState({
         email: "",
         password: ""
@@ -114,6 +117,10 @@ const Login = () => {
             toast.error("Please fill in all fields.");
             return;
         }
+        if (!kvkkAcceptedUser) {
+            toast.error("You must accept the KVKK agreement.");
+            return;
+        }
         try {
             await SignRequest(signObj);
             window.location.href = "/sign/in";
@@ -128,14 +135,19 @@ const Login = () => {
             toast.error("Please fill in all fields and upload the file.");
             return;
         }
+        if (!kvkkAcceptedWriter) {
+            toast.error("You must accept the KVKK agreement.");
+            return;
+        }
         try {
             await WriterSignRequest(writerObj);
             window.location.href = "/sign/in";
         } catch (error) {
-            const errorMessage = error?.response.data.errorMessage || "Writer registration failed.";
+            const errorMessage = error?.response.data?.errorMessage || "Writer registration failed.";
             toast.error(errorMessage || "Writer registration failed.");
         }
     };
+
     return (
         <div className="page-container">
             <div className="row p-0 m-0">
@@ -202,6 +214,15 @@ const Login = () => {
                                 value={signObj.password}
                                 onChange={(e) => handleInputChange(e, setSignObj)}
                             />
+                            <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={kvkkAcceptedUser}
+                                    onChange={() => setKvkkAcceptedUser(prev => !prev)}
+                                    required
+                                />
+                                <button className="border-0 bg-transparent" onClick={() => setKvkkPopupState(true)}>KVKK Metni'ni okudum kabul ediyorum</button>
+                            </div>
                             <button className="profile_btn" onClick={handleSignUp}>Sign Up</button>
                             <button className="login-btn-switch" onClick={() => setAuthType("in")}>Log In</button>
                             <button className="login-btn-switch" onClick={() => setAuthType("writer-up")}>Writer Sign
@@ -237,6 +258,7 @@ const Login = () => {
                                 value={writerObj.password}
                                 onChange={(e) => handleInputChange(e, setWriterObj)}
                             />
+
                             <div
                                 className="dropzone"
                                 onDragOver={handleDragOver}
@@ -255,6 +277,15 @@ const Login = () => {
                                     style={{display: "none"}}
                                 />
                             </div>
+                            <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
+                                <input
+                                    type="checkbox"
+                                    checked={kvkkAcceptedWriter}
+                                    onChange={() => setKvkkAcceptedWriter(prev => !prev)}
+                                    required
+                                />
+                                <button className="border-0 bg-transparent" onClick={() => setKvkkPopupState(true)}>KVKK Metni'ni okudum kabul ediyorum</button>
+                            </div>
                             <button className="profile_btn" onClick={handleWriterSignIn}>Sign Up</button>
                             <button className="login-btn-switch" onClick={() => setAuthType("in")}>Log In</button>
                         </div>
@@ -270,6 +301,13 @@ const Login = () => {
 
                 </div>
             </div>
+            {kvkkPopupState && (
+                <KvkkPopup
+                    onClose={(b) => {
+                        if (b === false) setKvkkPopupState(b);
+                    }}
+                />
+            )}
         </div>
     );
 };

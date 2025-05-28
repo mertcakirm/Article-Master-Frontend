@@ -142,6 +142,10 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
         GetFolders();
     }, []);
 
+    useEffect(() => {
+        GetFolders();
+    }, [refresh]);
+
 
     return (
         <div style={{maxWidth: '100%', padding: '16px'}}>

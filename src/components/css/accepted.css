@@ -24,6 +24,11 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.note-table{
+  overflow: hidden!important;
+  border-radius: 10px;
+}
+
 
 .popup-content-note{
   width: 80%;
@@ -280,8 +285,13 @@
 
 
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
   .popup-content-note{
     width: 90%;
+  }
+
+  .note-table{
+    overflow-y: hidden;
+    overflow-x: scroll!important;
   }
 }
