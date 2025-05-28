@@ -1,42 +1,56 @@
 import React, {useEffect, useState} from 'react';
-import ProcessPopup from "./processPopup.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {AddFolderRequest} from "../../API/NoteApi.js";
 
 const AddFolderPopup = ({onClose}) => {
-    const [isProcessPopupOpen, setProcessIsPopupOpen] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const [folderColor, setFolderColor] = useState("blue");
-    const [processState, setProcessState] = useState({
-        processtype: null,
-        text: "",
-        id: null,
-    });
+    const [folderName, setFolderName] = useState(""); // klasör adı
 
     const colorList = [
-        "blue",        // Klasik mavi
-        "red",         // Canlı kırmızı
-        "green",       // Doygun yeşil
-        "purple",      // Mor
-        "orange",      // Turuncu
-        "teal",        // Mavi-yeşil karışımı
-        "yellow",      // Canlı ama yumuşak sarı
-        "pink",        // Pastel pembe
-        "cyan",        // Açık mavi ton
-        "lime",        // Açık yeşil-sarı
-        "lightBlue",   // Açık mavi
-        "lightGreen",  // Açık yeşil
+        "blue", "red", "green", "purple", "orange", "teal",
+        "yellow", "pink", "cyan", "lime", "lightBlue", "lightGreen"
     ];
+
     useEffect(() => {
         AOS.init({duration: 500});
     }, []);
+
+    const AddFolder = async () => {
+        if (!folderName.trim()) {
+            alert("Folder name cannot be empty.");
+            return;
+        }
+
+        const FolderDTO = {
+            folderName: folderName,
+            color: folderColor
+        };
+
+        try {
+            await AddFolderRequest(FolderDTO);
+            setRefresh(!refresh);
+            onClose(false);
+        } catch (error) {
+            console.error("Error adding folder:", error);
+        }
+    };
+
     return (
         <div className="popup-overlay">
-            <div className="popup-content " style={{color: '#fff'}} data-aos="zoom-in">
+            <div className="popup-content" style={{color: '#fff'}} data-aos="zoom-in">
                 <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
                 <div className="row row-gap-4 justify-content-center">
-                    <div className="article-card-title col-12 text-center ">Create New Folder</div>
-                    <input type="text" placeholder="New folder name" className="profile_inp"/>
+                    <div className="article-card-title col-12 text-center">Create New Folder</div>
+                    <input
+                        type="text"
+                        placeholder="New folder name"
+                        className="profile_inp"
+                        maxLength="30"
+                        value={folderName}
+                        onChange={(e) => setFolderName(e.target.value)}
+                    />
                     <div className="color-palette d-flex flex-wrap row-gap-3 justify-content-center col-12">
                         {colorList.map((color) => (
                             <button
@@ -54,21 +68,9 @@ const AddFolderPopup = ({onClose}) => {
                             />
                         ))}
                     </div>
-                    <button className="profile_btn col-12">Create Folder</button>
+                    <button className="profile_btn col-12" onClick={AddFolder}>Create Folder</button>
                 </div>
             </div>
-            {isProcessPopupOpen && (
-                <ProcessPopup
-                    onClose={(b) => {
-                        if (b === false) setProcessIsPopupOpen(b);
-                        setRefresh(!refresh);
-                        onClose(false)
-                    }}
-                    text={processState.text}
-                    type={processState.processtype}
-                    id={processState.id}
-                />
-            )}
         </div>
     );
 };

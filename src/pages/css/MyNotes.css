@@ -73,7 +73,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 10px;
+    row-gap: 5px;
     background: transparent;
     border: none;
     transition: .4s;
@@ -89,11 +89,20 @@
     font-weight: bold;
 }
 
+.folder-queantity{
+    font-size: 14px;
+    font-weight: bold;
+}
+
 .color-swatch:hover {
     transform: scale(1.1);
     transition: transform 0.2s ease;
 }
 
 
-
+@media only screen and (max-width: 1000px) {
+    .folder-row{
+        justify-content: center;
+    }
+}
 

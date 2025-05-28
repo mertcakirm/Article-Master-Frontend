@@ -5,6 +5,7 @@ import CustomTooltip from "./CustomTooltip.jsx";
 import {getCookie} from "../../API/Cokkie.js";
 import AddFolderPopup from "../popups/AddFolderPopup.jsx";
 import {ToastContainer, toast} from 'react-toastify';
+import {GetFoldersRequest} from "../../API/NoteApi.js";
 
 
 const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
@@ -16,10 +17,10 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
     const [cursorPosition, setCursorPosition] = useState({x: 0, y: 0});
     const [addNotePopupState, setAddNotePopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [folders, setFolders] = useState([]);
 
     const token = getCookie("token")
 
-    const folders = ['Test 1', 'Test 2', 'Test 3'];
 
     const ToggleAddNotePopup = () => {
         setAddNotePopupState(!addNotePopupState);
@@ -76,7 +77,7 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
             const newNote = {
                 start: selectedText.start,
                 end: selectedText.end,
-                listName: selectedFolder,
+                folderId: selectedFolder,
                 text: noteText,
                 color
             };
@@ -132,6 +133,16 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
         '#008B8B'  // Dark Cyan
     ];
 
+    const GetFolders= async ()=>{
+        const foldersObj = await GetFoldersRequest(1,100);
+        setFolders(foldersObj.data.data.items);
+    }
+
+    useEffect(() => {
+        GetFolders();
+    }, []);
+
+
     return (
         <div style={{maxWidth: '100%', padding: '16px'}}>
             <div
@@ -174,8 +185,8 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
                         >
                             <option value="">Select Folder</option>
                             {folders.map((folder, index) => (
-                                <option key={index} value={folder}>
-                                    {folder}
+                                <option key={index} value={folder.id}>
+                                    {folder.name}
                                 </option>
                             ))}
                         </select>

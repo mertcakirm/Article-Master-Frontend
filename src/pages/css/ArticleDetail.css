@@ -207,11 +207,11 @@
 
 
     .add-folder-btn{
-        bottom: 10px;
-        top: unset;
+        top: unset!important;
         height: fit-content;
         width: fit-content;
-        position: fixed;
+        position: fixed!important;
+        bottom: 10px!important;
     }
 
     .add-folder-btn2{

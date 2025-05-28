@@ -5,7 +5,7 @@ import {useEffect} from "react";
 import {ApproveRequest, DeleteUsersRequest, RejectRoleRequest} from "../../API/AdminApi.js";
 import {DeleteArticleRequest} from "../../API/ArticleApi.js";
 import {AddFavoriteRequest} from "../../API/FavoriteApi.js";
-import {DeleteNoteRequest} from "../../API/NoteApi.js";
+import {DeleteNoteRequest, DeleteNotesRequest} from "../../API/NoteApi.js";
 import {toast} from 'react-toastify';
 
 const ProcessPopup = ({type, text, id, onClose,}) => {

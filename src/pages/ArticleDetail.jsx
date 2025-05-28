@@ -61,14 +61,15 @@ const ArticleDetail = () => {
         }
     };
 
-    const handleNewNote = async ({start, end, text, color, listName}) => {
+    const handleNewNote = async ({start, end, text, color, folderId}) => {
+
         await AddNoteRequest({
             articleId: articleid,
             insertStart: start,
             insertEnd: end,
             note: text,
             color: color,
-            listName: listName
+            folderId: folderId
         });
     };
 

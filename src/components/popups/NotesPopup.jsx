@@ -27,14 +27,19 @@ const NotesPopup = ({onClose, folderId}) => {
     };
 
     const GetNotes = async () => {
-        const notes = await NoteGetAllRequests(pageNum, 10);
+        const notes = await NoteGetAllRequests(folderId,pageNum, 5);
         setNotesList(notes.data.data.items);
         setLastPage(notes.data.data.totalPages)
     }
 
     useEffect(() => {
+        console.log(folderId)
         GetNotes();
     }, [refresh]);
+
+    useEffect(() => {
+        GetNotes();
+    }, [pageNum]);
 
     return (
         <div className="popup-overlay">
@@ -66,12 +71,12 @@ const NotesPopup = ({onClose, folderId}) => {
                     {notesList.length > 0 ? (
                         notesList.map((note, index) => (
                             <tr key={index}>
-                                <th scope="row">bu bölümü araştır</th>
+                                <th scope="row">{note.noteDes}</th>
                                 <th scope="row">
                                     <div
                                         className="color-swatch mx-auto"
                                         style={{
-                                            backgroundColor: "red",
+                                            backgroundColor: note.noteColor,
                                             width: "30px",
                                             height: "30px",
                                             borderRadius: "50%",
@@ -111,7 +116,7 @@ const NotesPopup = ({onClose, folderId}) => {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="4" className="text-center py-4">No notes found.</td>
+                            <td colSpan="5" className="text-center py-4">No notes found.</td>
                         </tr>
                     )}
                     </tbody>
