@@ -20,7 +20,6 @@ const WriterArticles = () => {
         } catch (error) {
             console.log(error);
             toast.error("Error while getting articles!");
-
         }
     }
 
@@ -52,7 +51,7 @@ const WriterArticles = () => {
         <div className="page-container mb-5 container-fluid">
             <div className="row row-gap-5 popular-row">
                 <div className="col-12 row align-items-center align-content-center mt-3">
-                    <div className="col-lg-6 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
+                    <div className="col-lg-12 titles mt-5 mb-4 text-center" data-aos="fade-in">Articles</div>
                 </div>
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
