@@ -1,12 +1,62 @@
-# React + Vite
+# 📰 Article Master
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Article Master** is a full-featured article management platform built with **React** and **Bootstrap**.  
+It supports role-based access control, article creation and organization, personalized notes, and collaborative tools — designed for writers, readers, and administrators alike.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 👥 Role System
+- **Super Admin** – Full control over users, roles, and system settings  
+- **Writer** – Can create, edit, and manage articles  
+- **User** – Can read, comment, and favorite articles  
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📝 Article Management
+- Create, edit, and delete articles  
+- Rich text formatting support  
+- Tagging and categorization for better organization  
+- Mark articles as **favorites** for quick access  
+
+### 🧠 Personal Notes System
+- Add **notes** directly on specific article paragraphs  
+- Use **color-coded markers** to highlight key parts of articles  
+- Organize notes into **custom folders**  
+- Quickly navigate between saved notes  
+
+### 💬 Comments & Engagement
+- Leave comments under any article  
+- Reply to other users’ comments  
+- Real-time update of comment threads  
+
+### 🌈 Modern Interface
+- Built with **React** and **Bootstrap 5**  
+- Fully responsive, works on desktop and mobile  
+- Clean, elegant UI with intuitive layout  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React  
+- **UI Framework:** Bootstrap 5  
+- **State Management:** React Context / Redux (depending on setup)  
+- **Authentication:** JWT-based role system  
+- **API:** RESTful backend integration  
+
+---
+
+## ⚙️ Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/mertcakirm/Article-Master.git
+
+# Navigate into the project
+cd Article-Master
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
