@@ -43,13 +43,19 @@ const NotesPopup = ({onClose, folderId}) => {
     return (
         <div className="popup-overlay">
             <div className="popup-content popup-content-note" style={{color: '#fff'}} data-aos="zoom-in">
-                <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
-                <button className="popup-close-btn" style={{left: '5px', right: 'unset'}}
+                <button className="popup-close-btn" onClick={() => onClose(false)} aria-label="Close notes">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                </button>
+                <button className="folder-delete-btn"
+                        aria-label="Delete folder"
+                        title="Delete folder"
                         onClick={() => {
                             toggleProcessPopup('folder_delete', folderId, "Are you sure you want to delete your folder?");
                         }}>
-                    <svg fill="white" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                         fillRule="evenodd" clipRule="evenodd">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                         fillRule="evenodd" clipRule="evenodd" aria-hidden="true">
                         <path
                             d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2m-9-14c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6-5h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-12-2h4v-1h-4v1z"/>
                     </svg>

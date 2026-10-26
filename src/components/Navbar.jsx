@@ -42,7 +42,7 @@ const Navbar = ({popupOpen, setPopupOpen}) => {
         <div className="container-fluid nav-con py-2" data-aos="fade-in">
             <div className="row align-items-center nav-row-lg">
                 <div className="col-lg-3 p-0 align-items-center row">
-                    <Link to="/" className="col-lg-1 p-0 navbar-link">
+                    <Link to="/" className="col-lg-1 mx-5 p-0 navbar-link nav-logo" aria-label="Article Master home">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
                             <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A"
                                   strokeWidth="1"/>
@@ -108,7 +108,7 @@ const Navbar = ({popupOpen, setPopupOpen}) => {
 
             <div className="row py-1 px-1 align-items-center justify-content-between nav-row-sm m-0">
                 <div className="col-3 p-0 align-items-center row">
-                    <Link to="/" className="col-lg-1 p-0 navbar-link">
+                    <Link to="/" className="col-lg-1 p-0 navbar-link nav-logo" aria-label="Article Master home">
                         <svg xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 600 200">
                             <path d="M120,60 L220,60 L220,140 L120,140 Z" fill="#FFFFFF" stroke="#4A235A"
                                   strokeWidth="1"/>
@@ -131,7 +131,8 @@ const Navbar = ({popupOpen, setPopupOpen}) => {
                         </svg>
                     </Link>
                 </div>
-                <button onClick={() => setPopupOpen(true)} className="btn col-3 p-0">
+                <button onClick={() => setPopupOpen(true)} className="btn col-3 p-0 nav-menu-btn"
+                        aria-label="Open menu">
                     <svg fill="white" width="50" height="50" clipRule="evenodd" fillRule="evenodd"
                          strokeLinejoin="round" strokeMiterlimit="2" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">

@@ -1,71 +1,88 @@
-import React, {useEffect, useState} from "react";
+import React, {useLayoutEffect, useRef, useState} from "react";
+import {createPortal} from "react-dom";
 
-const CustomTooltip = () => {
-    const [tooltip, setTooltip] = useState({
-        visible: false,
-        content: '',
-        position: {x: 0, y: 0}
-    });
-    const [hoveredElement, setHoveredElement] = useState(null);
+const CustomTooltip = ({containerRef}) => {
+    const tooltipRef = useRef(null);
+    const [activeNote, setActiveNote] = useState(null);
+    const [position, setPosition] = useState({left: 0, top: 0});
 
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            const element = document.elementFromPoint(e.clientX, e.clientY);
+    useLayoutEffect(() => {
+        if (!activeNote || !tooltipRef.current) return;
 
-            if (element === hoveredElement) {
-                setTooltip(prev => ({
-                    ...prev,
-                    position: {x: e.clientX, y: e.clientY}
-                }));
-                return;
-            }
+        const updatePosition = () => {
+            const noteRect = activeNote.element.getBoundingClientRect();
+            const tooltipRect = tooltipRef.current.getBoundingClientRect();
+            const sidePadding = 12;
+            const left = Math.min(
+                Math.max(noteRect.left + noteRect.width / 2 - tooltipRect.width / 2, sidePadding),
+                window.innerWidth - tooltipRect.width - sidePadding
+            );
+            const top = noteRect.top - tooltipRect.height - 10 >= sidePadding
+                ? noteRect.top - tooltipRect.height - 10
+                : Math.min(noteRect.bottom + 10, window.innerHeight - tooltipRect.height - sidePadding);
 
-            setHoveredElement(element);
-
-            if (element && element.hasAttribute('data-note')) {
-                const content = element.getAttribute('data-note');
-                setTooltip({
-                    visible: true,
-                    content,
-                    position: {x: e.clientX, y: e.clientY}
-                });
-            } else {
-                setTooltip(prev => ({...prev, visible: false}));
-            }
+            setPosition({left, top: Math.max(sidePadding, top)});
         };
 
-        const handleMouseLeave = () => {
-            setTooltip(prev => ({...prev, visible: false}));
-            setHoveredElement(null);
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        document.body.addEventListener('mouseleave', handleMouseLeave);
+        updatePosition();
+        window.addEventListener("resize", updatePosition);
+        window.addEventListener("scroll", updatePosition, true);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            document.body.removeEventListener('mouseleave', handleMouseLeave);
+            window.removeEventListener("resize", updatePosition);
+            window.removeEventListener("scroll", updatePosition, true);
         };
-    }, [hoveredElement]);
+    }, [activeNote]);
 
-    if (!tooltip.visible) return null;
+    useLayoutEffect(() => {
+        const container = containerRef?.current;
+        if (!container) return;
 
-    return (
+        const handlePointerOver = (event) => {
+            if (!(event.target instanceof Element)) return;
+
+            const noteElement = event.target.closest("[data-note]");
+            if (!noteElement || !container.contains(noteElement)) return;
+
+            setActiveNote({
+                element: noteElement,
+                content: noteElement.getAttribute("data-note") || ""
+            });
+        };
+
+        const handlePointerOut = (event) => {
+            if (!(event.target instanceof Element)) return;
+
+            const noteElement = event.target.closest("[data-note]");
+            if (!noteElement) return;
+
+            const nextElement = event.relatedTarget instanceof Element ? event.relatedTarget : null;
+            if (nextElement?.closest("[data-note]") === noteElement) return;
+
+            setActiveNote((current) => current?.element === noteElement ? null : current);
+        };
+
+        container.addEventListener("pointerover", handlePointerOver);
+        container.addEventListener("pointerout", handlePointerOut);
+
+        return () => {
+            container.removeEventListener("pointerover", handlePointerOver);
+            container.removeEventListener("pointerout", handlePointerOut);
+        };
+    }, [containerRef]);
+
+    if (!activeNote) return null;
+
+    return createPortal(
         <div
-            style={{
-                position: 'fixed',
-                left: `${tooltip.position.x + 10}px`,
-                top: `${tooltip.position.y + 10}px`,
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                color: 'white',
-                padding: '5px 10px',
-                borderRadius: '4px',
-                zIndex: 9999,
-                pointerEvents: 'none',
-            }}
+            ref={tooltipRef}
+            className="note-tooltip"
+            role="tooltip"
+            style={{left: `${position.left}px`, top: `${position.top}px`}}
         >
-            {tooltip.content}
-        </div>
+            {activeNote.content}
+        </div>,
+        document.body
     );
 };
 

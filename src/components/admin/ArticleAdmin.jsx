@@ -39,15 +39,26 @@ const ArticleAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
     };
 
     return (
-        <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up" style={{height: 'fit-content'}}>
-            <div className="row justify-content-between">
-                <input type="text" className="profile_inp admin-inp col-lg-3"
-                       onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search Article"></input>
-                <div className="titles text-center admin-title mb-3 col-lg-6">artIcles</div>
-                <div className="col-lg-3"></div>
+        <section className="admin-panel" data-aos="fade-up">
+            <div className="admin-panel-head">
+                <div className="admin-panel-heading">
+                    <span className="admin-panel-kicker">LIBRARY / 04</span>
+                    <h2 className="admin-panel-title">Articles</h2>
+                    <p className="admin-panel-description">Review the published content library.</p>
+                </div>
+                <span className="admin-panel-count">{articles.length} on page</span>
             </div>
-            <table className="table table-striped table-dark text-center"
-                   style={{borderRadius: '10px', overflow: 'hidden'}}>
+            <div className="admin-panel-toolbar">
+                <input
+                    type="search"
+                    className="admin-search"
+                    aria-label="Search articles"
+                    onChange={(e) => searchTextChanged(e.target.value)}
+                    placeholder="Search articles..."
+                />
+            </div>
+            <div className="admin-table-wrap">
+            <table className="table table-striped table-dark text-center admin-table">
                 <thead>
                 <tr>
                     <th scope="col">Article Name</th>
@@ -72,8 +83,9 @@ const ArticleAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
                                             "Should the article be deleted?",
                                             "Transaction successful"
                                         )}
-                                        className="my-notes-process-bin px-3 py-1"
-                                        style={{background: 'red'}}
+                                        className="admin-action admin-action-delete"
+                                        aria-label={`Delete article ${article.title}`}
+                                        title="Delete article"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -87,15 +99,18 @@ const ArticleAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="4" className="text-center my-4">
+                        <td colSpan="4" className="admin-empty-state">
                             There are no articles yet.
                         </td>
                     </tr>
                 )}
                 </tbody>
             </table>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
-        </div>
+            </div>
+            <div className="admin-pagination">
+                <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
+            </div>
+        </section>
     );
 };
 

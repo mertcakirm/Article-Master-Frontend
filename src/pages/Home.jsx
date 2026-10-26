@@ -68,8 +68,7 @@ const Home = () => {
     return (
         <div>
             <div className="page-container p-0 container-fluid">
-                <div className="row p-0 m-0 justify-content-center"
-                     style={{borderBottom: '3px solid /articles/1fff', position: 'relative'}}>
+                <div className="row p-0 m-0 justify-content-center hero">
                     <img className="img-fluid w-100 p-0 m-0 header-img" data-aos="fade-in" src={header}
                          alt="header_photo"/>
                     {token ? null : (
@@ -82,12 +81,12 @@ const Home = () => {
                     }
                 </div>
 
-                <div className="row row-gap-5 m-0  my-5 popular-row">
+                <div className="row row-gap-5 m-0 my-5 popular-row">
                     <div className="col-12 titles mb-4 text-center" data-aos="fade-up">Popular Articles</div>
 
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
-                            <div className="col-lg-3" data-aos="fade-up" key={index}>
+                            <div className="col-12 col-md-6 col-lg-3 card-wrap" data-aos="fade-up" key={index}>
                                 <Link to={`/article/${article.id}`} className="article-card">
                                     <img className="w-100 img-fluid article-card-img"
                                          src={
@@ -101,10 +100,10 @@ const Home = () => {
                                     />
                                     <p className="article-card-title">{article.title}</p>
                                     <p className="article-card-desc">{article.description || "Article description not found."}</p>
-                                    <div className="my-notes-process-flex justify-content-between w-100 px-5">
+                                    <div className="my-notes-process-flex justify-content-between w-100 article-card-stats">
                                         <div className="my-notes-process-flex align-items-center">
                                             <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
-                                                 strokeMiterlimit="2" width="30" fill="white" height="30"
+                                                 strokeMiterlimit="2" width="22" fill="white" height="22"
                                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="m11.998 5c-4.078 0-7.742 3.093-9.853 6.483-.096.159-.145.338-.145.517s.048.358.144.517c2.112 3.39 5.776 6.483 9.854 6.483 4.143 0 7.796-3.09 9.864-6.493.092-.156.138-.332.138-.507s-.046-.351-.138-.507c-2.068-3.403-5.721-6.493-9.864-6.493zm.002 3c2.208 0 4 1.792 4 4s-1.792 4-4 4-4-1.792-4-4 1.792-4 4-4zm0 1.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5z"
@@ -113,7 +112,7 @@ const Home = () => {
                                             <div>{article.viewCount}</div>
                                         </div>
                                         <div className="my-notes-process-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" fill="yellow" height="25"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="yellow" height="20"
                                                  viewBox="0 0 24 24">
                                                 <path
                                                     d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
@@ -124,9 +123,10 @@ const Home = () => {
                                     <p className="article-card-writerName">{article.writerName}</p>
 
                                 </Link>
-                                <button className="article-card-like" onClick={() => AddFavorite(article.id)}>
+                                <button className="article-card-like" aria-label="Add to favorites"
+                                        onClick={() => AddFavorite(article.id)}>
                                     <svg clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round"
-                                         strokeMiterlimit="2" width="30" height="30" fill="red" viewBox="0 0 24 24"
+                                         strokeMiterlimit="2" width="22" height="22" fill="red" viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="m12 5.72c-2.624-4.517-10-3.198-10 2.461 0 3.725 4.345 7.727 9.303 12.54.194.189.446.283.697.283s.503-.094.697-.283c4.977-4.831 9.303-8.814 9.303-12.54 0-5.678-7.396-6.944-10-2.461z"
@@ -147,12 +147,12 @@ const Home = () => {
                     </div>
                 </div>
                 <div
-                    className="row row-gap-5 m-0 my-5 popular-row justify-content-center  column-gap-5 align-items-center">
+                    className="row row-gap-5 m-0 my-5 popular-row writers-row justify-content-center align-items-center">
                     <div className="col-12 titles mb-4 text-center" data-aos="fade-up">Popular Writers</div>
 
                     {writers.length > 0 ? (
                         writers.map((writer, index) => (
-                            <div key={index} className="col-lg-1 col-3" data-aos="fade-up">
+                            <div key={index} className="col-6 col-md-3 col-lg-2" data-aos="fade-up">
                                 <Link to={`/writer/${writer.id}`} className="writer-card">
                                     <img className="profile_photo"
                                          style={{aspectRatio: '1'}}
@@ -164,9 +164,9 @@ const Home = () => {
                                                  : "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
                                          }
                                          alt="profile_photo"/>
-                                    <div className="small text-uppercase fw-bold">{writer.writerName}</div>
+                                    <div className="writer-name">{writer.writerName}</div>
                                     <div className="my-notes-process-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" fill="yellow" height="25"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="yellow" height="20"
                                              viewBox="0 0 24 24">
                                             <path
                                                 d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>

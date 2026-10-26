@@ -26,10 +26,17 @@ const WriterAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
     }, [refresh]);
 
     return (
-        <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up"
-             style={{height: 'fit-content'}}>
-            <div className="titles text-center mb-3 col-12">WRITERS</div>
-            <table className="table table-striped col-12 table-dark text-center" style={{borderRadius: '10px', overflow: 'hidden'}}>
+        <section className="admin-panel" data-aos="fade-up">
+            <div className="admin-panel-head">
+                <div className="admin-panel-heading">
+                    <span className="admin-panel-kicker">CREATORS / 02</span>
+                    <h2 className="admin-panel-title">Writers</h2>
+                    <p className="admin-panel-description">Monitor writer accounts and ratings.</p>
+                </div>
+                <span className="admin-panel-count">{users.length} on page</span>
+            </div>
+            <div className="admin-table-wrap">
+            <table className="table table-striped table-dark text-center admin-table">
                 <thead>
                 <tr>
                     <th scope="col">Writer Name</th>
@@ -47,8 +54,9 @@ const WriterAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
                                 <div className="my-notes-process-flex">
                                     <button
                                         onClick={() => toggleProcessPopup('delete_user', user.id, "Should the user be deleted?", "Transaction successful")}
-                                        className="my-notes-process-bin px-3 py-1"
-                                        style={{background: 'red'}}
+                                        className="admin-action admin-action-delete"
+                                        aria-label={`Delete writer ${user.writerName}`}
+                                        title="Delete writer"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -62,15 +70,18 @@ const WriterAdmin = ({toggleProcessPopup, refresh, setRefresh}) => {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="3" className="text-center my-4">
+                        <td colSpan="3" className="admin-empty-state">
                             There are no users yet.
                         </td>
                     </tr>
                 )}
                 </tbody>
             </table>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
-        </div>
+            </div>
+            <div className="admin-pagination">
+                <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
+            </div>
+        </section>
     );
 };
 

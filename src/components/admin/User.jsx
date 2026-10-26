@@ -39,16 +39,26 @@ const User = ({toggleProcessPopup, refresh, setRefresh}) => {
     };
 
     return (
-        <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up"
-             style={{height: 'fit-content'}}>
-            <div className="row justify-content-between">
-                <input type="text" className="profile_inp admin-inp col-lg-3"
-                       onChange={(e) => searchTextChanged(e.target.value)} placeholder="Search User"></input>
-                <div className="titles text-center admin-title mb-3 col-lg-6">users</div>
-                <div className="col-lg-3"></div>
+        <section className="admin-panel" data-aos="fade-up">
+            <div className="admin-panel-head">
+                <div className="admin-panel-heading">
+                    <span className="admin-panel-kicker">COMMUNITY / 03</span>
+                    <h2 className="admin-panel-title">Users</h2>
+                    <p className="admin-panel-description">Find and manage reader accounts.</p>
+                </div>
+                <span className="admin-panel-count">{users.length} on page</span>
             </div>
-            <table className="table table-striped table-dark text-center"
-                   style={{borderRadius: '10px', overflow: 'hidden'}}>
+            <div className="admin-panel-toolbar">
+                <input
+                    type="search"
+                    className="admin-search"
+                    aria-label="Search users"
+                    onChange={(e) => searchTextChanged(e.target.value)}
+                    placeholder="Search users..."
+                />
+            </div>
+            <div className="admin-table-wrap">
+            <table className="table table-striped table-dark text-center admin-table">
                 <thead>
                 <tr>
                     <th scope="col">Username</th>
@@ -66,8 +76,9 @@ const User = ({toggleProcessPopup, refresh, setRefresh}) => {
                                 <div className="my-notes-process-flex">
                                     <button
                                         onClick={() => toggleProcessPopup('delete_user', user.id, "Should the user be deleted?", "Transaction successful")}
-                                        className="my-notes-process-bin px-3 py-1"
-                                        style={{background: 'red'}}
+                                        className="admin-action admin-action-delete"
+                                        aria-label={`Delete user ${user.username}`}
+                                        title="Delete user"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -81,15 +92,18 @@ const User = ({toggleProcessPopup, refresh, setRefresh}) => {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="3" className="text-center my-4">
+                        <td colSpan="3" className="admin-empty-state">
                             There are no users yet.
                         </td>
                     </tr>
                 )}
                 </tbody>
             </table>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
-        </div>
+            </div>
+            <div className="admin-pagination">
+                <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
+            </div>
+        </section>
     );
 };
 

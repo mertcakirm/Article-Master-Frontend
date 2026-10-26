@@ -21,8 +21,20 @@ const Admin = () => {
     };
 
     return (
-        <div className="page-container mb-5 container-fluid">
-            <div className="row justify-content-between row-gap-5 popular-row">
+        <main className="page-container admin-dashboard mb-5 container-fluid">
+            <header className="admin-dashboard-header">
+                <div className="admin-dashboard-heading">
+                    <span className="admin-eyebrow">ARTICLE MASTER / CONTROL PANEL</span>
+                    <h1>Admin workspace</h1>
+                    <p>Manage access, writers, readers and published articles.</p>
+                </div>
+                <div className="admin-status">
+                    <span className="admin-status-indicator" />
+                    <span>Management tools</span>
+                </div>
+            </header>
+
+            <div className="admin-dashboard-grid">
                 <RoleRequests
                     toggleProcessPopup={handleToggleProcessPopup}
                     refresh={refresh}
@@ -60,7 +72,7 @@ const Admin = () => {
                     id={processState.id}
                 />
             )}
-        </div>
+        </main>
 
     );
 };

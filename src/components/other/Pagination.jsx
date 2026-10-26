@@ -2,7 +2,7 @@ import React from 'react';
 
 const Pagination = ({pageNum, setPageNum, lastPage}) => {
     return (
-        <div className="my-notes-process-flex" style={{height: 'fit-content'}}>
+        <div className="my-notes-process-flex mt-5" style={{height: 'fit-content'}}>
             {pageNum > 1 && (
                 <button onClick={() => setPageNum(pageNum - 1)} className="my-notes-process-see">
                     <svg

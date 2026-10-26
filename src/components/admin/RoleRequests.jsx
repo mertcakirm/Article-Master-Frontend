@@ -43,10 +43,17 @@ const RoleRequests = ({toggleProcessPopup, refresh, setRefresh}) => {
     };
 
     return (
-        <div className="col-lg-6 col-12 px-3 mt-5 row justify-content-center" data-aos="fade-up"
-             style={{height: 'fit-content'}}>
-            <div className="titles text-center mb-3">Role Requests</div>
-            <table className="table table-striped table-dark text-center">
+        <section className="admin-panel" data-aos="fade-up">
+            <div className="admin-panel-head">
+                <div className="admin-panel-heading">
+                    <span className="admin-panel-kicker">ACCESS / 01</span>
+                    <h2 className="admin-panel-title">Role requests</h2>
+                    <p className="admin-panel-description">Review writer applications and documents.</p>
+                </div>
+                <span className="admin-panel-count">{writers.length} on page</span>
+            </div>
+            <div className="admin-table-wrap">
+            <table className="table table-striped table-dark text-center admin-table">
                 <thead>
                 <tr>
                     <th>Writer Name</th>
@@ -59,9 +66,11 @@ const RoleRequests = ({toggleProcessPopup, refresh, setRefresh}) => {
                     writers.map((writer, index) => (
                         <tr key={index}>
                             <td>{writer.name}</td>
-                            <td className="row justify-content-center">
+                            <td>
                                 <button onClick={() => DownloadwriterDoc(writer.id)}
-                                        className="my-notes-process-see w-auto px-3">
+                                        className="admin-action admin-action-download"
+                                        aria-label={`Download ${writer.name}'s application`}
+                                        title="Download application">
                                     <svg width="24" height="24" fill="white" xmlns="http://www.w3.org/2000/svg"
                                          fillRule="evenodd" clipRule="evenodd">
                                         <path
@@ -70,11 +79,12 @@ const RoleRequests = ({toggleProcessPopup, refresh, setRefresh}) => {
                                 </button>
                             </td>
                             <td>
-                                <div className="my-notes-process-flex">
+                                <div className="admin-actions">
                                     <button
-                                        className="my-notes-process-see"
+                                        className="admin-action admin-action-approve"
                                         onClick={() => toggleProcessPopup("approve_user", writer.id, "Accept role request?", "Transaction successful")}
-                                        style={{background: "green"}}
+                                        aria-label={`Approve ${writer.name}'s writer request`}
+                                        title="Approve request"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -84,8 +94,9 @@ const RoleRequests = ({toggleProcessPopup, refresh, setRefresh}) => {
                                     </button>
                                     <button
                                         onClick={() => toggleProcessPopup("role_reject", writer.id, "Reject role request?", "Transaction successful")}
-                                        className="my-notes-process-bin"
-                                        style={{background: "red"}}
+                                        className="admin-action admin-action-reject"
+                                        aria-label={`Reject ${writer.name}'s writer request`}
+                                        title="Reject request"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -99,13 +110,16 @@ const RoleRequests = ({toggleProcessPopup, refresh, setRefresh}) => {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="3">There are no writers yet.</td>
+                        <td colSpan="3" className="admin-empty-state">There are no pending role requests.</td>
                     </tr>
                 )}
                 </tbody>
             </table>
-            <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
-        </div>
+            </div>
+            <div className="admin-pagination">
+                <Pagination pageNum={pageNum} setPageNum={setPageNum} lastPage={lastPage}/>
+            </div>
+        </section>
     );
 };
 

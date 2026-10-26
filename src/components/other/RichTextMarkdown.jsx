@@ -14,7 +14,7 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
     const markdownRef = useRef(null);
     const noteEditorRef = useRef(null);
     const [selectedFolder, setSelectedFolder] = useState(null);
-    const [cursorPosition, setCursorPosition] = useState({x: 0, y: 0});
+    const [selectionPosition, setSelectionPosition] = useState({x: 0, y: 0});
     const [addNotePopupState, setAddNotePopupState] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const [folders, setFolders] = useState([]);
@@ -29,23 +29,19 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
         if (!noteEditorRef.current)
             return;
 
-        noteEditorRef.current.style.top = `${cursorPosition.y + 18}px`;
-    }, [selectedText]);
+        const editor = noteEditorRef.current;
+        const {width, height} = editor.getBoundingClientRect();
+        const left = Math.min(
+            Math.max(selectionPosition.x - width / 2, 12),
+            window.innerWidth - width - 12
+        );
+        const top = selectionPosition.y + height + 12 > window.innerHeight
+            ? selectionPosition.y - height - 12
+            : selectionPosition.y + 12;
 
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            setCursorPosition({
-                x: e.clientX,
-                y: e.clientY
-            });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, []);
+        editor.style.left = `${left}px`;
+        editor.style.top = `${Math.max(12, top)}px`;
+    }, [selectedText, selectionPosition]);
 
     const handleTextSelection = () => {
         const selection = window.getSelection();
@@ -53,6 +49,11 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
 
         const range = selection.getRangeAt(0);
         const selectedContent = range.toString();
+        const selectionRect = range.getBoundingClientRect();
+        setSelectionPosition({
+            x: selectionRect.left + selectionRect.width / 2,
+            y: selectionRect.bottom
+        });
 
         const markdownElement = markdownRef.current;
         if (!markdownElement) return;
@@ -170,16 +171,20 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
                 >
                     {renderMarkdownWithNotes()}
                 </ReactMarkdown>
-                <CustomTooltip/>
+                <CustomTooltip containerRef={markdownRef}/>
             </div>
             {selectedText && (
                 <div ref={noteEditorRef} className="add-note-rich-con">
-                      <textarea
-                          placeholder="Enter your note"
-                          className="add-note-rich-text"
-                          value={newNoteText}
-                          onChange={(e) => setNewNoteText(e.target.value)}
-                      />
+                    <div className="add-note-rich-heading">
+                        <span className="add-note-rich-title">Add a note</span>
+                        <span className="add-note-rich-selection">“{selectedText.text}”</span>
+                    </div>
+                    <textarea
+                        placeholder="Write a note about this selection..."
+                        className="add-note-rich-text"
+                        value={newNoteText}
+                        onChange={(e) => setNewNoteText(e.target.value)}
+                    />
                     <div className="rich-child-flex">
                         <select
                             className="form-select add-note-rich-select"
@@ -195,7 +200,12 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
                             ))}
                         </select>
 
-                        <button onClick={ToggleAddNotePopup} className="add-folder-btn2">
+                        <button
+                            onClick={ToggleAddNotePopup}
+                            className="add-folder-btn2"
+                            aria-label="Create a new folder"
+                            title="Create a new folder"
+                        >
                             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                  fillRule="evenodd" clipRule="evenodd">
                                 <path
@@ -204,9 +214,14 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
                         </button>
                     </div>
                     <div className="add-note-rich-colors">
+                        <span className="add-note-rich-colors-label">Choose a color to save</span>
                         {noteColors.map((color) => (
                             <button
                                 key={color}
+                                type="button"
+                                className="add-note-rich-color"
+                                aria-label={`Save note with color ${color}`}
+                                title={`Save with ${color}`}
                                 onClick={() => {
                                     if (selectedFolder !== null) {
                                         addNote(newNoteText, color)
@@ -218,11 +233,6 @@ const RichTextMarkdown = ({markdown, notes, setNotes, onNewNote = null}) => {
                                 }
                                 style={{
                                     backgroundColor: color,
-                                    width: '30px',
-                                    height: '30px',
-                                    borderRadius: '50%',
-                                    border: 'none',
-                                    cursor: 'pointer'
                                 }}
                             />
                         ))}

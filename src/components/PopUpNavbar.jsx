@@ -98,7 +98,11 @@ const PopUpNavbar = ({setPopupOpen}) => {
     return (
         <div className="popup-overlay" style={{zIndex: '120', height: '100vh'}}>
             <div className="popup-content checked-content-popup" data-aos="zoom-in">
-                <button className="popup-close-btn" onClick={() => setPopupOpen(false)}>&times;</button>
+                <button className="popup-close-btn" onClick={() => setPopupOpen(false)} aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                </button>
                 <div className="row justify-content-center align-items-center row-gap-3 column-gap-3 w-100 p-0 m-0">
                     {navLinks.map(({to, label, icon}) => (
                         <Link

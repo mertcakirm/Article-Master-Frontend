@@ -40,7 +40,11 @@ const AddFolderPopup = ({onClose}) => {
     return (
         <div className="popup-overlay">
             <div className="popup-content" style={{color: '#fff'}} data-aos="zoom-in">
-                <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
+                <button className="popup-close-btn" onClick={() => onClose(false)} aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                </button>
                 <div className="row row-gap-4 justify-content-center">
                     <div className="article-card-title col-12 text-center">Create New Folder</div>
                     <input

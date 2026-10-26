@@ -2,7 +2,11 @@ const CommentsPopup = ({onClose}) => {
     return (
         <div className="popup-overlay">
             <div className="popup-content comments-popup" style={{color: '#fff'}} data-aos="zoom-in">
-                <button className="popup-close-btn" onClick={() => onClose(false)}>&times;</button>
+                <button className="popup-close-btn" onClick={() => onClose(false)} aria-label="Close">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                </button>
                 <div style={{overflow:'hidden', overflowY:'scroll', maxHeight:'500px'}}>
                     <p className="titles text-center">KVKK Aydınlatma Metni</p>
 
